@@ -1,0 +1,107 @@
+[
+  {
+    "id": "35000",
+    "name": "Lord Walker No-Show Socks \u2014 Invisible Everyday Comfort (Code -35000)",
+    "price": 249,
+    "stock": 4855,
+    "status": "active"
+  },
+  {
+    "id": "14306",
+    "name": "Lord Walker Men's Breathable Polka Dot Design Cotton Crew Sock(Code-14306)",
+    "price": 399,
+    "stock": 500,
+    "status": "active"
+  },
+  {
+    "id": "36365",
+    "name": "Lord Walker Zebra Stripe No-Show Socks \u2013 Ultra-Light, Anti-Slip, Breathable (Pack of 1 Pair) ( Code 36365)",
+    "price": 349,
+    "stock": 109,
+    "status": "active"
+  },
+  {
+    "id": "22",
+    "name": "Lord Walker Premium Textured Crew Socks for Men | Soft Cotton Rich | Breathable | All-Day Comfort | Formal & Casual Wear | Model 16250",
+    "price": 499,
+    "stock": 200,
+    "status": "active"
+  },
+  {
+    "id": "66340",
+    "name": "Women's Premium No-Show Socks | Anti-Slip Heel Grip | Seamless Toe | Breathable Cotton | Invisible Low-Cut Fit | Lilac, Blue & Purple | Code 66340",
+    "price": 249,
+    "stock": 330,
+    "status": "active"
+  },
+  {
+    "id": "18366_4Pcs",
+    "name": "Lord Walker Premium Premium Mercerized Cotton Socks | Pack of 4 | Men Crew | Combo_18366_4Pcs",
+    "price": 1490,
+    "stock": 5,
+    "status": "active"
+  },
+  {
+    "id": "16251_5Pcs",
+    "name": "Lord Walker Premium Luxury Bamboo Fabric Socks | Pack of 5 | Men Crew | Combo_16251_5Pcs",
+    "price": 1790,
+    "stock": 5,
+    "status": "active"
+  },
+  {
+    "id": "36365_4pcs",
+    "name": "Lord Walker Premium Luxury Bamboo Fabric Socks | Pack of 4 | Men No Show | Combo_36365_4pcs",
+    "price": 1290,
+    "stock": 5,
+    "status": "active"
+  },
+  {
+    "id": "14306_5pcs",
+    "name": "Lord Walker Premium Premium Mercerized Cotton Socks | Pack of 5 | Men Crew | Combo_14306_5pcs",
+    "price": 1790,
+    "stock": 5,
+    "status": "active"
+  },
+  {
+    "id": "14308_5Pcs",
+    "name": "Lord Walker Premium Premium Mercerized Cotton Socks | Pack of 5 | Men Crew | Combo_14308_5Pcs",
+    "price": 1790,
+    "stock": 5,
+    "status": "active"
+  },
+  {
+    "id": "35000_5pcs",
+    "name": "Lord Walker Premium Premium Cotton Blend Socks | Pack of 5 | Men No Show | Combo_35000_5pcs",
+    "price": 1590,
+    "stock": 5,
+    "status": "active"
+  },
+  {
+    "id": "36265_5pcs",
+    "name": "Lord Walker Premium Luxury Bamboo Fabric Socks | Pack of 5 | Men No Show | Combo_36265_5pcs",
+    "price": 1590,
+    "stock": 5,
+    "status": "active"
+  },
+  {
+    "id": "16250_4pcs",
+    "name": "Lord Walker Premium Premium Mercerized Cotton Socks | Pack of 4 | Men Crew | Combo_16250_4pcs",
+    "price": 1390,
+    "stock": 5,
+    "status": "active"
+  },
+  {
+    "id": "14285_5pcs",
+    "name": "Lord Walker Premium Premium Mercerized Cotton Socks | Pack of 5 | Men Crew | Combo_14285_5pcs",
+    "price": 1790,
+    "stock": 5,
+    "status": "active"
+  },
+  {
+    "id": "66340_3Pcs",
+    "name": "Lord Walker Premium Premium Cotton Blend Socks | Pack of 3 | Women No Show | Combo_66340_3Pcs",
+    "price": 990,
+    "stock": 5,
+    "status": "active"
+  }
+]
