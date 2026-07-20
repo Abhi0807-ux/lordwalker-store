@@ -7,6 +7,29 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+
+<!-- Meta Pixel — replace YOUR_PIXEL_ID with the real ID from Meta Events Manager -->
+<script>
+!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
+document,'script','https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', 'YOUR_PIXEL_ID');
+fbq('track', 'PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none"
+  src="https://www.facebook.com/tr?id=YOUR_PIXEL_ID&ev=PageView&noscript=1"
+/></noscript>
+
+<!-- GA4 — replace G-QWV2JV0V0V with the real Measurement ID from Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-QWV2JV0V0V"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-QWV2JV0V0V');
+</script>
 <style>
   :root{
     --ink:#15161c;
@@ -164,6 +187,8 @@
   .drawer-foot{padding:22px 24px 28px; border-top:1px solid rgba(21,22,28,0.1);}
   .subtotal-row{display:flex; justify-content:space-between; font-size:15px; margin-bottom:16px;}
   .subtotal-row strong{font-family:'Fraunces',serif; font-size:19px;}
+  .cart-msg{font-size:12.5px; color:rgba(21,22,28,0.55); margin-bottom:8px; padding:8px 10px; background:rgba(21,22,28,0.04); border-radius:8px;}
+  .cart-msg-good{color:#2f7a4a; background:rgba(47,122,74,0.08);}
   #checkout-btn{
     width:100%; background:var(--ink); color:var(--paper); border:none; border-radius:999px;
     padding:15px; font-weight:600; font-size:14px; cursor:pointer;
@@ -241,6 +266,7 @@
       <a href="#shop">Shop</a>
       <a href="#why">Why Lord Walker</a>
       <a href="#gifting">Gifting</a>
+      <a href="#reviews">Reviews</a>
       <a href="#contact">Contact</a>
     </div>
     <div class="nav-right">
@@ -255,6 +281,9 @@
   <div class="hero-inner">
   <h1>Somethings shouldn't need <em>second thoughts.</em><br>Like great socks.</h1>
   <p class="sub">No-show, crew, and gifting socks built for the everyday walk — breathable cotton, anti-slip grip, zero fuss.</p>
+  <p style="font-family:'IBM Plex Mono',monospace; font-size:12px; letter-spacing:0.5px; color:var(--brass); margin:-16px 0 32px;">
+    Buy 3, get 1 free · Free shipping over ₹499
+  </p>
   <div class="cta-row">
     <button class="btn-primary" onclick="document.getElementById('shop').scrollIntoView({behavior:'smooth'})">Shop the range</button>
     <button class="btn-ghost" onclick="document.getElementById('why').scrollIntoView({behavior:'smooth'})">Our story</button>
@@ -272,7 +301,9 @@
 <section id="shop" class="wrap reveal">
   <div class="shop-head">
     <h2>The full range</h2>
-    <p>Every pair below is live inventory — priced, stocked, and ready to ship.</p>
+    <p>Every pair below is live inventory — priced, stocked, and ready to ship.
+      <a href="#" onclick="event.preventDefault(); openSizeGuide();" style="text-decoration:underline; color:inherit;">See size guide →</a>
+    </p>
   </div>
   <div class="grid reveal-stagger" id="product-grid"></div>
 </section>
@@ -342,6 +373,31 @@
   </div>
 </section>
 
+<section id="reviews" class="reveal" style="background:var(--paper); color:var(--ink); padding:90px 32px;">
+  <div class="wrap" style="text-align:center;">
+    <div class="section-eyebrow" style="color:var(--violet); font-family:'IBM Plex Mono',monospace; font-size:12px; letter-spacing:2px; text-transform:uppercase; margin-bottom:16px;">What customers say</div>
+    <h2 style="font-family:'Fraunces',serif; font-size:36px; font-weight:600; letter-spacing:-0.5px; margin-bottom:48px;">Trusted by everyday walkers</h2>
+    <div class="why-grid" style="max-width:1000px; margin:0 auto;">
+      <div class="why-card" style="background:#fff; border:1px solid rgba(21,22,28,0.08);">
+        <div style="color:var(--brass); margin-bottom:10px; font-size:14px;">★★★★★</div>
+        <p style="font-size:13.5px; color:rgba(21,22,28,0.65); line-height:1.6; margin-bottom:14px;">"Genuinely the most comfortable socks I've bought online. The heel grip actually works — no slipping by evening."</p>
+        <div style="font-size:12.5px; font-weight:600;">— Ananya R., Bengaluru</div>
+      </div>
+      <div class="why-card" style="background:#fff; border:1px solid rgba(21,22,28,0.08);">
+        <div style="color:var(--brass); margin-bottom:10px; font-size:14px;">★★★★★</div>
+        <p style="font-size:13.5px; color:rgba(21,22,28,0.65); line-height:1.6; margin-bottom:14px;">"Bought the Pack of 5 as a gift for my dad — he's asked for more already. Great quality for the price."</p>
+        <div style="font-size:12.5px; font-weight:600;">— Karthik M., Chennai</div>
+      </div>
+      <div class="why-card" style="background:#fff; border:1px solid rgba(21,22,28,0.08);">
+        <div style="color:var(--brass); margin-bottom:10px; font-size:14px;">★★★★☆</div>
+        <p style="font-size:13.5px; color:rgba(21,22,28,0.65); line-height:1.6; margin-bottom:14px;">"Fast delivery and the no-show pair is invisible with loafers, exactly as advertised."</p>
+        <div style="font-size:12.5px; font-weight:600;">— Priya S., Pune</div>
+      </div>
+    </div>
+    <p style="font-size:11.5px; color:rgba(21,22,28,0.4); margin-top:32px;">Placeholder reviews — swap these for real customer feedback (e.g. via a post-purchase WhatsApp/email review request) before launch.</p>
+  </div>
+</section>
+
 <section id="contact" class="reveal">
   <div class="contact-wrap">
     <div>
@@ -366,6 +422,30 @@
   <p>Lord Walker · lordwalker.in · Built for people who'd rather think about anything else but their socks</p>
 </footer>
 
+<div id="size-overlay" onclick="closeSizeGuide()" style="position:fixed; inset:0; background:rgba(21,22,28,0.5); display:none; z-index:98;"></div>
+<div id="size-modal" style="position:fixed; top:50%; left:50%; transform:translate(-50%,-50%) scale(0.95); opacity:0; pointer-events:none; transition:opacity .25s ease, transform .25s ease; background:var(--paper); color:var(--ink); z-index:99; width:420px; max-width:90vw; border-radius:18px; padding:28px;">
+  <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:18px;">
+    <h3 style="font-family:'Fraunces',serif; font-size:20px;">Size Guide</h3>
+    <button onclick="closeSizeGuide()" style="background:none; border:none; font-size:22px; cursor:pointer; color:var(--ink);">×</button>
+  </div>
+  <p style="font-size:13px; color:rgba(21,22,28,0.6); margin-bottom:16px;">Most Lord Walker socks are Free Size and stretch comfortably across the range below. Formal crew styles run true to size.</p>
+  <table style="width:100%; border-collapse:collapse; font-size:13px;">
+    <thead>
+      <tr style="border-bottom:1px solid rgba(21,22,28,0.15); text-align:left;">
+        <th style="padding:8px 4px;">Foot Length (cm)</th>
+        <th style="padding:8px 4px;">UK Size</th>
+        <th style="padding:8px 4px;">EU Size</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr style="border-bottom:1px solid rgba(21,22,28,0.08);"><td style="padding:8px 4px;">24–26</td><td style="padding:8px 4px;">6–8</td><td style="padding:8px 4px;">39–42</td></tr>
+      <tr style="border-bottom:1px solid rgba(21,22,28,0.08);"><td style="padding:8px 4px;">26–28</td><td style="padding:8px 4px;">8–10</td><td style="padding:8px 4px;">42–44</td></tr>
+      <tr><td style="padding:8px 4px;">28–30</td><td style="padding:8px 4px;">10–11</td><td style="padding:8px 4px;">44–46</td></tr>
+    </tbody>
+  </table>
+  <p style="font-size:11.5px; color:rgba(21,22,28,0.45); margin-top:14px;">Note: replace this chart with your own measured sizing before launch — these are placeholder ranges.</p>
+</div>
+
 <div id="overlay" onclick="closeCart()"></div>
 <div id="drawer">
   <div class="drawer-head">
@@ -379,7 +459,8 @@
       <input id="cf-phone" placeholder="Phone number" style="width:100%;padding:10px;margin-bottom:8px;border-radius:8px;border:1px solid rgba(21,22,28,0.2);font-family:'Inter',sans-serif;">
       <textarea id="cf-address" placeholder="Delivery address" rows="2" style="width:100%;padding:10px;border-radius:8px;border:1px solid rgba(21,22,28,0.2);font-family:'Inter',sans-serif;resize:vertical;"></textarea>
     </div>
-    <div class="subtotal-row"><span>Subtotal</span><strong id="subtotal">₹0</strong></div>
+    <div id="cart-summary"></div>
+    <div class="subtotal-row"><span>Total</span><strong id="subtotal">₹0</strong></div>
     <button id="checkout-btn" onclick="checkout()">Proceed to Checkout</button>
   </div>
 </div>
@@ -390,6 +471,8 @@ const API_BASE = "https://lordwalker-store.onrender.com";
 
 let PRODUCTS = [];
 let cart = {};
+let lastQuote = null;
+const FREE_SHIPPING_THRESHOLD = 499; // display-only mirror of pricing.js — server is authoritative
 
 const swatchOrder = ["ink","violet","sky","lilac","brass"];
 function swatchFor(i){ return swatchOrder[i % swatchOrder.length]; }
@@ -445,12 +528,20 @@ function addToCart(id){
   badge.classList.remove('bump');
   void badge.offsetWidth;
   badge.classList.add('bump');
+
+  const p = PRODUCTS.find(x => x.id === id);
+  if (p) {
+    if (window.fbq) fbq('track', 'AddToCart', { content_ids: [p.id], content_name: p.name, value: p.price, currency: 'INR' });
+    if (window.gtag) gtag('event', 'add_to_cart', { currency: 'INR', value: p.price, items: [{ item_id: p.id, item_name: p.name }] });
+  }
 }
 function changeQty(id, delta){
   cart[id] = (cart[id] || 0) + delta;
   if(cart[id] <= 0) delete cart[id];
   updateCartUI();
 }
+let quoteSeq = 0; // guards against an old slow response overwriting a newer one
+
 function updateCartUI(){
   const count = Object.values(cart).reduce((a,b)=>a+b,0);
   document.getElementById('cart-count').textContent = count;
@@ -481,8 +572,65 @@ function updateCartUI(){
     }).join('');
   }
 
-  const subtotal = ids.reduce((sum,id) => sum + PRODUCTS.find(x=>x.id===id).price * cart[id], 0);
-  document.getElementById('subtotal').textContent = '₹' + subtotal;
+  refreshQuote(ids);
+}
+
+async function refreshQuote(ids){
+  const summaryEl = document.getElementById('cart-summary');
+  if (ids.length === 0){
+    summaryEl.innerHTML = '';
+    document.getElementById('subtotal').textContent = '₹0';
+    return;
+  }
+
+  const mySeq = ++quoteSeq;
+  const items = ids.map(id => ({ id, qty: cart[id] }));
+  try{
+    const res = await fetch(`${API_BASE}/api/orders/quote`, {
+      method: 'POST',
+      headers: {'Content-Type':'application/json'},
+      body: JSON.stringify({ items })
+    });
+    const q = await res.json();
+    if (mySeq !== quoteSeq) return; // a newer request already landed
+    if (q.error) throw new Error(q.error);
+
+    lastQuote = q;
+    document.getElementById('subtotal').textContent = '₹' + q.total;
+
+    let msg = '';
+    if (q.bundleDiscount > 0){
+      msg += `<div class="cart-msg cart-msg-good">🎉 Bundle discount applied: −₹${q.bundleDiscount} (${q.freeUnits} pair${q.freeUnits>1?'s':''} free)</div>`;
+    }
+    if (q.shipping === 0){
+      msg += `<div class="cart-msg cart-msg-good">✓ Free shipping unlocked</div>`;
+    } else {
+      const remaining = FREE_SHIPPING_THRESHOLD - (q.subtotal - q.bundleDiscount);
+      msg += `<div class="cart-msg">Add ₹${remaining} more for free shipping (currently ₹${q.shipping} shipping)</div>`;
+    }
+    summaryEl.innerHTML = msg;
+  }catch(e){
+    if (mySeq !== quoteSeq) return;
+    summaryEl.innerHTML = '';
+    // Fall back to a naive local subtotal so the UI never looks broken
+    const subtotal = ids.reduce((sum,id) => sum + PRODUCTS.find(x=>x.id===id).price * cart[id], 0);
+    document.getElementById('subtotal').textContent = '₹' + subtotal;
+  }
+}
+
+function openSizeGuide(){
+  document.getElementById('size-overlay').style.display = 'block';
+  const m = document.getElementById('size-modal');
+  m.style.opacity = '1';
+  m.style.transform = 'translate(-50%,-50%) scale(1)';
+  m.style.pointerEvents = 'auto';
+}
+function closeSizeGuide(){
+  document.getElementById('size-overlay').style.display = 'none';
+  const m = document.getElementById('size-modal');
+  m.style.opacity = '0';
+  m.style.transform = 'translate(-50%,-50%) scale(0.95)';
+  m.style.pointerEvents = 'none';
 }
 
 function openCart(){
@@ -503,6 +651,9 @@ async function checkout(){
   if(!name || !phone || !address){ alert('Please fill in your name, phone, and address.'); return; }
 
   const items = Object.keys(cart).map(id => ({ id, qty: cart[id] }));
+
+  if (window.fbq) fbq('track', 'InitiateCheckout', { value: lastQuote ? lastQuote.total : undefined, currency: 'INR' });
+  if (window.gtag) gtag('event', 'begin_checkout', { currency: 'INR', value: lastQuote ? lastQuote.total : undefined });
 
   let orderData;
   try{
@@ -539,8 +690,11 @@ async function checkout(){
       });
       const verifyData = await verifyRes.json();
       if(verifyData.success){
+        if (window.fbq) fbq('track', 'Purchase', { value: verifyData.amount, currency: 'INR' });
+        if (window.gtag) gtag('event', 'purchase', { transaction_id: verifyData.orderId, value: verifyData.amount, currency: 'INR' });
         alert('Payment successful! Order ' + orderData.orderId + ' confirmed.');
         cart = {};
+        lastQuote = null;
         updateCartUI();
         closeCart();
         loadProducts();
