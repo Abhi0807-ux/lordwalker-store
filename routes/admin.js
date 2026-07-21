@@ -21,11 +21,11 @@ router.get('/products', requireAdmin, (req, res) => {
   res.json(db.getProducts());
 });
 
-// PUT /api/admin/products/:id — update stock, price, and/or status
-// body: { stock?, price?, status? }
+// PUT /api/admin/products/:id — update stock, price, status, and/or image
+// body: { stock?, price?, status?, image? }
 router.put('/products/:id', requireAdmin, (req, res) => {
   try {
-    const { stock, price, status } = req.body;
+    const { stock, price, status, image } = req.body;
     const updates = {};
     if (stock !== undefined) {
       const n = Number(stock);
@@ -41,8 +41,49 @@ router.put('/products/:id', requireAdmin, (req, res) => {
       if (!['active', 'inactive'].includes(status)) throw new Error('Status must be active or inactive');
       updates.status = status;
     }
+    if (image !== undefined) {
+      updates.image = image; // base64 data URL, or '' to clear it
+    }
     const updated = db.updateProduct(req.params.id, updates);
     res.json(updated);
+  } catch (err) {
+    res.status(400).json({ error: err.message });
+  }
+});
+
+// POST /api/admin/products — create a new product
+// body: { id, name, price, stock, status?, image? }
+router.post('/products', requireAdmin, (req, res) => {
+  try {
+    const { id, name, price, stock, status, image } = req.body;
+    if (!id || !String(id).trim()) throw new Error('Product code is required');
+    if (!name || !String(name).trim()) throw new Error('Product name is required');
+    const priceNum = Number(price);
+    if (!Number.isFinite(priceNum) || priceNum <= 0) throw new Error('Price must be a positive number');
+    const stockNum = Number(stock);
+    if (!Number.isFinite(stockNum) || stockNum < 0) throw new Error('Stock must be a non-negative number');
+
+    const product = {
+      id: String(id).trim(),
+      name: String(name).trim(),
+      price: priceNum,
+      stock: stockNum,
+      status: status === 'inactive' ? 'inactive' : 'active',
+    };
+    if (image) product.image = image;
+
+    const created = db.addProduct(product);
+    res.status(201).json(created);
+  } catch (err) {
+    res.status(400).json({ error: err.message });
+  }
+});
+
+// DELETE /api/admin/products/:id — remove a product entirely
+router.delete('/products/:id', requireAdmin, (req, res) => {
+  try {
+    const removed = db.deleteProduct(req.params.id);
+    res.json({ success: true, removed });
   } catch (err) {
     res.status(400).json({ error: err.message });
   }
