@@ -321,6 +321,26 @@ fbq('track', 'PageView');
     .nav-links{display:none;}
     .swatch-rail{margin-top:44px;}
   }
+
+  /* MOBILE HAMBURGER NAV */
+  #hamburger-btn{
+    display:none; flex-direction:column; justify-content:center; gap:4px;
+    width:36px; height:36px; background:none; border:none; cursor:pointer; padding:0;
+  }
+  #hamburger-btn span{width:22px; height:2px; background:var(--ink); border-radius:2px; transition:transform .25s ease, opacity .25s ease;}
+  #hamburger-btn.open span:nth-child(1){transform:translateY(6px) rotate(45deg);}
+  #hamburger-btn.open span:nth-child(2){opacity:0;}
+  #hamburger-btn.open span:nth-child(3){transform:translateY(-6px) rotate(-45deg);}
+  #mobile-nav{
+    display:none; flex-direction:column; background:var(--paper); border-top:1px solid var(--line);
+    overflow:hidden; max-height:0; transition:max-height .3s ease;
+  }
+  #mobile-nav.open{max-height:320px;}
+  #mobile-nav a{padding:16px 32px; font-size:15px; font-weight:500; border-bottom:1px solid var(--line); color:var(--ink);}
+  @media(max-width:720px){
+    #hamburger-btn{display:flex;}
+    #mobile-nav{display:flex;}
+  }
 </style>
 </head>
 <body>
@@ -362,8 +382,18 @@ fbq('track', 'PageView');
     </div>
     <div class="nav-right">
       <button id="cart-btn" onclick="openCart()">Cart <span id="cart-count">0</span></button>
+      <button id="hamburger-btn" onclick="toggleMobileNav()" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
     </div>
   </nav>
+  <div id="mobile-nav">
+    <a href="#shop" onclick="closeMobileNav()">Shop</a>
+    <a href="#why" onclick="closeMobileNav()">Why Lord Walker</a>
+    <a href="#gifting" onclick="closeMobileNav()">Gifting</a>
+    <a href="#reviews" onclick="closeMobileNav()">Reviews</a>
+    <a href="#contact" onclick="closeMobileNav()">Contact</a>
+  </div>
 </header>
 
 <section id="banner-carousel" class="banner-carousel">
@@ -840,6 +870,15 @@ function renderCategories(categories){
   `;
   }).join('');
   initReveal();
+}
+
+function toggleMobileNav(){
+  document.getElementById('hamburger-btn').classList.toggle('open');
+  document.getElementById('mobile-nav').classList.toggle('open');
+}
+function closeMobileNav(){
+  document.getElementById('hamburger-btn').classList.remove('open');
+  document.getElementById('mobile-nav').classList.remove('open');
 }
 
 function openSizeGuide(){
