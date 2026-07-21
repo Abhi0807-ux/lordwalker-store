@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lord Walker — Admin</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#2b2733; --paper:#fbf3ef; --paper-dim:#f3e6df;
+    --line:rgba(43,39,51,0.12); --accent-teal:#5b9c93; --accent-plum:#9b6fa0;
+    --good:#2f7a4a; --bad:#b0392f;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{background:var(--paper); color:var(--ink); font-family:'Inter',sans-serif; min-height:100vh;}
+  .wrap{max-width:1000px; margin:0 auto; padding:40px 24px 80px;}
+  h1{font-family:'Fraunces',serif; font-size:30px; font-weight:700; margin-bottom:6px;}
+  .sub{font-size:14px; color:rgba(43,39,51,0.6); margin-bottom:32px;}
+
+  /* Password gate */
+  #gate{max-width:380px; margin:120px auto; text-align:center;}
+  #gate h2{font-family:'Fraunces',serif; font-size:22px; margin-bottom:18px;}
+  #gate input{
+    width:100%; padding:13px 16px; border-radius:10px; border:1px solid var(--line);
+    background:#fff; font-size:15px; margin-bottom:12px; font-family:'Inter',sans-serif;
+  }
+  #gate button, .btn{
+    background:var(--ink); color:var(--paper); border:none; border-radius:999px;
+    padding:12px 24px; font-weight:600; font-size:14px; cursor:pointer;
+    transition:transform .2s ease;
+  }
+  #gate button:hover, .btn:hover{transform:translateY(-2px);}
+  #gate-error{color:var(--bad); font-size:13px; margin-top:10px; min-height:16px;}
+
+  /* Product table */
+  #app{display:none;}
+  .toolbar{display:flex; justify-content:space-between; align-items:center; margin-bottom:20px;}
+  table{width:100%; border-collapse:collapse; background:#fff; border-radius:14px; overflow:hidden; box-shadow:0 4px 20px rgba(43,39,51,0.06);}
+  th{
+    background:var(--ink); color:var(--paper); text-align:left; padding:12px 14px;
+    font-size:12px; letter-spacing:0.5px; text-transform:uppercase; font-family:'IBM Plex Mono',monospace;
+  }
+  td{padding:12px 14px; border-bottom:1px solid var(--line); font-size:14px; vertical-align:middle;}
+  tr:last-child td{border-bottom:none;}
+  tr:nth-child(even) td{background:var(--paper-dim);}
+  .code{font-family:'IBM Plex Mono',monospace; font-size:12px; color:rgba(43,39,51,0.55);}
+  .name{max-width:280px; font-size:13px;}
+  input.edit{
+    width:80px; padding:7px 9px; border-radius:8px; border:1px solid var(--line);
+    font-size:13.5px; font-family:'Inter',sans-serif;
+  }
+  select.edit{padding:7px 9px; border-radius:8px; border:1px solid var(--line); font-size:13px; background:#fff;}
+  .save-btn{
+    background:var(--accent-teal); color:#fff; border:none; border-radius:8px;
+    padding:7px 14px; font-size:12.5px; font-weight:600; cursor:pointer; transition:opacity .2s;
+  }
+  .save-btn:hover{opacity:0.85;}
+  .row-status{font-size:11.5px; margin-left:8px;}
+  .row-status.ok{color:var(--good);}
+  .row-status.err{color:var(--bad);}
+  #load-error{color:var(--bad); text-align:center; padding:40px; font-size:14px;}
+</style>
+</head>
+<body>
+
+<div id="gate">
+  <h2>🔒 Lord Walker Admin</h2>
+  <input type="password" id="password-input" placeholder="Admin password" autofocus>
+  <button onclick="unlock()">Unlock</button>
+  <div id="gate-error"></div>
+</div>
+
+<div id="app">
+  <div class="wrap">
+    <h1>Product Admin</h1>
+    <p class="sub">Update stock and prices directly — changes save immediately to the live store.</p>
+    <div class="toolbar">
+      <button class="btn" onclick="loadProducts()">↻ Refresh</button>
+      <button class="btn" onclick="lock()" style="background:transparent; color:var(--ink); border:1px solid var(--line);">Log out</button>
+    </div>
+    <table id="product-table">
+      <thead>
+        <tr><th>Code</th><th>Name</th><th>Price (₹)</th><th>Stock</th><th>Status</th><th></th></tr>
+      </thead>
+      <tbody id="table-body"></tbody>
+    </table>
+    <div id="load-error" style="display:none;"></div>
+  </div>
+</div>
+
+<script>
+const API_BASE = "https://lordwalker-store.onrender.com";
+let PASSWORD = '';
+
+function unlock(){
+  const pw = document.getElementById('password-input').value.trim();
+  if(!pw){ return; }
+  PASSWORD = pw;
+  sessionStorage.setItem('lw_admin_pw', pw);
+  document.getElementById('gate-error').textContent = '';
+  loadProducts();
+}
+
+function lock(){
+  sessionStorage.removeItem('lw_admin_pw');
+  PASSWORD = '';
+  document.getElementById('app').style.display = 'none';
+  document.getElementById('gate').style.display = 'block';
+  document.getElementById('password-input').value = '';
+}
+
+async function loadProducts(){
+  const errEl = document.getElementById('load-error');
+  errEl.style.display = 'none';
+  try{
+    const res = await fetch(`${API_BASE}/api/admin/products`, {
+      headers: { 'x-admin-password': PASSWORD }
+    });
+    if(res.status === 401){
+      document.getElementById('gate-error').textContent = 'Incorrect password.';
+      return;
+    }
+    const products = await res.json();
+    if(!res.ok) throw new Error(products.error || 'Failed to load products');
+
+    document.getElementById('gate').style.display = 'none';
+    document.getElementById('app').style.display = 'block';
+    renderTable(products);
+  }catch(e){
+    document.getElementById('app').style.display = 'block';
+    document.getElementById('gate').style.display = 'none';
+    errEl.style.display = 'block';
+    errEl.textContent = 'Could not load products: ' + e.message;
+  }
+}
+
+function renderTable(products){
+  const body = document.getElementById('table-body');
+  body.innerHTML = products.map(p => `
+    <tr data-id="${p.id}">
+      <td class="code">${p.id}</td>
+      <td class="name">${p.name}</td>
+      <td><input class="edit price-input" type="number" min="1" value="${p.price}"></td>
+      <td><input class="edit stock-input" type="number" min="0" value="${p.stock}"></td>
+      <td>
+        <select class="edit status-input">
+          <option value="active" ${p.status === 'active' ? 'selected' : ''}>Active</option>
+          <option value="inactive" ${p.status === 'inactive' ? 'selected' : ''}>Inactive</option>
+        </select>
+      </td>
+      <td>
+        <button class="save-btn" onclick="saveRow('${p.id}')">Save</button>
+        <span class="row-status" id="status-${p.id}"></span>
+      </td>
+    </tr>
+  `).join('');
+}
+
+async function saveRow(id){
+  const row = document.querySelector(`tr[data-id="${id}"]`);
+  const price = row.querySelector('.price-input').value;
+  const stock = row.querySelector('.stock-input').value;
+  const status = row.querySelector('.status-input').value;
+  const statusEl = document.getElementById(`status-${id}`);
+  statusEl.textContent = 'Saving…';
+  statusEl.className = 'row-status';
+
+  try{
+    const res = await fetch(`${API_BASE}/api/admin/products/${id}`, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json', 'x-admin-password': PASSWORD },
+      body: JSON.stringify({ price, stock, status })
+    });
+    const data = await res.json();
+    if(!res.ok) throw new Error(data.error || 'Save failed');
+    statusEl.textContent = '✓ Saved';
+    statusEl.className = 'row-status ok';
+    setTimeout(() => { statusEl.textContent = ''; }, 2500);
+  }catch(e){
+    statusEl.textContent = '✗ ' + e.message;
+    statusEl.className = 'row-status err';
+  }
+}
+
+// Auto-unlock if a password is already stored for this browser session
+const savedPw = sessionStorage.getItem('lw_admin_pw');
+if(savedPw){
+  PASSWORD = savedPw;
+  loadProducts();
+}
+document.getElementById('password-input').addEventListener('keydown', (e) => {
+  if(e.key === 'Enter') unlock();
+});
+</script>
+
+</body>
+</html>

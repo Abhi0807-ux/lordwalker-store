@@ -43,6 +43,14 @@ const db = {
     p.stock -= qty;
     writeJSON(PRODUCTS_FILE, products);
   },
+  updateProduct(id, updates) {
+    const products = this.getProducts();
+    const idx = products.findIndex(x => x.id === id);
+    if (idx === -1) throw new Error('Product not found: ' + id);
+    products[idx] = { ...products[idx], ...updates };
+    writeJSON(PRODUCTS_FILE, products);
+    return products[idx];
+  },
   createOrder(order) {
     const orders = readJSON(ORDERS_FILE);
     orders.push(order);
