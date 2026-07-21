@@ -85,8 +85,8 @@ fbq('track', 'PageView');
   }
   nav{display:flex; align-items:center; justify-content:space-between; padding:20px 32px;}
   .logo{font-family:'Fraunces',serif; font-size:22px; font-weight:600; letter-spacing:0.5px; display:flex; align-items:center; gap:8px;}
-  .logo .crown{color:var(--accent-gold); font-size:16px; display:inline-block; transition:transform .4s ease;}
-  .logo:hover .crown{transform:rotate(-14deg) scale(1.15);}
+  .logo-img{height:36px; width:auto; display:block; mix-blend-mode:multiply; transition:transform .3s ease;}
+  .logo:hover .logo-img{transform:scale(1.04);}
   .nav-links{display:flex; gap:36px; font-size:14px; font-weight:500; letter-spacing:0.3px;}
   .nav-links a{opacity:0.75; transition:opacity .2s; position:relative; padding-bottom:4px;}
   .nav-links a::after{content:'';position:absolute; left:0; bottom:0; width:0; height:1px; background:var(--accent-teal); transition:width .3s ease;}
@@ -288,7 +288,7 @@ fbq('track', 'PageView');
 
 <header>
   <nav class="wrap" style="padding:20px 0;">
-    <div class="logo"><span class="crown">♛</span> Lord Walker</div>
+    <div class="logo"><img src="lord-walker-logo.jpg" alt="Lord Walker" class="logo-img"></div>
     <div class="nav-links">
       <a href="#shop">Shop</a>
       <a href="#why">Why Lord Walker</a>
