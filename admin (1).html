@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lord Walker — Admin</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#2b2733; --paper:#fbf3ef; --paper-dim:#f3e6df;
+    --line:rgba(43,39,51,0.12); --accent-teal:#5b9c93; --accent-plum:#9b6fa0;
+    --good:#2f7a4a; --bad:#b0392f;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{background:var(--paper); color:var(--ink); font-family:'Inter',sans-serif; min-height:100vh;}
+  .wrap{max-width:1000px; margin:0 auto; padding:40px 24px 80px;}
+  h1{font-family:'Fraunces',serif; font-size:30px; font-weight:700; margin-bottom:6px;}
+  .sub{font-size:14px; color:rgba(43,39,51,0.6); margin-bottom:32px;}
+
+  /* Password gate */
+  #gate{max-width:380px; margin:120px auto; text-align:center;}
+  #gate h2{font-family:'Fraunces',serif; font-size:22px; margin-bottom:18px;}
+  #gate input{
+    width:100%; padding:13px 16px; border-radius:10px; border:1px solid var(--line);
+    background:#fff; font-size:15px; margin-bottom:12px; font-family:'Inter',sans-serif;
+  }
+  #gate button, .btn{
+    background:var(--ink); color:var(--paper); border:none; border-radius:999px;
+    padding:12px 24px; font-weight:600; font-size:14px; cursor:pointer;
+    transition:transform .2s ease;
+  }
+  #gate button:hover, .btn:hover{transform:translateY(-2px);}
+  #gate-error{color:var(--bad); font-size:13px; margin-top:10px; min-height:16px;}
+
+  /* Product table */
+  #app{display:none;}
+  .toolbar{display:flex; justify-content:space-between; align-items:center; margin-bottom:20px;}
+  table{width:100%; border-collapse:collapse; background:#fff; border-radius:14px; overflow:hidden; box-shadow:0 4px 20px rgba(43,39,51,0.06);}
+  th{
+    background:var(--ink); color:var(--paper); text-align:left; padding:12px 14px;
+    font-size:12px; letter-spacing:0.5px; text-transform:uppercase; font-family:'IBM Plex Mono',monospace;
+  }
+  td{padding:12px 14px; border-bottom:1px solid var(--line); font-size:14px; vertical-align:middle;}
+  tr:last-child td{border-bottom:none;}
+  tr:nth-child(even) td{background:var(--paper-dim);}
+  .code{font-family:'IBM Plex Mono',monospace; font-size:12px; color:rgba(43,39,51,0.55);}
+  .name{max-width:280px; font-size:13px;}
+  input.edit{
+    width:80px; padding:7px 9px; border-radius:8px; border:1px solid var(--line);
+    font-size:13.5px; font-family:'Inter',sans-serif;
+  }
+  select.edit{padding:7px 9px; border-radius:8px; border:1px solid var(--line); font-size:13px; background:#fff;}
+  .save-btn{
+    background:var(--accent-teal); color:#fff; border:none; border-radius:8px;
+    padding:7px 14px; font-size:12.5px; font-weight:600; cursor:pointer; transition:opacity .2s;
+  }
+  .save-btn:hover{opacity:0.85;}
+  .row-status{font-size:11.5px; margin-left:8px;}
+  .row-status.ok{color:var(--good);}
+  .row-status.err{color:var(--bad);}
+  #load-error{color:var(--bad); text-align:center; padding:40px; font-size:14px;}
+
+  /* Add product form */
+  #add-form{
+    background:#fff; border-radius:14px; padding:20px 22px; margin-bottom:24px;
+    box-shadow:0 4px 20px rgba(43,39,51,0.06); display:none;
+  }
+  #add-form.open{display:block;}
+  #add-form h3{font-family:'Fraunces',serif; font-size:17px; margin-bottom:14px;}
+  .form-grid{display:grid; grid-template-columns:repeat(auto-fit, minmax(160px,1fr)); gap:12px; margin-bottom:14px;}
+  .form-grid label{display:block; font-size:11.5px; color:rgba(43,39,51,0.55); margin-bottom:5px; font-family:'IBM Plex Mono',monospace; text-transform:uppercase; letter-spacing:0.5px;}
+  .form-grid input, .form-grid select{
+    width:100%; padding:9px 11px; border-radius:8px; border:1px solid var(--line); font-size:13.5px; font-family:'Inter',sans-serif;
+  }
+  #add-error{color:var(--bad); font-size:13px; margin-bottom:10px;}
+  #add-success{color:var(--good); font-size:13px; margin-bottom:10px;}
+
+  /* Table image column */
+  .thumb{width:44px; height:44px; border-radius:8px; object-fit:cover; display:block; background:var(--paper-dim);}
+  .thumb-empty{width:44px; height:44px; border-radius:8px; background:var(--paper-dim); display:flex; align-items:center; justify-content:center; font-size:16px; color:rgba(43,39,51,0.3);}
+  .img-input{font-size:11px; margin-top:6px; display:block;}
+  .delete-btn{
+    background:transparent; color:var(--bad); border:1px solid rgba(176,57,47,0.35); border-radius:8px;
+    padding:7px 12px; font-size:12.5px; font-weight:600; cursor:pointer; margin-left:6px;
+  }
+  .delete-btn:hover{background:rgba(176,57,47,0.08);}
+</style>
+</head>
+<body>
+
+<div id="gate">
+  <h2>🔒 Lord Walker Admin</h2>
+  <input type="password" id="password-input" placeholder="Admin password" autofocus>
+  <button onclick="unlock()">Unlock</button>
+  <div id="gate-error"></div>
+</div>
+
+<div id="app">
+  <div class="wrap">
+    <h1>Product Admin</h1>
+    <p class="sub">Update stock and prices directly — changes save immediately to the live store.</p>
+    <div class="toolbar">
+      <div>
+        <button class="btn" onclick="loadProducts()">↻ Refresh</button>
+        <button class="btn" onclick="toggleAddForm()" style="background:var(--accent-teal);">+ Add Product</button>
+      </div>
+      <button class="btn" onclick="lock()" style="background:transparent; color:var(--ink); border:1px solid var(--line);">Log out</button>
+    </div>
+
+    <div id="add-form">
+      <h3>New Product</h3>
+      <div id="add-error"></div>
+      <div id="add-success"></div>
+      <div class="form-grid">
+        <div>
+          <label>Product Code</label>
+          <input type="text" id="new-id" placeholder="e.g. 40001">
+        </div>
+        <div style="grid-column:span 2;">
+          <label>Name</label>
+          <input type="text" id="new-name" placeholder="e.g. Lord Walker Crew Socks">
+        </div>
+        <div>
+          <label>Price (₹)</label>
+          <input type="number" id="new-price" min="1">
+        </div>
+        <div>
+          <label>Stock</label>
+          <input type="number" id="new-stock" min="0">
+        </div>
+        <div>
+          <label>Status</label>
+          <select id="new-status">
+            <option value="active" selected>Active</option>
+            <option value="inactive">Inactive</option>
+          </select>
+        </div>
+      </div>
+      <div style="margin-bottom:14px;">
+        <label style="display:block; font-size:11.5px; color:rgba(43,39,51,0.55); margin-bottom:5px; font-family:'IBM Plex Mono',monospace; text-transform:uppercase; letter-spacing:0.5px;">Product Image (optional)</label>
+        <input type="file" id="new-image" accept="image/*">
+      </div>
+      <button class="btn" onclick="createProduct()">Create Product</button>
+    </div>
+
+    <table id="product-table">
+      <thead>
+        <tr><th>Image</th><th>Code</th><th>Name</th><th>Price (₹)</th><th>Stock</th><th>Status</th><th></th></tr>
+      </thead>
+      <tbody id="table-body"></tbody>
+    </table>
+    <div id="load-error" style="display:none;"></div>
+  </div>
+</div>
+
+<script>
+const API_BASE = "https://lordwalker-store.onrender.com";
+let PASSWORD = '';
+
+function unlock(){
+  const pw = document.getElementById('password-input').value.trim();
+  if(!pw){ return; }
+  PASSWORD = pw;
+  sessionStorage.setItem('lw_admin_pw', pw);
+  document.getElementById('gate-error').textContent = '';
+  loadProducts();
+}
+
+function lock(){
+  sessionStorage.removeItem('lw_admin_pw');
+  PASSWORD = '';
+  document.getElementById('app').style.display = 'none';
+  document.getElementById('gate').style.display = 'block';
+  document.getElementById('password-input').value = '';
+}
+
+async function loadProducts(){
+  const errEl = document.getElementById('load-error');
+  errEl.style.display = 'none';
+  try{
+    const res = await fetch(`${API_BASE}/api/admin/products`, {
+      headers: { 'x-admin-password': PASSWORD }
+    });
+    if(res.status === 401){
+      document.getElementById('gate-error').textContent = 'Incorrect password.';
+      return;
+    }
+    const products = await res.json();
+    if(!res.ok) throw new Error(products.error || 'Failed to load products');
+
+    document.getElementById('gate').style.display = 'none';
+    document.getElementById('app').style.display = 'block';
+    renderTable(products);
+  }catch(e){
+    document.getElementById('app').style.display = 'block';
+    document.getElementById('gate').style.display = 'none';
+    errEl.style.display = 'block';
+    errEl.textContent = 'Could not load products: ' + e.message;
+  }
+}
+
+function fileToDataURL(file){
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = () => resolve(reader.result);
+    reader.onerror = reject;
+    reader.readAsDataURL(file);
+  });
+}
+
+function renderTable(products){
+  const body = document.getElementById('table-body');
+  body.innerHTML = products.map(p => `
+    <tr data-id="${p.id}">
+      <td>
+        ${p.image ? `<img class="thumb" src="${p.image}">` : `<div class="thumb-empty">🧦</div>`}
+        <input type="file" class="img-input image-input" accept="image/*">
+      </td>
+      <td class="code">${p.id}</td>
+      <td class="name">${p.name}</td>
+      <td><input class="edit price-input" type="number" min="1" value="${p.price}"></td>
+      <td><input class="edit stock-input" type="number" min="0" value="${p.stock}"></td>
+      <td>
+        <select class="edit status-input">
+          <option value="active" ${p.status === 'active' ? 'selected' : ''}>Active</option>
+          <option value="inactive" ${p.status === 'inactive' ? 'selected' : ''}>Inactive</option>
+        </select>
+      </td>
+      <td>
+        <button class="save-btn" onclick="saveRow('${p.id}')">Save</button>
+        <button class="delete-btn" onclick="deleteRow('${p.id}', '${p.name.replace(/'/g, "\\'")}')">Delete</button>
+        <span class="row-status" id="status-${p.id}"></span>
+      </td>
+    </tr>
+  `).join('');
+}
+
+async function saveRow(id){
+  const row = document.querySelector(`tr[data-id="${id}"]`);
+  const price = row.querySelector('.price-input').value;
+  const stock = row.querySelector('.stock-input').value;
+  const status = row.querySelector('.status-input').value;
+  const imageFile = row.querySelector('.image-input').files[0];
+  const statusEl = document.getElementById(`status-${id}`);
+  statusEl.textContent = 'Saving…';
+  statusEl.className = 'row-status';
+
+  try{
+    const body = { price, stock, status };
+    if(imageFile){
+      body.image = await fileToDataURL(imageFile);
+    }
+    const res = await fetch(`${API_BASE}/api/admin/products/${id}`, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json', 'x-admin-password': PASSWORD },
+      body: JSON.stringify(body)
+    });
+    const data = await res.json();
+    if(!res.ok) throw new Error(data.error || 'Save failed');
+    statusEl.textContent = '✓ Saved';
+    statusEl.className = 'row-status ok';
+    setTimeout(() => { statusEl.textContent = ''; }, 2500);
+    if(imageFile) loadProducts(); // refresh thumbnail
+  }catch(e){
+    statusEl.textContent = '✗ ' + e.message;
+    statusEl.className = 'row-status err';
+  }
+}
+
+async function deleteRow(id, name){
+  if(!confirm(`Delete "${name}" (Code ${id})? This cannot be undone.`)) return;
+  const statusEl = document.getElementById(`status-${id}`);
+  try{
+    const res = await fetch(`${API_BASE}/api/admin/products/${id}`, {
+      method: 'DELETE',
+      headers: { 'x-admin-password': PASSWORD }
+    });
+    const data = await res.json();
+    if(!res.ok) throw new Error(data.error || 'Delete failed');
+    loadProducts();
+  }catch(e){
+    if(statusEl){
+      statusEl.textContent = '✗ ' + e.message;
+      statusEl.className = 'row-status err';
+    }
+  }
+}
+
+function toggleAddForm(){
+  document.getElementById('add-form').classList.toggle('open');
+}
+
+async function createProduct(){
+  const id = document.getElementById('new-id').value.trim();
+  const name = document.getElementById('new-name').value.trim();
+  const price = document.getElementById('new-price').value;
+  const stock = document.getElementById('new-stock').value;
+  const status = document.getElementById('new-status').value;
+  const imageFile = document.getElementById('new-image').files[0];
+  const errEl = document.getElementById('add-error');
+  const okEl = document.getElementById('add-success');
+  errEl.textContent = '';
+  okEl.textContent = '';
+
+  try{
+    const body = { id, name, price, stock, status };
+    if(imageFile){
+      body.image = await fileToDataURL(imageFile);
+    }
+    const res = await fetch(`${API_BASE}/api/admin/products`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'x-admin-password': PASSWORD },
+      body: JSON.stringify(body)
+    });
+    const data = await res.json();
+    if(!res.ok) throw new Error(data.error || 'Could not create product');
+    okEl.textContent = '✓ Product created';
+    document.getElementById('new-id').value = '';
+    document.getElementById('new-name').value = '';
+    document.getElementById('new-price').value = '';
+    document.getElementById('new-stock').value = '';
+    document.getElementById('new-image').value = '';
+    loadProducts();
+    setTimeout(() => { okEl.textContent = ''; document.getElementById('add-form').classList.remove('open'); }, 1200);
+  }catch(e){
+    errEl.textContent = '✗ ' + e.message;
+  }
+}
+
+// Auto-unlock if a password is already stored for this browser session
+const savedPw = sessionStorage.getItem('lw_admin_pw');
+if(savedPw){
+  PASSWORD = savedPw;
+  loadProducts();
+}
+document.getElementById('password-input').addEventListener('keydown', (e) => {
+  if(e.key === 'Enter') unlock();
+});
+</script>
+
+</body>
+</html>
