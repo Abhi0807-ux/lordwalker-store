@@ -60,6 +60,31 @@
   .row-status.ok{color:var(--good);}
   .row-status.err{color:var(--bad);}
   #load-error{color:var(--bad); text-align:center; padding:40px; font-size:14px;}
+
+  /* Add product form */
+  #add-form{
+    background:#fff; border-radius:14px; padding:20px 22px; margin-bottom:24px;
+    box-shadow:0 4px 20px rgba(43,39,51,0.06); display:none;
+  }
+  #add-form.open{display:block;}
+  #add-form h3{font-family:'Fraunces',serif; font-size:17px; margin-bottom:14px;}
+  .form-grid{display:grid; grid-template-columns:repeat(auto-fit, minmax(160px,1fr)); gap:12px; margin-bottom:14px;}
+  .form-grid label{display:block; font-size:11.5px; color:rgba(43,39,51,0.55); margin-bottom:5px; font-family:'IBM Plex Mono',monospace; text-transform:uppercase; letter-spacing:0.5px;}
+  .form-grid input, .form-grid select{
+    width:100%; padding:9px 11px; border-radius:8px; border:1px solid var(--line); font-size:13.5px; font-family:'Inter',sans-serif;
+  }
+  #add-error{color:var(--bad); font-size:13px; margin-bottom:10px;}
+  #add-success{color:var(--good); font-size:13px; margin-bottom:10px;}
+
+  /* Table image column */
+  .thumb{width:44px; height:44px; border-radius:8px; object-fit:cover; display:block; background:var(--paper-dim);}
+  .thumb-empty{width:44px; height:44px; border-radius:8px; background:var(--paper-dim); display:flex; align-items:center; justify-content:center; font-size:16px; color:rgba(43,39,51,0.3);}
+  .img-input{font-size:11px; margin-top:6px; display:block;}
+  .delete-btn{
+    background:transparent; color:var(--bad); border:1px solid rgba(176,57,47,0.35); border-radius:8px;
+    padding:7px 12px; font-size:12.5px; font-weight:600; cursor:pointer; margin-left:6px;
+  }
+  .delete-btn:hover{background:rgba(176,57,47,0.08);}
 </style>
 </head>
 <body>
@@ -76,12 +101,52 @@
     <h1>Product Admin</h1>
     <p class="sub">Update stock and prices directly — changes save immediately to the live store.</p>
     <div class="toolbar">
-      <button class="btn" onclick="loadProducts()">↻ Refresh</button>
+      <div>
+        <button class="btn" onclick="loadProducts()">↻ Refresh</button>
+        <button class="btn" onclick="toggleAddForm()" style="background:var(--accent-teal);">+ Add Product</button>
+      </div>
       <button class="btn" onclick="lock()" style="background:transparent; color:var(--ink); border:1px solid var(--line);">Log out</button>
     </div>
+
+    <div id="add-form">
+      <h3>New Product</h3>
+      <div id="add-error"></div>
+      <div id="add-success"></div>
+      <div class="form-grid">
+        <div>
+          <label>Product Code</label>
+          <input type="text" id="new-id" placeholder="e.g. 40001">
+        </div>
+        <div style="grid-column:span 2;">
+          <label>Name</label>
+          <input type="text" id="new-name" placeholder="e.g. Lord Walker Crew Socks">
+        </div>
+        <div>
+          <label>Price (₹)</label>
+          <input type="number" id="new-price" min="1">
+        </div>
+        <div>
+          <label>Stock</label>
+          <input type="number" id="new-stock" min="0">
+        </div>
+        <div>
+          <label>Status</label>
+          <select id="new-status">
+            <option value="active" selected>Active</option>
+            <option value="inactive">Inactive</option>
+          </select>
+        </div>
+      </div>
+      <div style="margin-bottom:14px;">
+        <label style="display:block; font-size:11.5px; color:rgba(43,39,51,0.55); margin-bottom:5px; font-family:'IBM Plex Mono',monospace; text-transform:uppercase; letter-spacing:0.5px;">Product Image (optional)</label>
+        <input type="file" id="new-image" accept="image/*">
+      </div>
+      <button class="btn" onclick="createProduct()">Create Product</button>
+    </div>
+
     <table id="product-table">
       <thead>
-        <tr><th>Code</th><th>Name</th><th>Price (₹)</th><th>Stock</th><th>Status</th><th></th></tr>
+        <tr><th>Image</th><th>Code</th><th>Name</th><th>Price (₹)</th><th>Stock</th><th>Status</th><th></th></tr>
       </thead>
       <tbody id="table-body"></tbody>
     </table>
@@ -135,10 +200,23 @@ async function loadProducts(){
   }
 }
 
+function fileToDataURL(file){
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = () => resolve(reader.result);
+    reader.onerror = reject;
+    reader.readAsDataURL(file);
+  });
+}
+
 function renderTable(products){
   const body = document.getElementById('table-body');
   body.innerHTML = products.map(p => `
     <tr data-id="${p.id}">
+      <td>
+        ${p.image ? `<img class="thumb" src="${p.image}">` : `<div class="thumb-empty">🧦</div>`}
+        <input type="file" class="img-input image-input" accept="image/*">
+      </td>
       <td class="code">${p.id}</td>
       <td class="name">${p.name}</td>
       <td><input class="edit price-input" type="number" min="1" value="${p.price}"></td>
@@ -151,6 +229,7 @@ function renderTable(products){
       </td>
       <td>
         <button class="save-btn" onclick="saveRow('${p.id}')">Save</button>
+        <button class="delete-btn" onclick="deleteRow('${p.id}', '${p.name.replace(/'/g, "\\'")}')">Delete</button>
         <span class="row-status" id="status-${p.id}"></span>
       </td>
     </tr>
@@ -162,24 +241,90 @@ async function saveRow(id){
   const price = row.querySelector('.price-input').value;
   const stock = row.querySelector('.stock-input').value;
   const status = row.querySelector('.status-input').value;
+  const imageFile = row.querySelector('.image-input').files[0];
   const statusEl = document.getElementById(`status-${id}`);
   statusEl.textContent = 'Saving…';
   statusEl.className = 'row-status';
 
   try{
+    const body = { price, stock, status };
+    if(imageFile){
+      body.image = await fileToDataURL(imageFile);
+    }
     const res = await fetch(`${API_BASE}/api/admin/products/${id}`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json', 'x-admin-password': PASSWORD },
-      body: JSON.stringify({ price, stock, status })
+      body: JSON.stringify(body)
     });
     const data = await res.json();
     if(!res.ok) throw new Error(data.error || 'Save failed');
     statusEl.textContent = '✓ Saved';
     statusEl.className = 'row-status ok';
     setTimeout(() => { statusEl.textContent = ''; }, 2500);
+    if(imageFile) loadProducts(); // refresh thumbnail
   }catch(e){
     statusEl.textContent = '✗ ' + e.message;
     statusEl.className = 'row-status err';
+  }
+}
+
+async function deleteRow(id, name){
+  if(!confirm(`Delete "${name}" (Code ${id})? This cannot be undone.`)) return;
+  const statusEl = document.getElementById(`status-${id}`);
+  try{
+    const res = await fetch(`${API_BASE}/api/admin/products/${id}`, {
+      method: 'DELETE',
+      headers: { 'x-admin-password': PASSWORD }
+    });
+    const data = await res.json();
+    if(!res.ok) throw new Error(data.error || 'Delete failed');
+    loadProducts();
+  }catch(e){
+    if(statusEl){
+      statusEl.textContent = '✗ ' + e.message;
+      statusEl.className = 'row-status err';
+    }
+  }
+}
+
+function toggleAddForm(){
+  document.getElementById('add-form').classList.toggle('open');
+}
+
+async function createProduct(){
+  const id = document.getElementById('new-id').value.trim();
+  const name = document.getElementById('new-name').value.trim();
+  const price = document.getElementById('new-price').value;
+  const stock = document.getElementById('new-stock').value;
+  const status = document.getElementById('new-status').value;
+  const imageFile = document.getElementById('new-image').files[0];
+  const errEl = document.getElementById('add-error');
+  const okEl = document.getElementById('add-success');
+  errEl.textContent = '';
+  okEl.textContent = '';
+
+  try{
+    const body = { id, name, price, stock, status };
+    if(imageFile){
+      body.image = await fileToDataURL(imageFile);
+    }
+    const res = await fetch(`${API_BASE}/api/admin/products`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'x-admin-password': PASSWORD },
+      body: JSON.stringify(body)
+    });
+    const data = await res.json();
+    if(!res.ok) throw new Error(data.error || 'Could not create product');
+    okEl.textContent = '✓ Product created';
+    document.getElementById('new-id').value = '';
+    document.getElementById('new-name').value = '';
+    document.getElementById('new-price').value = '';
+    document.getElementById('new-stock').value = '';
+    document.getElementById('new-image').value = '';
+    loadProducts();
+    setTimeout(() => { okEl.textContent = ''; document.getElementById('add-form').classList.remove('open'); }, 1200);
+  }catch(e){
+    errEl.textContent = '✗ ' + e.message;
   }
 }
 
