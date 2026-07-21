@@ -219,6 +219,18 @@ fbq('track', 'PageView');
   .add-btn:hover{background:var(--accent-plum);}
   .stock-tag{font-size:11px; color:rgba(21,22,28,0.4); font-family:'IBM Plex Mono',monospace;}
 
+  /* CATEGORY CARDS */
+  .category-grid{display:grid; grid-template-columns:repeat(auto-fit, minmax(220px,1fr)); gap:24px;}
+  .category-card{
+    position:relative; display:flex; align-items:flex-end; min-height:280px; border-radius:20px;
+    padding:24px; overflow:hidden; transition:transform .3s ease, box-shadow .3s ease;
+  }
+  .category-card:hover{transform:translateY(-6px); box-shadow:0 18px 36px rgba(43,39,51,0.14);}
+  .category-glyph{position:absolute; top:20px; right:20px; font-size:34px; opacity:0.85;}
+  .category-info{position:relative; z-index:2; background:rgba(255,255,255,0.75); backdrop-filter:blur(4px); padding:14px 18px; border-radius:14px; width:100%;}
+  .category-info h3{font-family:'Fraunces',serif; font-size:18px; font-weight:600; margin-bottom:6px; color:var(--ink);}
+  .category-cta{font-size:12.5px; font-weight:600; color:var(--accent-plum);}
+
   /* CART DRAWER */
   #overlay{position:fixed; inset:0; background:rgba(21,22,28,0.5); display:none; z-index:98;}
   #drawer{
@@ -394,6 +406,50 @@ fbq('track', 'PageView');
   </div>
 </section>
 
+<section id="categories" class="wrap reveal">
+  <div class="shop-head">
+    <h2>Shop by Purpose</h2>
+    <p>Find the right pair for wherever your day takes you.</p>
+  </div>
+  <div class="category-grid reveal-stagger">
+    <a href="#shop" class="category-card" style="background:linear-gradient(160deg, var(--violet), var(--lilac));">
+      <span class="category-glyph">💼</span>
+      <div class="category-info">
+        <h3>Office &amp; Corporate</h3>
+        <span class="category-cta">Shop Now →</span>
+      </div>
+    </a>
+    <a href="#shop" class="category-card" style="background:linear-gradient(160deg, var(--brass), var(--rose));">
+      <span class="category-glyph">🚶</span>
+      <div class="category-info">
+        <h3>Everyday</h3>
+        <span class="category-cta">Shop Now →</span>
+      </div>
+    </a>
+    <a href="#shop" class="category-card" style="background:linear-gradient(160deg, var(--sky), var(--wash-a));">
+      <span class="category-glyph">🏃</span>
+      <div class="category-info">
+        <h3>Sports &amp; Active</h3>
+        <span class="category-cta">Shop Now →</span>
+      </div>
+    </a>
+    <a href="#shop" class="category-card" style="background:linear-gradient(160deg, var(--wash-b), var(--sky));">
+      <span class="category-glyph">🌿</span>
+      <div class="category-info">
+        <h3>Wellness</h3>
+        <span class="category-cta">Shop Now →</span>
+      </div>
+    </a>
+    <a href="#gifting" class="category-card" style="background:linear-gradient(160deg, var(--rose), var(--violet));">
+      <span class="category-glyph">🎁</span>
+      <div class="category-info">
+        <h3>Gifting</h3>
+        <span class="category-cta">Shop Now →</span>
+      </div>
+    </a>
+  </div>
+</section>
+
 <section id="shop" class="wrap reveal">
   <div class="shop-head">
     <h2>The full range</h2>
@@ -402,6 +458,22 @@ fbq('track', 'PageView');
     </p>
   </div>
   <div class="grid reveal-stagger" id="product-grid"></div>
+</section>
+
+<section id="trending" class="wrap reveal">
+  <div class="shop-head">
+    <h2>Trending Now</h2>
+    <p>What everyone's adding to cart this week.</p>
+  </div>
+  <div class="grid reveal-stagger" id="trending-grid"></div>
+</section>
+
+<section id="new-arrivals" class="wrap reveal">
+  <div class="shop-head">
+    <h2>New Arrivals</h2>
+    <p>Fresh off the loom — just added to the collection.</p>
+  </div>
+  <div class="grid reveal-stagger" id="new-arrivals-grid"></div>
 </section>
 
 <section id="why" class="reveal">
@@ -465,6 +537,22 @@ fbq('track', 'PageView');
       <div style="background:var(--lilac); color:rgba(21,22,28,0.6);">Lilac Set</div>
       <div style="background:var(--sky); color:rgba(21,22,28,0.6);">Sky Set</div>
       <div style="background:var(--violet); color:rgba(43,39,51,0.6);">Violet Set</div>
+    </div>
+  </div>
+</section>
+
+<section id="about" class="reveal">
+  <div class="gifting-wrap">
+    <div>
+      <div class="section-eyebrow" style="color:var(--accent-teal); font-family:'IBM Plex Mono',monospace; font-size:12px; letter-spacing:2px; text-transform:uppercase; margin-bottom:16px;">About Us</div>
+      <h2>Crafted since 1994. Now stepping into India.</h2>
+      <p class="desc">Lord Walker began three decades ago with a simple belief: the details you don't see are the ones you feel the most. What started as a small craftsmanship-first sock maker has grown into a name people trust for comfort that lasts an entire day, not just a photoshoot.</p>
+      <p class="desc">Today, Lord Walker brings that same premium cotton, finest craftsmanship, and timeless comfort to India — built for boardrooms, morning walks, match days, and every ordinary moment in between. Every pair is made for you, not just made to sell.</p>
+    </div>
+    <div class="gift-swatchbox">
+      <div style="background:var(--lilac); color:rgba(43,39,51,0.6);">Since 1994</div>
+      <div style="background:var(--sky); color:rgba(43,39,51,0.6);">Premium Cotton</div>
+      <div style="background:var(--brass); color:rgba(43,39,51,0.6);">Made For You</div>
     </div>
   </div>
 </section>
@@ -595,9 +683,27 @@ function sockSVG(hex){
   </svg>`;
 }
 
+// Curated picks for the homepage sections — swap these IDs any time to feature different products.
+const TRENDING_IDS = ['35000', '14306', '66340', '36365'];
+const NEW_ARRIVAL_IDS = ['36265', '18366_4Pcs', '16251_5Pcs', '14308_5Pcs'];
+
 function renderProducts(){
-  const grid = document.getElementById('product-grid');
-  grid.innerHTML = PRODUCTS.map((p,i) => `
+  renderGrid('product-grid', PRODUCTS);
+  renderGrid('trending-grid', PRODUCTS.filter(p => TRENDING_IDS.includes(p.id)));
+  renderGrid('new-arrivals-grid', PRODUCTS.filter(p => NEW_ARRIVAL_IDS.includes(p.id)));
+  initReveal();
+}
+
+function renderGrid(elementId, list){
+  const grid = document.getElementById(elementId);
+  if (!grid) return;
+  if (!list.length){
+    grid.innerHTML = '<p style="grid-column:1/-1;text-align:center;color:rgba(21,22,28,0.4);">Nothing to show here yet.</p>';
+    return;
+  }
+  grid.innerHTML = list.map((p) => {
+    const i = PRODUCTS.indexOf(p);
+    return `
     <div class="card">
       <div class="card-media" style="background:${swatchColor[swatchFor(i)]}">${sockSVG('rgba(43,39,51,0.32)')}</div>
       <div class="card-body">
@@ -612,8 +718,8 @@ function renderProducts(){
         </div>
       </div>
     </div>
-  `).join('');
-  initReveal();
+  `;
+  }).join('');
 }
 
 function addToCart(id){
