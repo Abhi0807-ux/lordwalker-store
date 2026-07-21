@@ -61,6 +61,18 @@
   .row-status.err{color:var(--bad);}
   #load-error{color:var(--bad); text-align:center; padding:40px; font-size:14px;}
 
+  @media(max-width:720px){
+    .wrap{padding:24px 14px 60px;}
+    h1{font-size:24px;}
+    .toolbar{flex-direction:column; align-items:stretch; gap:10px;}
+    .toolbar > div{display:flex; flex-direction:column; gap:8px;}
+    table{display:block; overflow-x:auto; white-space:nowrap;}
+    thead, tbody, tr{display:table; width:100%; table-layout:fixed;}
+    input.edit{width:100%; min-width:60px;}
+    .name{max-width:140px; white-space:normal;}
+    #gate{margin:60px auto; padding:0 20px;}
+  }
+
   /* Add product form */
   #add-form, #add-category-form{
     background:#fff; border-radius:14px; padding:20px 22px; margin-bottom:24px;
