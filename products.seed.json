@@ -3,7 +3,7 @@
     "id": "35000",
     "name": "Lord Walker No-Show Socks \u2014 Invisible Everyday Comfort (Code -35000)",
     "price": 249,
-    "stock": 4855,
+    "stock": 4800,
     "status": "active"
   },
   {
@@ -95,6 +95,13 @@
     "name": "Lord Walker Premium Premium Mercerized Cotton Socks | Pack of 5 | Men Crew | Combo_14285_5pcs",
     "price": 1790,
     "stock": 5,
+    "status": "active"
+  },
+  {
+    "id": "36265",
+    "name": "Lord Walker Premium Luxury Bamboo Fabric Socks — Men No Show (Code 36265)",
+    "price": 349,
+    "stock": 200,
     "status": "active"
   },
   {
