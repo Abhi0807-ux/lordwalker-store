@@ -89,4 +89,62 @@ router.delete('/products/:id', requireAdmin, (req, res) => {
   }
 });
 
+// ---------- Category management (homepage "Shop by Purpose" cards) ----------
+
+// GET /api/admin/categories — list all categories
+router.get('/categories', requireAdmin, (req, res) => {
+  res.json(db.getCategories());
+});
+
+// POST /api/admin/categories — create a new category card
+// body: { id, title, link, glyph?, image? }
+router.post('/categories', requireAdmin, (req, res) => {
+  try {
+    const { id, title, link, glyph, image } = req.body;
+    if (!id || !String(id).trim()) throw new Error('Category ID (slug) is required');
+    if (!title || !String(title).trim()) throw new Error('Title is required');
+    if (!link || !String(link).trim()) throw new Error('Link is required (e.g. #shop)');
+
+    const category = {
+      id: String(id).trim(),
+      title: String(title).trim(),
+      link: String(link).trim(),
+      glyph: glyph ? String(glyph).trim() : '🧦',
+    };
+    if (image) category.image = image;
+
+    const created = db.addCategory(category);
+    res.status(201).json(created);
+  } catch (err) {
+    res.status(400).json({ error: err.message });
+  }
+});
+
+// PUT /api/admin/categories/:id — update a category card
+// body: { title?, link?, glyph?, image? }
+router.put('/categories/:id', requireAdmin, (req, res) => {
+  try {
+    const { title, link, glyph, image } = req.body;
+    const updates = {};
+    if (title !== undefined) updates.title = String(title).trim();
+    if (link !== undefined) updates.link = String(link).trim();
+    if (glyph !== undefined) updates.glyph = String(glyph).trim();
+    if (image !== undefined) updates.image = image; // '' clears it
+    const updated = db.updateCategory(req.params.id, updates);
+    res.json(updated);
+  } catch (err) {
+    res.status(400).json({ error: err.message });
+  }
+});
+
+// DELETE /api/admin/categories/:id — remove a category card
+router.delete('/categories/:id', requireAdmin, (req, res) => {
+  try {
+    const removed = db.deleteCategory(req.params.id);
+    res.json({ success: true, removed });
+  } catch (err) {
+    res.status(400).json({ error: err.message });
+  }
+});
+
 module.exports = router;
