@@ -102,6 +102,27 @@ fbq('track', 'PageView');
   #cart-count{background:var(--paper); color:var(--ink); border-radius:999px; font-size:11px; padding:1px 7px; transition:transform .2s ease;}
   #cart-count.bump{transform:scale(1.4);}
 
+  /* HERO BANNER CAROUSEL */
+  .banner-carousel{position:relative; width:100%; overflow:hidden; background:var(--paper-dim);}
+  .banner-track{position:relative; width:100%; aspect-ratio:1920/1035;}
+  .banner-slide{
+    position:absolute; inset:0; display:block;
+    background-size:cover; background-position:center;
+    opacity:0; transition:opacity .8s ease; pointer-events:none;
+  }
+  .banner-slide.active{opacity:1; pointer-events:auto;}
+  .banner-dots{
+    position:absolute; bottom:18px; left:0; right:0; display:flex; justify-content:center; gap:8px; z-index:5;
+  }
+  .banner-dot{
+    width:8px; height:8px; border-radius:50%; border:none; background:rgba(255,255,255,0.55);
+    cursor:pointer; padding:0; transition:background .25s ease, transform .25s ease;
+  }
+  .banner-dot.active{background:#fff; transform:scale(1.3);}
+  @media(max-width:720px){
+    .banner-track{aspect-ratio:1024/1024;}
+  }
+
   /* HERO */
   .hero{padding:96px 32px 64px; text-align:center; position:relative;}
   .hero-inner{position:relative; z-index:2;}
@@ -281,6 +302,19 @@ fbq('track', 'PageView');
   </nav>
 </header>
 
+<section id="banner-carousel" class="banner-carousel">
+  <div class="banner-track">
+    <a href="#shop" class="banner-slide active" style="background-image:url('assets/banner-men.jpg');" aria-label="Lord Walker — Explore Collection"></a>
+    <a href="#shop" class="banner-slide" style="background-image:url('assets/banner-women.jpg');" aria-label="Lady Walker — Explore Collection"></a>
+    <a href="#shop" class="banner-slide" style="background-image:url('assets/banner-kids.jpg');" aria-label="Li'l Walker — Explore Collection"></a>
+  </div>
+  <div class="banner-dots">
+    <button class="banner-dot active" onclick="goToBannerSlide(0, true)" aria-label="Slide 1"></button>
+    <button class="banner-dot" onclick="goToBannerSlide(1, true)" aria-label="Slide 2"></button>
+    <button class="banner-dot" onclick="goToBannerSlide(2, true)" aria-label="Slide 3"></button>
+  </div>
+</section>
+
 <section class="hero section-relative">
   <div class="blob" style="width:420px;height:420px;top:-160px;left:-100px;background:var(--violet);"></div>
   <div class="blob" style="width:360px;height:360px;top:-80px;right:-120px;background:var(--sky);"></div>
@@ -411,7 +445,7 @@ fbq('track', 'PageView');
       <h2>Talk to us</h2>
       <p class="desc">Questions about an order, bulk gifting, or just want to say hello — reach out and we'll get back to you.</p>
       <div class="contact-detail">📧 hello@lordwalker.in</div>
-      <div class="contact-detail">📱 WhatsApp: +91 00000 00000</div>
+      <div class="contact-detail">📱 WhatsApp: +91 78783 25805</div>
       <div class="contact-detail">📍 India</div>
     </div>
     <form class="contact-form" onsubmit="event.preventDefault(); alert('Thanks — we\'ll get back to you soon.'); this.reset();">
@@ -623,6 +657,25 @@ async function refreshQuote(ids){
     document.getElementById('subtotal').textContent = '₹' + subtotal;
   }
 }
+
+let bannerIndex = 0;
+let bannerTimer = null;
+function goToBannerSlide(i, manual){
+  const slides = document.querySelectorAll('.banner-slide');
+  const dots = document.querySelectorAll('.banner-dot');
+  if(!slides.length) return;
+  slides[bannerIndex].classList.remove('active');
+  dots[bannerIndex].classList.remove('active');
+  bannerIndex = (i + slides.length) % slides.length;
+  slides[bannerIndex].classList.add('active');
+  dots[bannerIndex].classList.add('active');
+  if(manual) startBannerAutoplay();
+}
+function startBannerAutoplay(){
+  clearInterval(bannerTimer);
+  bannerTimer = setInterval(() => goToBannerSlide(bannerIndex + 1), 4500);
+}
+startBannerAutoplay();
 
 function openSizeGuide(){
   document.getElementById('size-overlay').style.display = 'block';
