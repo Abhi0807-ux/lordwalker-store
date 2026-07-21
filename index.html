@@ -85,13 +85,40 @@ fbq('track', 'PageView');
   }
   nav{display:flex; align-items:center; justify-content:space-between; padding:20px 32px;}
   .logo{font-family:'Fraunces',serif; font-size:22px; font-weight:600; letter-spacing:0.5px; display:flex; align-items:center; gap:8px;}
-  .logo-img{height:36px; width:auto; display:block; mix-blend-mode:multiply; transition:transform .3s ease;}
+  .logo-img{height:52px; width:auto; display:block; mix-blend-mode:multiply; transition:transform .3s ease;}
   .logo:hover .logo-img{transform:scale(1.04);}
   .nav-links{display:flex; gap:36px; font-size:14px; font-weight:500; letter-spacing:0.3px;}
   .nav-links a{opacity:0.75; transition:opacity .2s; position:relative; padding-bottom:4px;}
   .nav-links a::after{content:'';position:absolute; left:0; bottom:0; width:0; height:1px; background:var(--accent-teal); transition:width .3s ease;}
   .nav-links a:hover{opacity:1;}
   .nav-links a:hover::after{width:100%;}
+
+  /* SHOP MEGA MENU */
+  .nav-item-dropdown{position:relative;}
+  .nav-shop-trigger{display:flex; align-items:center; gap:4px;}
+  .nav-shop-trigger .chevron{font-size:10px; transition:transform .25s ease;}
+  .nav-item-dropdown:hover .nav-shop-trigger .chevron{transform:rotate(180deg);}
+  .mega-menu{
+    position:absolute; top:calc(100% + 14px); left:50%; transform:translateX(-50%) translateY(-8px);
+    background:var(--ink-soft); border:1px solid var(--line); border-radius:16px;
+    box-shadow:0 20px 40px rgba(43,39,51,0.12);
+    padding:28px 32px; display:flex; gap:48px;
+    opacity:0; pointer-events:none; transition:opacity .25s ease, transform .25s ease;
+    z-index:60; white-space:nowrap;
+  }
+  .nav-item-dropdown:hover .mega-menu{opacity:1; pointer-events:auto; transform:translateX(-50%) translateY(0);}
+  .mega-col{display:flex; flex-direction:column; gap:12px;}
+  .mega-col h4{
+    font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:1.5px; text-transform:uppercase;
+    color:var(--accent-teal); margin-bottom:4px; font-weight:600;
+  }
+  .mega-col a{font-size:14px; font-weight:500; color:var(--ink); opacity:0.8; padding-bottom:0;}
+  .mega-col a::after{display:none;}
+  .mega-col a:hover{opacity:1; color:var(--accent-plum);}
+  @media(max-width:900px){
+    .mega-menu{left:0; transform:translateY(-8px); flex-wrap:wrap; gap:28px;}
+    .nav-item-dropdown:hover .mega-menu{transform:translateY(0);}
+  }
   .nav-right{display:flex; align-items:center; gap:20px;}
   #cart-btn{
     background:var(--ink); color:var(--paper); border:none; border-radius:999px;
@@ -290,7 +317,32 @@ fbq('track', 'PageView');
   <nav class="wrap" style="padding:20px 0;">
     <div class="logo"><img src="lord-walker-logo.jpg" alt="Lord Walker" class="logo-img"></div>
     <div class="nav-links">
-      <a href="#shop">Shop</a>
+      <div class="nav-item-dropdown">
+        <a href="#shop" class="nav-shop-trigger">Shop <span class="chevron">▾</span></a>
+        <div class="mega-menu">
+          <div class="mega-col">
+            <h4>Shop by Purpose</h4>
+            <a href="#shop">Office &amp; Corporate</a>
+            <a href="#shop">Everyday</a>
+            <a href="#shop">Sports &amp; Active</a>
+            <a href="#shop">Wellness</a>
+            <a href="#gifting">Gifting</a>
+          </div>
+          <div class="mega-col">
+            <h4>Shop by Length</h4>
+            <a href="#shop">Crew / Calf Length</a>
+            <a href="#shop">Ankle Socks</a>
+            <a href="#shop">No Show / Toe Socks</a>
+            <a href="#shop">Quarter Length</a>
+          </div>
+          <div class="mega-col">
+            <h4>Shop by Wearer</h4>
+            <a href="#shop">My Lord (Men)</a>
+            <a href="#shop">Lady Walker (Women)</a>
+            <a href="#shop">Li'l Walker (Kids)</a>
+          </div>
+        </div>
+      </div>
       <a href="#why">Why Lord Walker</a>
       <a href="#gifting">Gifting</a>
       <a href="#reviews">Reviews</a>
