@@ -80,12 +80,19 @@ fbq('track', 'PageView');
   header{
     position:sticky; top:0; z-index:50;
     background:rgba(251,243,239,0.86);
+    -webkit-backdrop-filter:blur(10px);
     backdrop-filter:blur(10px);
     border-bottom:1px solid var(--line);
   }
   nav{display:flex; align-items:center; justify-content:space-between; padding:20px 32px;}
+
+  /* Top announcement bar */
+  .lw-announce{
+    background:var(--ink); color:#fff; text-align:center; font-size:12.5px; font-weight:600;
+    letter-spacing:0.2px; padding:9px 16px;
+  }
   .logo{font-family:'Fraunces',serif; font-size:22px; font-weight:600; letter-spacing:0.5px; display:flex; align-items:center; gap:8px;}
-  .logo-img{height:52px; width:auto; display:block; mix-blend-mode:multiply; transition:transform .3s ease;}
+  .logo-img{height:52px; width:auto; display:block; transition:transform .3s ease;}
   .logo:hover .logo-img{transform:scale(1.04);}
   .nav-links{display:flex; gap:36px; font-size:14px; font-weight:500; letter-spacing:0.3px;}
   .nav-links a{opacity:0.75; transition:opacity .2s; position:relative; padding-bottom:4px;}
@@ -130,28 +137,42 @@ fbq('track', 'PageView');
   #cart-count.bump{transform:scale(1.4);}
 
   /* HERO BANNER CAROUSEL */
-  .banner-carousel{position:relative; width:100%; overflow:hidden; background:var(--paper-dim);}
-  .banner-track{position:relative; width:100%; aspect-ratio:1536/1024;}
-  .banner-slide{
-    position:absolute; inset:0; display:block;
-    background-size:cover; background-position:center;
+  .hero-carousel{position:relative; width:100%; overflow:hidden; background:var(--paper-dim);}
+  .hero-track{position:relative; width:100%; aspect-ratio:1536/1024; min-height:260px;}
+  .hero-slide{
+    position:absolute; inset:0; display:block; width:100%; height:100%;
+    background-size:cover; background-position:center; background-repeat:no-repeat;
+    background-color:var(--paper-dim);
     opacity:0; transition:opacity .8s ease; pointer-events:none;
   }
-  .banner-slide.active{opacity:1; pointer-events:auto;}
-  .banner-dots{
+  .hero-slide.active{opacity:1; pointer-events:auto;}
+  .hero-dots{
     position:absolute; bottom:18px; left:0; right:0; display:flex; justify-content:center; gap:8px; z-index:5;
   }
-  .banner-dot{
+  .hero-dot{
     width:8px; height:8px; border-radius:50%; border:none; background:rgba(255,255,255,0.55);
     cursor:pointer; padding:0; transition:background .25s ease, transform .25s ease;
   }
-  .banner-dot.active{background:#fff; transform:scale(1.3);}
+  .hero-dot.active{background:#fff; transform:scale(1.3);}
+
+  /* Desktop (wide crop) hero images */
+  #hero-slide-1{background-image:url('hero-slide-men.jpg');}
+  #hero-slide-2{background-image:url('hero-slide-women.jpg');}
+  #hero-slide-3{background-image:url('hero-slide-kids.jpg');}
+  #hero-slide-4{background-image:url('hero-slide-walk.jpg');}
+
   @media(max-width:720px){
-    .banner-track{aspect-ratio:1024/1024;}
+    .hero-track{aspect-ratio:1024/1024; min-height:320px;}
+
+    /* Swap to the square, mobile-cropped versions so faces/text aren't cut off */
+    #hero-slide-1{background-image:url('hero-slide-men-mobile.jpg');}
+    #hero-slide-2{background-image:url('hero-slide-women-mobile.jpg');}
+    #hero-slide-3{background-image:url('hero-slide-kids-mobile.jpg');}
+    #hero-slide-4{background-image:url('hero-slide-walk-mobile.jpg');}
   }
 
   /* HERO */
-  .hero{padding:96px 32px 64px; text-align:center; position:relative;}
+  .hero{padding:60px 32px 36px; text-align:center; position:relative;}
   .hero-inner{position:relative; z-index:2;}
   .eyebrow{font-family:'IBM Plex Mono',monospace; font-size:12px; letter-spacing:2px; text-transform:uppercase; color:var(--accent-plum); margin-bottom:20px;}
   h1{
@@ -175,61 +196,65 @@ fbq('track', 'PageView');
   .btn-ghost{background:transparent; color:var(--ink); border:1px solid var(--line);}
   .btn-ghost:hover{background:rgba(43,39,51,0.05); transform:translateY(-3px);}
 
-  /* SWATCH RAIL — signature element */
-  .swatch-rail{
-    display:flex; justify-content:center; gap:0; margin:64px auto 0; max-width:640px;
-    border-radius:16px; overflow:hidden; border:1px solid var(--line); position:relative; z-index:2;
-    opacity:0; transform:translateY(20px); animation:heroIn .9s cubic-bezier(.2,.7,.3,1) .56s forwards;
-  }
-  .swatch{flex:1; height:64px; display:flex; align-items:flex-end; justify-content:center; padding-bottom:8px;
-    font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:1px; text-transform:uppercase; color:rgba(43,39,51,0.55);
-    transition:flex .35s ease, height .35s ease; cursor:default;}
-  .swatch:hover{flex:1.6; height:76px;}
-  .swatch.lilac{background:var(--lilac);}
-  .swatch.sky{background:var(--sky);}
-  .swatch.violet{background:var(--violet);}
-  .swatch.ink{background:var(--rose);}
-  .swatch.brass{background:var(--brass);}
 
   /* SHOP */
-  #shop{background:var(--paper-dim); color:var(--ink); padding:88px 32px 100px; border-radius:32px 32px 0 0; margin-top:64px;}
-  .shop-head{display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:44px; flex-wrap:wrap; gap:16px;}
+  #shop{background:var(--paper-dim); color:var(--ink); padding:48px 32px 64px; border-radius:32px 32px 0 0; margin-top:32px;}
+  .shop-head{display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:28px; flex-wrap:wrap; gap:16px;}
   .shop-head h2{font-family:'Fraunces',serif; font-size:38px; font-weight:600; letter-spacing:-0.5px;}
   .shop-head p{font-size:14px; color:rgba(21,22,28,0.55); max-width:360px;}
 
-  .grid{display:grid; grid-template-columns:repeat(auto-fill, minmax(240px,1fr)); gap:28px;}
+  .grid{display:grid; grid-template-columns:repeat(auto-fill, minmax(190px,1fr)); gap:18px;}
   .card{
-    background:#fff; border-radius:18px; overflow:hidden; border:1px solid rgba(21,22,28,0.08);
+    background:#fff; border-radius:14px; overflow:hidden; border:1px solid rgba(21,22,28,0.08);
     display:flex; flex-direction:column; transition:transform .25s ease, box-shadow .25s ease;
   }
   .card:hover{transform:translateY(-4px); box-shadow:0 16px 32px rgba(21,22,28,0.10);}
   .card-media{
-    height:170px; display:flex; align-items:center; justify-content:center;
-    font-size:40px; position:relative;
+    height:120px; display:flex; align-items:center; justify-content:center;
+    font-size:32px; position:relative;
   }
-  .card-body{padding:18px 18px 20px; display:flex; flex-direction:column; gap:10px; flex:1;}
-  .card-code{font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:1px; text-transform:uppercase; color:rgba(21,22,28,0.4);}
-  .card-title{font-size:14.5px; font-weight:600; line-height:1.4; flex:1;}
+  .card-body{padding:12px 12px 14px; display:flex; flex-direction:column; gap:6px; flex:1;}
+  .card-code{font-family:'IBM Plex Mono',monospace; font-size:9px; letter-spacing:1px; text-transform:uppercase; color:rgba(21,22,28,0.4);}
+  .card-title{font-size:12.5px; font-weight:600; line-height:1.35; flex:1; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden;}
   .card-foot{display:flex; align-items:center; justify-content:space-between; margin-top:auto;}
-  .price{font-family:'Fraunces',serif; font-size:20px; font-weight:600;}
+  .price{font-family:'Fraunces',serif; font-size:16px; font-weight:600;}
   .add-btn{
     background:var(--ink); color:var(--paper); border:none; border-radius:999px;
-    width:36px; height:36px; font-size:18px; cursor:pointer; line-height:1;
+    width:30px; height:30px; font-size:16px; cursor:pointer; line-height:1; flex-shrink:0;
   }
   .add-btn:hover{background:var(--accent-plum);}
-  .stock-tag{font-size:11px; color:rgba(21,22,28,0.4); font-family:'IBM Plex Mono',monospace;}
+  .stock-tag{font-size:9.5px; color:rgba(21,22,28,0.4); font-family:'IBM Plex Mono',monospace;}
 
-  /* CATEGORY CARDS */
-  .category-grid{display:grid; grid-template-columns:repeat(auto-fit, minmax(220px,1fr)); gap:24px;}
-  .category-card{
-    position:relative; display:flex; align-items:flex-end; min-height:280px; border-radius:20px;
-    padding:24px; overflow:hidden; transition:transform .3s ease, box-shadow .3s ease;
+  /* Compact 2-up grid on mobile — this is the main fix for excessive mobile scrolling */
+  @media(max-width:600px){
+    .grid{grid-template-columns:1fr 1fr; gap:10px;}
+    .card{border-radius:12px;}
+    .card-media{height:96px; font-size:26px;}
+    .card-body{padding:9px 9px 11px; gap:4px;}
+    .card-code{font-size:8px;}
+    .card-title{font-size:11px; line-height:1.3;}
+    .card-foot{gap:8px;}
+    .price{font-size:14px;}
+    .add-btn{width:26px; height:26px; font-size:14px; flex-shrink:0;}
+    .stock-tag{font-size:8.5px;}
   }
-  .category-card:hover{transform:translateY(-6px); box-shadow:0 18px 36px rgba(43,39,51,0.14);}
-  .category-glyph{position:absolute; top:20px; right:20px; font-size:34px; opacity:0.85;}
-  .category-info{position:relative; z-index:2; background:rgba(255,255,255,0.75); backdrop-filter:blur(4px); padding:14px 18px; border-radius:14px; width:100%;}
-  .category-info h3{font-family:'Fraunces',serif; font-size:18px; font-weight:600; margin-bottom:6px; color:var(--ink);}
-  .category-cta{font-size:12.5px; font-weight:600; color:var(--accent-plum);}
+
+  /* CATEGORY PILLS — compact, single row (wraps on small screens), replaces the old tall cards */
+  .category-grid{
+    display:flex; flex-wrap:wrap; gap:12px; justify-content:center;
+  }
+  .category-pill{
+    display:flex; align-items:center; gap:9px; padding:12px 20px; border-radius:999px;
+    border:1px solid var(--line); font-size:13.5px; font-weight:600; color:var(--ink);
+    transition:transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+    white-space:nowrap;
+  }
+  .category-pill:hover{transform:translateY(-3px); box-shadow:0 10px 22px rgba(43,39,51,0.12); border-color:transparent;}
+  .category-pill .category-glyph{font-size:17px; line-height:1;}
+  @media(max-width:600px){
+    .category-grid{justify-content:flex-start; overflow-x:auto; flex-wrap:nowrap; padding-bottom:6px; margin:0 -32px; padding-left:32px; padding-right:32px;}
+    .category-pill{flex-shrink:0; padding:10px 16px; font-size:12.5px;}
+  }
 
   /* CART DRAWER */
   #overlay{position:fixed; inset:0; background:rgba(21,22,28,0.5); display:none; z-index:98;}
@@ -266,9 +291,9 @@ fbq('track', 'PageView');
   footer p{font-size:13px; color:rgba(21,22,28,0.5);}
 
   /* WHY SECTION */
-  #why{background:var(--wash-a); padding:100px 32px; text-align:center; position:relative; overflow:hidden;}
+  #why{background:var(--wash-a); padding:64px 32px; text-align:center; position:relative; overflow:hidden;}
   #why .section-eyebrow{font-family:'IBM Plex Mono',monospace; font-size:12px; letter-spacing:2px; text-transform:uppercase; color:var(--accent-teal); margin-bottom:16px;}
-  #why h2{font-family:'Fraunces',serif; font-size:40px; font-weight:600; letter-spacing:-0.5px; margin-bottom:56px;}
+  #why h2{font-family:'Fraunces',serif; font-size:40px; font-weight:600; letter-spacing:-0.5px; margin-bottom:36px;}
   .why-grid{display:grid; grid-template-columns:repeat(auto-fit, minmax(220px,1fr)); gap:28px; max-width:1000px; margin:0 auto;}
   .why-card{background:var(--ink-soft); border:1px solid var(--line); border-radius:18px; padding:32px 24px; text-align:left; transition:transform .3s ease, border-color .3s ease;}
   .why-card:hover{transform:translateY(-6px); border-color:rgba(91,156,147,0.4);}
@@ -278,8 +303,7 @@ fbq('track', 'PageView');
   .why-card p{font-size:13.5px; color:rgba(43,39,51,0.6); line-height:1.6;}
 
   /* GIFTING SECTION */
-  #gifting{background:var(--paper); color:var(--ink); padding:100px 32px;}
-  #about{background:var(--paper); color:var(--ink); padding:100px 32px;}
+  #gifting{background:var(--paper); color:var(--ink); padding:64px 32px;}
   .gifting-wrap{max-width:1100px; margin:0 auto; display:grid; grid-template-columns:1fr 1fr; gap:56px; align-items:center;}
   #gifting .section-eyebrow{font-family:'IBM Plex Mono',monospace; font-size:12px; letter-spacing:2px; text-transform:uppercase; color:var(--accent-plum); margin-bottom:16px;}
   #gifting h2{font-family:'Fraunces',serif; font-size:38px; font-weight:600; letter-spacing:-0.5px; margin-bottom:18px; line-height:1.15;}
@@ -294,7 +318,7 @@ fbq('track', 'PageView');
   .gift-swatchbox div{display:flex; align-items:flex-end; padding:16px; font-family:'IBM Plex Mono',monospace; font-size:11px; text-transform:uppercase; letter-spacing:1px;}
 
   /* CONTACT SECTION */
-  #contact{background:var(--wash-b); padding:100px 32px;}
+  #contact{background:var(--wash-b); padding:64px 32px;}
   .contact-wrap{max-width:900px; margin:0 auto; display:grid; grid-template-columns:1fr 1fr; gap:56px;}
   #contact .section-eyebrow{font-family:'IBM Plex Mono',monospace; font-size:12px; letter-spacing:2px; text-transform:uppercase; color:var(--accent-gold); margin-bottom:16px;}
   #contact h2{font-family:'Fraunces',serif; font-size:36px; font-weight:600; letter-spacing:-0.5px; margin-bottom:16px;}
@@ -314,49 +338,215 @@ fbq('track', 'PageView');
   .contact-form input:focus, .contact-form textarea:focus{outline:none; border-color:var(--accent-gold);}
 
   @media(max-width:780px){
-    .gifting-wrap, .contact-wrap{grid-template-columns:1fr; align-items:start;}
+    .gifting-wrap, .contact-wrap{grid-template-columns:1fr;}
     .gift-swatchbox{min-height:220px;}
-  }
-
-  @media(max-width:480px){
-    .gift-bundles{grid-template-columns:1fr;}
   }
 
   @media(max-width:720px){
     .nav-links{display:none;}
-    .swatch-rail{margin-top:44px;}
-    #why, #gifting, #about, #contact{padding:64px 20px;}
-    #reviews{padding:64px 20px !important;}
-    .gifting-wrap{gap:32px;}
-    .gift-swatchbox{margin-top:8px;}
+    #why, #gifting, #contact{padding:44px 20px;}
+    #reviews{padding:44px 20px !important;}
   }
 
-  /* MOBILE HAMBURGER NAV */
-  #hamburger-btn{
-    display:none; flex-direction:column; justify-content:center; gap:4px;
-    width:36px; height:36px; background:none; border:none; cursor:pointer; padding:0;
+  /* ===================== HEADER v2 — full header + mobile drawer ===================== */
+
+  .nav-left{display:flex; align-items:center; gap:14px;}
+
+  .lw-hamburger{
+    display:none; flex-direction:column; justify-content:center; gap:5px;
+    width:38px; height:38px; background:none; border:none; cursor:pointer; padding:0; flex-shrink:0;
   }
-  #hamburger-btn span{width:22px; height:2px; background:var(--ink); border-radius:2px; transition:transform .25s ease, opacity .25s ease;}
-  #hamburger-btn.open span:nth-child(1){transform:translateY(6px) rotate(45deg);}
-  #hamburger-btn.open span:nth-child(2){opacity:0;}
-  #hamburger-btn.open span:nth-child(3){transform:translateY(-6px) rotate(-45deg);}
-  #mobile-nav{
-    display:none; flex-direction:column; background:var(--paper); border-top:1px solid var(--line);
-    overflow:hidden; max-height:0; transition:max-height .3s ease;
+  .lw-hamburger span{width:22px; height:2px; background:var(--ink); border-radius:2px; transition:transform .25s ease, opacity .25s ease;}
+
+  .lw-icon-btn{
+    background:none; border:none; cursor:pointer; font-size:18px; line-height:1;
+    color:var(--ink); padding:6px; border-radius:50%; display:flex; align-items:center; justify-content:center;
+    transition:background .2s ease, transform .2s ease;
   }
-  #mobile-nav.open{max-height:320px;}
-  #mobile-nav a{padding:16px 32px; font-size:15px; font-weight:500; border-bottom:1px solid var(--line); color:var(--ink);}
+  .lw-icon-btn:hover{background:rgba(43,39,51,0.06); transform:translateY(-1px);}
+  .lw-whatsapp-btn{color:#25D366;}
+
+  .lw-search-bar{
+    max-height:0; overflow:hidden; transition:max-height .3s ease, border-color .3s ease;
+    border-top:1px solid transparent;
+  }
+  .lw-search-bar.open{max-height:74px; border-top:1px solid var(--line);}
+  .lw-search-bar form{display:flex; gap:10px; padding:16px 0;}
+  .lw-search-bar input{
+    flex:1; padding:11px 16px; border-radius:999px; border:1px solid var(--line);
+    background:#fff; font-family:'Inter',sans-serif; font-size:14px; color:var(--ink);
+  }
+  .lw-search-bar input:focus{outline:none; border-color:var(--accent-teal);}
+  .lw-search-bar button{
+    background:var(--ink); color:var(--paper); border:none; border-radius:999px;
+    padding:0 22px; font-weight:600; font-size:13px; cursor:pointer;
+  }
+
+  .mega-feature{
+    width:190px; border-radius:12px; padding:18px; display:flex; flex-direction:column;
+    justify-content:flex-end; min-height:150px; position:relative; overflow:hidden;
+  }
+  .mega-feature .mf-eyebrow{font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:1px; text-transform:uppercase; opacity:0.7; margin-bottom:4px;}
+  .mega-feature .mf-title{font-family:'Fraunces',serif; font-size:16px; font-weight:600; margin-bottom:8px; color:var(--ink);}
+  .mega-feature .mf-cta{font-size:12px; font-weight:700; color:var(--accent-plum);}
+
+  .lw-overlay{
+    position:fixed; inset:0; background:rgba(43,39,51,0.42); z-index:120;
+    opacity:0; pointer-events:none; transition:opacity .3s ease;
+  }
+  .lw-overlay.open{opacity:1; pointer-events:auto;}
+
+  .lw-drawer{
+    position:fixed; top:0; left:0; bottom:0; width:100%; max-width:400px; z-index:121;
+    background:var(--paper); display:flex; flex-direction:column;
+    transform:translateX(-100%); transition:transform .3s cubic-bezier(.4,0,.2,1);
+    box-shadow:6px 0 40px rgba(43,39,51,0.18);
+  }
+  .lw-drawer.open{transform:translateX(0);}
+
+  .lw-drawer-head{
+    display:flex; align-items:center; gap:10px; padding:14px 16px;
+    border-bottom:1px solid var(--line); flex-shrink:0; background:var(--ink-soft);
+  }
+  .lw-drawer-back{
+    width:34px; height:34px; border:none; background:none; cursor:pointer;
+    font-size:22px; color:var(--ink); display:flex; align-items:center; justify-content:center; flex-shrink:0;
+  }
+  .lw-drawer-head .logo{flex:1; justify-content:center;}
+  .lw-drawer-head .logo-img{height:38px;}
+
+  .lw-search-row{padding:10px 16px; border-bottom:1px solid var(--line); flex-shrink:0;}
+  .lw-search-row form{
+    display:flex; align-items:center; gap:8px; background:#fff; border:1px solid var(--line);
+    border-radius:10px; padding:0 6px 0 12px;
+  }
+  .lw-search-row input{
+    flex:1; border:none; background:none; padding:10px 0; font-family:'Inter',sans-serif; font-size:13.5px; color:var(--ink);
+  }
+  .lw-search-row input:focus{outline:none;}
+  .lw-search-row button{
+    background:var(--ink); color:var(--paper); border:none; border-radius:8px;
+    padding:8px 14px; font-size:12px; font-weight:600; cursor:pointer; flex-shrink:0;
+  }
+
+  .lw-drawer-body{flex:1; display:flex; overflow:hidden; min-height:0;}
+
+  .lw-sidebar{
+    width:118px; flex-shrink:0; background:var(--ink-soft); border-right:1px solid var(--line);
+    overflow-y:auto; -webkit-overflow-scrolling:touch;
+  }
+  .lw-sidebar__label{
+    display:block; width:100%; text-align:left; padding:16px 12px;
+    background:none; border:none; border-bottom:1px solid var(--line); cursor:pointer; color:rgba(43,39,51,0.6);
+    text-transform:uppercase; letter-spacing:0.3px; font-family:'IBM Plex Mono',monospace; font-size:11px; font-weight:600;
+  }
+  .lw-sidebar__label.active{background:var(--paper); color:var(--accent-plum); border-right:3px solid var(--accent-plum); margin-right:-1px;}
+  .lw-sidebar__link{
+    display:block; padding:14px 12px; font-size:12.5px; font-weight:500; color:var(--ink);
+    border-bottom:1px solid var(--line);
+  }
+  .lw-sidebar__link:hover{color:var(--accent-plum);}
+
+  .lw-panel{flex:1; overflow-y:auto; -webkit-overflow-scrolling:touch; padding:14px;}
+  .lw-panel__pane{display:none;}
+  .lw-panel__pane.active{display:block;}
+
+  .lw-imgrid{display:grid; grid-template-columns:1fr 1fr; gap:8px;}
+  .lw-imgcard{
+    position:relative; border-radius:12px; min-height:96px; display:flex; flex-direction:column;
+    align-items:center; justify-content:center; gap:6px; text-align:center; padding:10px;
+    transition:transform .2s ease;
+  }
+  .lw-imgcard:active{transform:scale(0.97);}
+  .lw-imgcard__glyph{font-size:24px; line-height:1;}
+  .lw-imgcard__name{
+    font-family:'IBM Plex Mono',monospace; font-size:10.5px; font-weight:600; text-transform:uppercase;
+    letter-spacing:0.4px; color:var(--ink);
+  }
+  .lw-panel__viewall-row{margin-top:12px;}
+  .lw-panel__viewall{
+    display:flex; align-items:center; justify-content:center; gap:6px; width:100%;
+    background:var(--ink); color:var(--paper); border-radius:999px; padding:12px 0;
+    font-size:12.5px; font-weight:700; letter-spacing:0.3px;
+  }
+
+  body.lw-locked{overflow:hidden;}
+
+  /* Bottom mobile tab bar — hidden on desktop, fixed on mobile */
+  .lw-bottom-nav{
+    display:none; align-items:center;
+    position:fixed; left:0; right:0; bottom:0; z-index:90;
+    background:#fff; border-top:1px solid var(--line);
+    padding:6px 4px calc(6px + env(safe-area-inset-bottom));
+    box-shadow:0 -4px 16px rgba(43,39,51,0.06);
+  }
+  .lw-bnav-item{
+    flex:1; display:flex; flex-direction:column; align-items:center; justify-content:center;
+    gap:3px; color:rgba(43,39,51,0.55); font-size:10px; font-weight:600; letter-spacing:0.2px;
+    padding:4px 0;
+  }
+  .lw-bnav-item:active{color:var(--accent-plum);}
+  .lw-bnav-icon-wrap{position:relative; display:flex;}
+  .lw-bnav-badge{
+    position:absolute; top:-6px; right:-9px; background:var(--accent-gold); color:#fff;
+    font-size:9px; font-weight:700; min-width:15px; height:15px; border-radius:999px;
+    display:flex; align-items:center; justify-content:center; padding:0 2px; line-height:1;
+  }
+
   @media(max-width:720px){
-    #hamburger-btn{display:flex;}
-    #mobile-nav{display:flex;}
+    .lw-bottom-nav{display:flex;}
+    body{padding-bottom:64px;}
+  }
+
+  @media(max-width:720px){
+    .lw-hamburger{display:flex;}
+    .lw-icon-btn--hide-mobile{display:none;}
+
+    /* Grid layout guarantees the logo is truly centered regardless of the
+       hamburger vs icon-group widths being unequal (flex space-between can't do this). */
+    nav{
+      display:grid; grid-template-columns:1fr auto 1fr; align-items:center;
+      column-gap:8px; padding:10px 16px;
+    }
+    .wrap{padding:0 16px;}
+    .nav-left{justify-self:start; gap:6px;}
+    .logo{justify-self:center; gap:0;}
+    .logo-img{height:30px;}
+    .lw-hamburger{width:28px; height:28px; gap:4px; flex-shrink:0;}
+    .lw-hamburger span{width:18px;}
+    .lw-icon-btn{font-size:15px; padding:4px; flex-shrink:0;}
+    .nav-right{justify-self:end; gap:2px;}
+
+    /* Cart now lives in the bottom tab bar on mobile — hide the header's cart button */
+    #cart-btn{display:none;}
+
+    /* Inline search bar: match the tighter mobile padding */
+    .lw-search-bar form{padding:8px 0; gap:6px;}
+    .lw-search-bar input{padding:8px 12px; font-size:12.5px;}
+    .lw-search-bar button{padding:0 14px; font-size:11.5px;}
+  }
+
+  /* On very narrow phones, drop the "Cart" label — icon + count badge is enough */
+  @media(max-width:360px){
+    #cart-btn .cart-label{display:none;}
+    #cart-btn{padding:7px 9px;}
   }
 </style>
 </head>
 <body>
 
+<div class="lw-announce">🎉 Enjoy free shipping on ₹499+ orders</div>
+
 <header>
-  <nav class="wrap" style="padding:20px 0;">
+  <nav class="wrap lw-nav">
+    <div class="nav-left">
+      <button class="lw-hamburger" onclick="openDrawer()" aria-label="Open menu" aria-expanded="false" aria-controls="lw-drawer">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+
     <div class="logo"><img src="lord-walker-logo.jpg" alt="Lord Walker" class="logo-img"></div>
+
     <div class="nav-links">
       <div class="nav-item-dropdown">
         <a href="#shop" class="nav-shop-trigger">Shop <span class="chevron">▾</span></a>
@@ -382,41 +572,141 @@ fbq('track', 'PageView');
             <a href="#shop">Lady Walker (Women)</a>
             <a href="#shop">Li'l Walker (Kids)</a>
           </div>
+          <a href="#gifting" class="mega-feature" style="background:linear-gradient(160deg, var(--violet), var(--lilac));">
+            <span class="mf-eyebrow">Bundle &amp; Save</span>
+            <span class="mf-title">Mix &amp; Match Gift Sets</span>
+            <span class="mf-cta">Shop gifting →</span>
+          </a>
         </div>
       </div>
       <a href="#why">Why Lord Walker</a>
       <a href="#gifting">Gifting</a>
       <a href="#reviews">Reviews</a>
+      <a href="#blog">Blog</a>
       <a href="#contact">Contact</a>
     </div>
+
     <div class="nav-right">
-      <button id="cart-btn" onclick="openCart()">Cart <span id="cart-count">0</span></button>
-      <button id="hamburger-btn" onclick="toggleMobileNav()" aria-label="Menu">
-        <span></span><span></span><span></span>
-      </button>
+      <a class="lw-icon-btn lw-whatsapp-btn" href="https://wa.me/917878325805" target="_blank" rel="noopener" aria-label="Chat on WhatsApp">
+        <svg viewBox="0 0 32 32" width="18" height="18" fill="currentColor"><path d="M16 3C9.4 3 4 8.4 4 15c0 2.4.7 4.7 2 6.6L4 29l7.6-2c1.8 1 3.9 1.5 6 1.5h0.1c6.6 0 12-5.4 12-12S22.6 3 16 3zm0 22c-1.9 0-3.7-.5-5.3-1.4l-.4-.2-4.5 1.2 1.2-4.4-.2-.4C5.7 18.3 5.1 16.7 5.1 15c0-6 4.9-10.9 10.9-10.9S26.9 9 26.9 15 22 25 16 25zm5.9-8.2c-.3-.2-1.9-.9-2.2-1-.3-.1-.5-.2-.7.2-.2.3-.8 1-1 1.2-.2.2-.4.2-.7.1-.3-.2-1.4-.5-2.6-1.6-1-.9-1.6-2-1.8-2.3-.2-.3 0-.5.1-.6.1-.1.3-.4.4-.5.1-.2.2-.3.3-.5.1-.2 0-.4 0-.5-.1-.2-.7-1.7-1-2.3-.3-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.4s1 2.8 1.2 3c.1.2 2 3.1 4.9 4.3.7.3 1.2.5 1.6.6.7.2 1.3.2 1.8.1.5-.1 1.9-.8 2.1-1.5.3-.7.3-1.4.2-1.5-.1-.1-.3-.2-.6-.3z"/></svg>
+      </a>
+      <button class="lw-icon-btn" onclick="toggleSearchBar()" aria-label="Search">🔍</button>
+      <button id="cart-btn" onclick="openCart()"><span class="cart-label">Cart</span> <span id="cart-count">0</span></button>
     </div>
   </nav>
-  <div id="mobile-nav">
-    <a href="#shop" onclick="closeMobileNav()">Shop</a>
-    <a href="#why" onclick="closeMobileNav()">Why Lord Walker</a>
-    <a href="#gifting" onclick="closeMobileNav()">Gifting</a>
-    <a href="#reviews" onclick="closeMobileNav()">Reviews</a>
-    <a href="#contact" onclick="closeMobileNav()">Contact</a>
+
+  <div id="lw-search-bar" class="lw-search-bar">
+    <form class="wrap" onsubmit="event.preventDefault(); runSiteSearch(document.getElementById('lw-search-input').value);">
+      <input id="lw-search-input" type="search" placeholder="Search socks, collections…" autocomplete="off">
+      <button type="submit">Search</button>
+    </form>
   </div>
 </header>
 
-<section id="banner-carousel" class="banner-carousel">
-  <div class="banner-track">
-    <a href="#shop" class="banner-slide active" style="background-image:url('banner-men.jpg');" aria-label="Lord Walker — Explore Collection"></a>
-    <a href="#shop" class="banner-slide" style="background-image:url('banner-women.jpg');" aria-label="Lady Walker — Explore Collection"></a>
-    <a href="#shop" class="banner-slide" style="background-image:url('banner-kids.jpg');" aria-label="Li'l Walker — Explore Collection"></a>
-    <a href="#shop" class="banner-slide" style="background-image:url('banner-walklikealord.jpg');" aria-label="Walk Like A Lord — Explore Collection"></a>
+<!-- Mobile drawer -->
+<div id="lw-overlay" class="lw-overlay" onclick="closeDrawer()"></div>
+<nav id="lw-drawer" class="lw-drawer" aria-label="Mobile navigation">
+  <div class="lw-drawer-head">
+    <button class="lw-drawer-back" onclick="closeDrawer()" aria-label="Close menu">‹</button>
+    <div class="logo"><img src="lord-walker-logo.jpg" alt="Lord Walker" class="logo-img"></div>
+    <span style="width:34px;"></span>
   </div>
-  <div class="banner-dots">
-    <button class="banner-dot active" onclick="goToBannerSlide(0, true)" aria-label="Slide 1"></button>
-    <button class="banner-dot" onclick="goToBannerSlide(1, true)" aria-label="Slide 2"></button>
-    <button class="banner-dot" onclick="goToBannerSlide(2, true)" aria-label="Slide 3"></button>
-    <button class="banner-dot" onclick="goToBannerSlide(3, true)" aria-label="Slide 4"></button>
+
+  <div class="lw-search-row">
+    <form onsubmit="event.preventDefault(); runSiteSearch(document.getElementById('lw-drawer-search-input').value); closeDrawer();">
+      <input id="lw-drawer-search-input" type="search" placeholder="Search socks, collections…" autocomplete="off">
+      <button type="submit">Go</button>
+    </form>
+  </div>
+
+  <div class="lw-drawer-body">
+    <div class="lw-sidebar" id="lw-sidebar">
+      <button class="lw-sidebar__label active" data-tab="0" onclick="showDrawerTab(0)">Purpose</button>
+      <button class="lw-sidebar__label" data-tab="1" onclick="showDrawerTab(1)">Length</button>
+      <button class="lw-sidebar__label" data-tab="2" onclick="showDrawerTab(2)">Wearer</button>
+      <a href="#why" class="lw-sidebar__link" onclick="closeDrawer()">Why Lord Walker</a>
+      <a href="#gifting" class="lw-sidebar__link" onclick="closeDrawer()">Gifting</a>
+      <a href="#reviews" class="lw-sidebar__link" onclick="closeDrawer()">Reviews</a>
+      <a href="#blog" class="lw-sidebar__link" onclick="closeDrawer()">Blog</a>
+      <a href="#contact" class="lw-sidebar__link" onclick="closeDrawer()">Contact</a>
+    </div>
+
+    <div class="lw-panel" id="lw-panel">
+      <div class="lw-panel__pane active" data-pane="0">
+        <div class="lw-imgrid">
+          <a href="#shop" class="lw-imgcard" style="background:linear-gradient(160deg,var(--violet),var(--lilac));" onclick="closeDrawer()">
+            <span class="lw-imgcard__glyph">💼</span><span class="lw-imgcard__name">Office &amp; Corporate</span>
+          </a>
+          <a href="#shop" class="lw-imgcard" style="background:linear-gradient(160deg,var(--sky),var(--wash-a));" onclick="closeDrawer()">
+            <span class="lw-imgcard__glyph">☀️</span><span class="lw-imgcard__name">Everyday</span>
+          </a>
+          <a href="#shop" class="lw-imgcard" style="background:linear-gradient(160deg,var(--brass),var(--rose));" onclick="closeDrawer()">
+            <span class="lw-imgcard__glyph">🏃</span><span class="lw-imgcard__name">Sports &amp; Active</span>
+          </a>
+          <a href="#shop" class="lw-imgcard" style="background:linear-gradient(160deg,var(--wash-b),var(--sky));" onclick="closeDrawer()">
+            <span class="lw-imgcard__glyph">🌿</span><span class="lw-imgcard__name">Wellness</span>
+          </a>
+          <a href="#gifting" class="lw-imgcard" style="background:linear-gradient(160deg,var(--rose),var(--violet));" onclick="closeDrawer()">
+            <span class="lw-imgcard__glyph">🎁</span><span class="lw-imgcard__name">Gifting</span>
+          </a>
+        </div>
+        <div class="lw-panel__viewall-row">
+          <a href="#shop" class="lw-panel__viewall" onclick="closeDrawer()">View All →</a>
+        </div>
+      </div>
+
+      <div class="lw-panel__pane" data-pane="1">
+        <div class="lw-imgrid">
+          <a href="#shop" class="lw-imgcard" style="background:linear-gradient(160deg,var(--violet),var(--wash-a));" onclick="closeDrawer()">
+            <span class="lw-imgcard__glyph">🧦</span><span class="lw-imgcard__name">Crew / Calf</span>
+          </a>
+          <a href="#shop" class="lw-imgcard" style="background:linear-gradient(160deg,var(--sky),var(--lilac));" onclick="closeDrawer()">
+            <span class="lw-imgcard__glyph">👟</span><span class="lw-imgcard__name">Ankle</span>
+          </a>
+          <a href="#shop" class="lw-imgcard" style="background:linear-gradient(160deg,var(--brass),var(--wash-b));" onclick="closeDrawer()">
+            <span class="lw-imgcard__glyph">🫥</span><span class="lw-imgcard__name">No Show / Toe</span>
+          </a>
+          <a href="#shop" class="lw-imgcard" style="background:linear-gradient(160deg,var(--rose),var(--sky));" onclick="closeDrawer()">
+            <span class="lw-imgcard__glyph">📏</span><span class="lw-imgcard__name">Quarter Length</span>
+          </a>
+        </div>
+        <div class="lw-panel__viewall-row">
+          <a href="#shop" class="lw-panel__viewall" onclick="closeDrawer()">View All →</a>
+        </div>
+      </div>
+
+      <div class="lw-panel__pane" data-pane="2">
+        <div class="lw-imgrid">
+          <a href="#shop" class="lw-imgcard" style="background:linear-gradient(160deg,var(--sky),var(--violet));" onclick="closeDrawer()">
+            <span class="lw-imgcard__glyph">🤵</span><span class="lw-imgcard__name">My Lord (Men)</span>
+          </a>
+          <a href="#shop" class="lw-imgcard" style="background:linear-gradient(160deg,var(--rose),var(--lilac));" onclick="closeDrawer()">
+            <span class="lw-imgcard__glyph">👑</span><span class="lw-imgcard__name">Lady Walker (Women)</span>
+          </a>
+          <a href="#shop" class="lw-imgcard" style="background:linear-gradient(160deg,var(--brass),var(--sky));" onclick="closeDrawer()">
+            <span class="lw-imgcard__glyph">🧒</span><span class="lw-imgcard__name">Li'l Walker (Kids)</span>
+          </a>
+        </div>
+        <div class="lw-panel__viewall-row">
+          <a href="#shop" class="lw-panel__viewall" onclick="closeDrawer()">View All →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<section id="hero-carousel" class="hero-carousel">
+  <div class="hero-track">
+    <a href="#shop" id="hero-slide-1" class="hero-slide active" aria-label="Lord Walker — Explore Collection"></a>
+    <a href="#shop" id="hero-slide-2" class="hero-slide" aria-label="Lady Walker — Explore Collection"></a>
+    <a href="#shop" id="hero-slide-3" class="hero-slide" aria-label="Li'l Walker — Explore Collection"></a>
+    <a href="#shop" id="hero-slide-4" class="hero-slide" aria-label="Walk Like A Lord — Explore Collection"></a>
+  </div>
+  <div class="hero-dots">
+    <button class="hero-dot active" onclick="goToHeroSlide(0, true)" aria-label="Slide 1"></button>
+    <button class="hero-dot" onclick="goToHeroSlide(1, true)" aria-label="Slide 2"></button>
+    <button class="hero-dot" onclick="goToHeroSlide(2, true)" aria-label="Slide 3"></button>
+    <button class="hero-dot" onclick="goToHeroSlide(3, true)" aria-label="Slide 4"></button>
   </div>
 </section>
 
@@ -427,18 +717,11 @@ fbq('track', 'PageView');
   <h1>Somethings shouldn't need <em>second thoughts.</em><br>Like great socks.</h1>
   <p class="sub">No-show, crew, and gifting socks built for the everyday walk — breathable cotton, anti-slip grip, zero fuss.</p>
   <p style="font-family:'IBM Plex Mono',monospace; font-size:12px; letter-spacing:0.5px; color:var(--accent-gold); margin:-16px 0 32px;">
-    Buy 3, get 1 free · Free shipping over ₹499
+    Free shipping over ₹499
   </p>
   <div class="cta-row">
     <button class="btn-primary" onclick="document.getElementById('shop').scrollIntoView({behavior:'smooth'})">Shop the range</button>
     <button class="btn-ghost" onclick="document.getElementById('why').scrollIntoView({behavior:'smooth'})">Our story</button>
-  </div>
-  <div class="swatch-rail">
-    <div class="swatch lilac">Lilac</div>
-    <div class="swatch sky">Sky</div>
-    <div class="swatch violet">Violet</div>
-    <div class="swatch ink">Ink</div>
-    <div class="swatch brass">Brass</div>
   </div>
   </div>
 </section>
@@ -459,6 +742,9 @@ fbq('track', 'PageView');
     </p>
   </div>
   <div class="grid reveal-stagger" id="product-grid"></div>
+  <div id="shop-more-row" style="text-align:center; margin-top:28px; display:none;">
+    <button id="shop-more-btn" class="btn-ghost" onclick="toggleShopExpand()">Show All Products</button>
+  </div>
 </section>
 
 <section id="trending" class="wrap reveal">
@@ -558,7 +844,7 @@ fbq('track', 'PageView');
   </div>
 </section>
 
-<section id="reviews" class="reveal" style="background:var(--paper); color:var(--ink); padding:90px 32px;">
+<section id="reviews" class="reveal" style="background:var(--paper); color:var(--ink); padding:56px 32px;">
   <div class="wrap" style="text-align:center;">
     <div class="section-eyebrow" style="color:var(--accent-plum); font-family:'IBM Plex Mono',monospace; font-size:12px; letter-spacing:2px; text-transform:uppercase; margin-bottom:16px;">What customers say</div>
     <h2 style="font-family:'Fraunces',serif; font-size:36px; font-weight:600; letter-spacing:-0.5px; margin-bottom:48px;">Trusted by everyday walkers</h2>
@@ -580,6 +866,31 @@ fbq('track', 'PageView');
       </div>
     </div>
     <p style="font-size:11.5px; color:rgba(21,22,28,0.4); margin-top:32px;">Placeholder reviews — swap these for real customer feedback (e.g. via a post-purchase WhatsApp/email review request) before launch.</p>
+  </div>
+</section>
+
+<section id="blog" class="reveal" style="background:var(--wash-a); padding:56px 32px;">
+  <div class="wrap" style="text-align:center;">
+    <div class="section-eyebrow" style="color:var(--accent-teal); font-family:'IBM Plex Mono',monospace; font-size:12px; letter-spacing:2px; text-transform:uppercase; margin-bottom:16px;">From the Journal</div>
+    <h2 style="font-family:'Fraunces',serif; font-size:36px; font-weight:600; letter-spacing:-0.5px; margin-bottom:36px;">Notes on comfort, craft &amp; everyday style</h2>
+    <div class="why-grid" style="max-width:1000px; margin:0 auto;">
+      <a href="#" class="why-card" style="text-decoration:none; display:block;">
+        <span class="glyph">🧦</span>
+        <h3>How to Choose the Right Sock Length</h3>
+        <p>A quick guide to crew, ankle, and no-show fits — and when to wear each one.</p>
+      </a>
+      <a href="#" class="why-card" style="text-decoration:none; display:block;">
+        <span class="glyph">🧺</span>
+        <h3>Caring for Your Cotton Socks</h3>
+        <p>Simple washing habits that keep colours sharp and elastic intact for longer.</p>
+      </a>
+      <a href="#" class="why-card" style="text-decoration:none; display:block;">
+        <span class="glyph">🎁</span>
+        <h3>A Gifting Guide for Every Occasion</h3>
+        <p>From onboarding kits to festival bundles — how to pick the right pack size.</p>
+      </a>
+    </div>
+    <p style="font-size:11.5px; color:rgba(21,22,28,0.4); margin-top:32px;">Placeholder posts — replace with real articles before launch, or link out to a Medium/Substack blog.</p>
   </div>
 </section>
 
@@ -613,7 +924,7 @@ fbq('track', 'PageView');
     <h3 style="font-family:'Fraunces',serif; font-size:20px;">Size Guide</h3>
     <button onclick="closeSizeGuide()" style="background:none; border:none; font-size:22px; cursor:pointer; color:var(--ink);">×</button>
   </div>
-  <p style="font-size:13px; color:rgba(21,22,28,0.6); margin-bottom:16px;">Most Lord Walker socks are Free Size and stretch comfortably across the range below. Formal crew styles run true to size.</p>
+  <p style="font-size:13px; color:rgba(21,22,28,0.6); margin-bottom:16px;">Most Lord Walker socks are One Size and stretch comfortably across the range below. Formal crew styles run true to size.</p>
   <table style="width:100%; border-collapse:collapse; font-size:13px;">
     <thead>
       <tr style="border-bottom:1px solid rgba(21,22,28,0.15); text-align:left;">
@@ -688,11 +999,41 @@ function sockSVG(hex){
 const TRENDING_IDS = ['35000', '14306', '66340', '36365'];
 const NEW_ARRIVAL_IDS = ['36265', '18366_4Pcs', '16251_5Pcs', '14308_5Pcs'];
 
+// Show only this many products in "The full range" at first — cuts down on
+// mobile scroll length. The rest appear after tapping "Show All Products".
+const SHOP_INITIAL_LIMIT = 8;
+let shopExpanded = false;
+
 function renderProducts(){
-  renderGrid('product-grid', PRODUCTS);
+  renderShopGrid();
   renderGrid('trending-grid', PRODUCTS.filter(p => TRENDING_IDS.includes(p.id)));
   renderGrid('new-arrivals-grid', PRODUCTS.filter(p => NEW_ARRIVAL_IDS.includes(p.id)));
   initReveal();
+}
+
+function renderShopGrid(){
+  const list = shopExpanded ? PRODUCTS : PRODUCTS.slice(0, SHOP_INITIAL_LIMIT);
+  renderGrid('product-grid', list);
+
+  const row = document.getElementById('shop-more-row');
+  const btn = document.getElementById('shop-more-btn');
+  if (!row || !btn) return;
+
+  if (PRODUCTS.length <= SHOP_INITIAL_LIMIT){
+    row.style.display = 'none';
+  } else {
+    row.style.display = 'block';
+    btn.textContent = shopExpanded ? 'Show Less' : `Show All Products (${PRODUCTS.length})`;
+  }
+}
+
+function toggleShopExpand(){
+  shopExpanded = !shopExpanded;
+  renderShopGrid();
+  initReveal();
+  if (!shopExpanded){
+    document.getElementById('shop').scrollIntoView({behavior:'smooth'});
+  }
 }
 
 function renderGrid(elementId, list){
@@ -751,6 +1092,8 @@ let quoteSeq = 0; // guards against an old slow response overwriting a newer one
 function updateCartUI(){
   const count = Object.values(cart).reduce((a,b)=>a+b,0);
   document.getElementById('cart-count').textContent = count;
+  const bottomCount = document.getElementById('bottom-cart-count');
+  if (bottomCount) bottomCount.textContent = count;
 
   const itemsEl = document.getElementById('cart-items');
   const ids = Object.keys(cart);
@@ -806,7 +1149,7 @@ async function refreshQuote(ids){
 
     let msg = '';
     if (q.bundleDiscount > 0){
-      msg += `<div class="cart-msg cart-msg-good">🎉 Bundle discount applied: −₹${q.bundleDiscount} (${q.freeUnits} pair${q.freeUnits>1?'s':''} free)</div>`;
+      msg += `<div class="cart-msg cart-msg-good">🎉 Bundle discount applied: −₹${q.bundleDiscount}</div>`;
     }
     if (q.shipping === 0){
       msg += `<div class="cart-msg cart-msg-good">✓ Free shipping unlocked</div>`;
@@ -824,24 +1167,24 @@ async function refreshQuote(ids){
   }
 }
 
-let bannerIndex = 0;
-let bannerTimer = null;
-function goToBannerSlide(i, manual){
-  const slides = document.querySelectorAll('.banner-slide');
-  const dots = document.querySelectorAll('.banner-dot');
+let heroIndex = 0;
+let heroTimer = null;
+function goToHeroSlide(i, manual){
+  const slides = document.querySelectorAll('.hero-slide');
+  const dots = document.querySelectorAll('.hero-dot');
   if(!slides.length) return;
-  slides[bannerIndex].classList.remove('active');
-  dots[bannerIndex].classList.remove('active');
-  bannerIndex = (i + slides.length) % slides.length;
-  slides[bannerIndex].classList.add('active');
-  dots[bannerIndex].classList.add('active');
-  if(manual) startBannerAutoplay();
+  slides[heroIndex].classList.remove('active');
+  dots[heroIndex].classList.remove('active');
+  heroIndex = (i + slides.length) % slides.length;
+  slides[heroIndex].classList.add('active');
+  dots[heroIndex].classList.add('active');
+  if(manual) startHeroAutoplay();
 }
-function startBannerAutoplay(){
-  clearInterval(bannerTimer);
-  bannerTimer = setInterval(() => goToBannerSlide(bannerIndex + 1), 4500);
+function startHeroAutoplay(){
+  clearInterval(heroTimer);
+  heroTimer = setInterval(() => goToHeroSlide(heroIndex + 1), 4500);
 }
-startBannerAutoplay();
+startHeroAutoplay();
 
 async function loadCategories(){
   try{
@@ -854,40 +1197,68 @@ async function loadCategories(){
   }
 }
 
-const CATEGORY_GRADIENTS = [
-  'linear-gradient(160deg, var(--violet), var(--lilac))',
-  'linear-gradient(160deg, var(--brass), var(--rose))',
-  'linear-gradient(160deg, var(--sky), var(--wash-a))',
-  'linear-gradient(160deg, var(--wash-b), var(--sky))',
-  'linear-gradient(160deg, var(--rose), var(--violet))',
-];
+const CATEGORY_PILL_TINTS = ['var(--lilac)','var(--brass)','var(--sky)','var(--wash-b)','var(--rose)','var(--violet)'];
 
 function renderCategories(categories){
   const grid = document.getElementById('category-grid');
   if(!grid) return;
   grid.innerHTML = categories.map((c, i) => {
-    const bg = c.image ? `url('${c.image}')` : CATEGORY_GRADIENTS[i % CATEGORY_GRADIENTS.length];
-    const bgStyle = c.image ? `background-image:${bg}; background-size:cover; background-position:center;` : `background:${bg};`;
+    const tint = CATEGORY_PILL_TINTS[i % CATEGORY_PILL_TINTS.length];
     return `
-    <a href="${c.link}" class="category-card" style="${bgStyle}">
-      ${c.image ? '' : `<span class="category-glyph">${c.glyph || '🧦'}</span>`}
-      <div class="category-info">
-        <h3>${c.title}</h3>
-        <span class="category-cta">Shop Now →</span>
-      </div>
+    <a href="${c.link}" class="category-pill" style="background:${tint};">
+      <span class="category-glyph">${c.glyph || '🧦'}</span>
+      <span>${c.title}</span>
     </a>
   `;
   }).join('');
   initReveal();
 }
 
-function toggleMobileNav(){
-  document.getElementById('hamburger-btn').classList.toggle('open');
-  document.getElementById('mobile-nav').classList.toggle('open');
+/* ===== Mobile drawer ===== */
+function openDrawer(){
+  document.getElementById('lw-drawer').classList.add('open');
+  document.getElementById('lw-overlay').classList.add('open');
+  document.body.classList.add('lw-locked');
 }
-function closeMobileNav(){
-  document.getElementById('hamburger-btn').classList.remove('open');
-  document.getElementById('mobile-nav').classList.remove('open');
+function closeDrawer(){
+  document.getElementById('lw-drawer').classList.remove('open');
+  document.getElementById('lw-overlay').classList.remove('open');
+  document.body.classList.remove('lw-locked');
+}
+function showDrawerTab(idx){
+  document.querySelectorAll('#lw-sidebar .lw-sidebar__label').forEach(btn => {
+    btn.classList.toggle('active', btn.dataset.tab === String(idx));
+  });
+  document.querySelectorAll('#lw-panel .lw-panel__pane').forEach(pane => {
+    pane.classList.toggle('active', pane.dataset.pane === String(idx));
+  });
+  document.getElementById('lw-panel').scrollTop = 0;
+}
+
+/* ===== Desktop inline search bar ===== */
+function toggleSearchBar(){
+  const bar = document.getElementById('lw-search-bar');
+  bar.classList.toggle('open');
+  if(bar.classList.contains('open')){
+    setTimeout(() => document.getElementById('lw-search-input').focus(), 150);
+  }
+}
+
+/* ===== Simple client-side search — filters the live product grid ===== */
+function runSiteSearch(query){
+  const q = (query || '').trim().toLowerCase();
+  document.getElementById('shop').scrollIntoView({behavior:'smooth'});
+  const row = document.getElementById('shop-more-row');
+  if(!q){
+    renderShopGrid();
+    return;
+  }
+  if(row) row.style.display = 'none';
+  const matches = PRODUCTS.filter(p =>
+    p.name.toLowerCase().includes(q) || String(p.id).toLowerCase().includes(q)
+  );
+  renderGrid('product-grid', matches);
+  initReveal();
 }
 
 function openSizeGuide(){
@@ -992,7 +1363,7 @@ function initReveal(){
         io.unobserve(entry.target);
       }
     });
-  }, { threshold: 0.02, rootMargin: '0px 0px -5% 0px' });
+  }, { threshold: 0.15 });
   targets.forEach(t => io.observe(t));
 }
 
@@ -1001,6 +1372,33 @@ loadCategories();
 updateCartUI();
 initReveal();
 </script>
+
+<!-- Bottom mobile tab bar -->
+<nav class="lw-bottom-nav" aria-label="Bottom navigation">
+  <a href="#" class="lw-bnav-item" onclick="event.preventDefault(); window.scrollTo({top:0, behavior:'smooth'});">
+    <svg viewBox="0 0 24 24" width="21" height="21" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 11.5 12 4l9 7.5"/><path d="M5.5 10v9a1 1 0 0 0 1 1H9a1 1 0 0 0 1-1v-4a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v4a1 1 0 0 0 1 1h2.5a1 1 0 0 0 1-1v-9"/></svg>
+    <span>Home</span>
+  </a>
+  <a href="#shop" class="lw-bnav-item" onclick="closeDrawer();">
+    <svg viewBox="0 0 24 24" width="21" height="21" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="4" width="7" height="7" rx="1"/><rect x="14" y="4" width="7" height="7" rx="1"/><rect x="3" y="15" width="7" height="7" rx="1"/><rect x="14" y="15" width="7" height="7" rx="1"/></svg>
+    <span>Shop</span>
+  </a>
+  <a href="#" class="lw-bnav-item" onclick="event.preventDefault(); alert('Wishlist is coming soon!');">
+    <svg viewBox="0 0 24 24" width="21" height="21" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 20.5s-7.5-4.6-9.9-9.1C.5 8 2 4.5 5.6 4c2-.3 3.8.7 6.4 3.2C14.6 4.7 16.4 3.7 18.4 4c3.6.5 5.1 4 3.5 7.4C19.5 15.9 12 20.5 12 20.5Z"/></svg>
+    <span>Wishlist</span>
+  </a>
+  <a href="#" class="lw-bnav-item" onclick="event.preventDefault(); alert('Account login is coming soon!');">
+    <svg viewBox="0 0 24 24" width="21" height="21" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="8" r="3.6"/><path d="M4.5 20c1.2-3.6 4.2-5.6 7.5-5.6s6.3 2 7.5 5.6"/></svg>
+    <span>Account</span>
+  </a>
+  <a href="#" class="lw-bnav-item" onclick="event.preventDefault(); openCart();">
+    <span class="lw-bnav-icon-wrap">
+      <svg viewBox="0 0 24 24" width="21" height="21" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 8h12l-1 12.5a1.5 1.5 0 0 1-1.5 1.5h-7A1.5 1.5 0 0 1 7 20.5L6 8Z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg>
+      <span class="lw-bnav-badge" id="bottom-cart-count">0</span>
+    </span>
+    <span>Cart</span>
+  </a>
+</nav>
 
 </body>
 </html>
