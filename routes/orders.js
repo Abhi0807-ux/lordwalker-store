@@ -23,6 +23,9 @@ function resolveLines(items) {
 }
 
 // POST /api/orders/quote
+// body: { items: [{ id, qty }] }
+// Read-only price preview for the frontend cart drawer — same pricing.js
+// logic used at checkout, so the number shown never drifts from what's charged.
 router.post('/quote', (req, res) => {
   try {
     const lines = resolveLines(req.body.items || []);
@@ -34,6 +37,8 @@ router.post('/quote', (req, res) => {
 });
 
 // POST /api/orders/create
+// body: { items: [{ id, qty }], customer: { name, phone, email, address } }
+// Server recalculates the price itself from the DB — never trust prices sent from the browser.
 router.post('/create', async (req, res) => {
   try {
     const { items, customer } = req.body;
@@ -46,7 +51,7 @@ router.post('/create', async (req, res) => {
 
     const localOrderId = 'LW-' + Date.now();
     const razorpayOrder = await razorpay.orders.create({
-      amount: total * 100,
+      amount: total * 100, // paise
       currency: 'INR',
       receipt: localOrderId,
     });
@@ -82,6 +87,7 @@ router.post('/create', async (req, res) => {
 });
 
 // POST /api/orders/verify
+// body: { orderId, razorpay_order_id, razorpay_payment_id, razorpay_signature }
 router.post('/verify', (req, res) => {
   try {
     const { orderId, razorpay_order_id, razorpay_payment_id, razorpay_signature } = req.body;
@@ -114,7 +120,7 @@ router.post('/verify', (req, res) => {
   }
 });
 
-// GET /api/orders/:id
+// GET /api/orders/:id — check order status
 router.get('/:id', (req, res) => {
   const order = db.getOrder(req.params.id);
   if (!order) return res.status(404).json({ error: 'Order not found' });
