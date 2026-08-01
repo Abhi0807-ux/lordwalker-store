@@ -232,6 +232,7 @@ fbq('track', 'PageView');
   }
 
   /* SHOP BY WEARER — full-bleed 3-tile visual section */
+  #wearer-tiles{margin-top:32px;}
   .wearer-grid{display:grid; grid-template-columns:1fr 1fr 1fr;}
   .wearer-tile{position:relative; display:block; overflow:hidden; height:460px; text-decoration:none;}
   .wearer-tile img{width:100%; height:100%; object-fit:cover; display:block; transition:transform .5s ease;}
@@ -248,32 +249,23 @@ fbq('track', 'PageView');
     .wearer-tile__label{font-size:21px; left:18px; bottom:58px;}
     .wearer-tile__cta{left:18px; bottom:18px;}
   }
+  /* Keep 3-across on mobile, just smaller/more compact */
   @media(max-width:600px){
-    .wearer-grid{grid-template-columns:1fr; }
-    .wearer-tile{height:280px;}
+    .wearer-grid{grid-template-columns:1fr 1fr 1fr; gap:6px;}
+    .wearer-tile{height:170px;}
+    .wearer-tile__label{font-size:13px; left:10px; bottom:34px; text-shadow:0 1px 6px rgba(0,0,0,0.4);}
+    .wearer-tile__cta{left:10px; bottom:10px; padding:5px 10px; font-size:8.5px; letter-spacing:0.3px;}
   }
 
 
   #comfort-banner{margin:8px 0;}
   .comfort-banner-wrap{position:relative; overflow:hidden;}
   .comfort-banner-img{width:100%; display:block; object-fit:cover; height:380px;}
-  .comfort-banner-wrap::after{
-    content:''; position:absolute; inset:0;
-    background:linear-gradient(to top, rgba(20,16,10,0.55) 0%, rgba(20,16,10,0.15) 35%, rgba(20,16,10,0) 60%);
-    pointer-events:none;
-  }
-  .comfort-banner-caption{
-    position:absolute; left:0; right:0; bottom:28px; text-align:center; z-index:2;
-    font-family:'Fraunces',serif; font-weight:600; color:#fff; font-size:clamp(24px, 3.2vw, 40px);
-    letter-spacing:-0.3px; text-shadow:0 2px 14px rgba(0,0,0,0.35);
-  }
   @media(max-width:900px){
     .comfort-banner-img{height:260px;}
-    .comfort-banner-caption{bottom:20px;}
   }
   @media(max-width:600px){
     .comfort-banner-img{height:190px;}
-    .comfort-banner-caption{bottom:14px; font-size:22px;}
   }
 
   /* Why Lord Walker — intro copy above the feature cards */
@@ -870,8 +862,6 @@ fbq('track', 'PageView');
   <div class="blob" style="width:420px;height:420px;top:-160px;left:-100px;background:var(--violet);"></div>
   <div class="blob" style="width:360px;height:360px;top:-80px;right:-120px;background:var(--sky);"></div>
   <div class="hero-inner">
-  <h1>Somethings shouldn't need <em>second thoughts.</em><br>Like great socks.</h1>
-  <p class="sub">No-show, crew, and gifting socks built for the everyday walk — breathable cotton, anti-slip grip, zero fuss.</p>
   <p style="font-family:'IBM Plex Mono',monospace; font-size:12px; letter-spacing:0.5px; color:var(--accent-gold); margin:-4px 0 20px;">
     Free shipping over ₹499
   </p>
@@ -903,7 +893,6 @@ fbq('track', 'PageView');
 <section id="comfort-banner" class="reveal">
   <div class="comfort-banner-wrap">
     <img src="comfort-every-step-banner.jpg" alt="Comfort, every step — Lord Walker" class="comfort-banner-img">
-    <div class="comfort-banner-caption">Comfort, every step</div>
   </div>
 </section>
 
