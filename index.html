@@ -140,7 +140,7 @@ fbq('track', 'PageView');
 
   /* HERO BANNER CAROUSEL */
   .hero-carousel{position:relative; width:100%; overflow:hidden; background:var(--paper-dim);}
-  .hero-track{position:relative; width:100%; aspect-ratio:1536/1024; max-height:60vh; min-height:260px;}
+  .hero-track{position:relative; width:100%; aspect-ratio:1536/1024; min-height:260px;}
   .hero-slide{
     position:absolute; inset:0; display:block; width:100%; height:100%;
     background-size:cover; background-position:center; background-repeat:no-repeat;
@@ -166,7 +166,7 @@ fbq('track', 'PageView');
   @media(max-width:720px){
     /* Capped with max-height (vh) so header + banner always fit in one screen —
        no scrolling needed just to see the whole banner on load. */
-    .hero-track{aspect-ratio:4/3; max-height:28vh; min-height:170px;}
+    .hero-track{aspect-ratio:1024/1024; min-height:170px;}
 
     /* Swap to the square, mobile-cropped versions so faces/text aren't cut off */
     #hero-slide-1{background-image:url('hero-slide-walk-mobile.jpg');}
@@ -209,7 +209,10 @@ fbq('track', 'PageView');
   .shop-head p{font-size:14px; color:rgba(21,22,28,0.55); max-width:360px;}
   /* Trending Now / New Arrivals — smaller heading than other section titles */
   .shop-head h2.section-h2-compact{font-size:26px;}
-  @media(max-width:600px){.shop-head h2.section-h2-compact{font-size:21px;}}
+  @media(max-width:600px){
+    .shop-head h2.section-h2-compact{font-size:21px;}
+    .shop-head h2{font-size:23px;}
+  }
 
   /* DIABETIC-SOCKS FEATURE — full-bleed split, text left / image right */
   #diabetic-feature{background:var(--paper-dim);}
@@ -265,17 +268,11 @@ fbq('track', 'PageView');
 
   #comfort-banner{margin:8px 0;}
   .comfort-banner-wrap{position:relative; overflow:hidden;}
-  .comfort-banner-img{width:100%; display:block; object-fit:cover; height:280px;}
+  .comfort-banner-img{width:100%; display:block; aspect-ratio:1600/648; object-fit:cover;}
   .comfort-banner-wrap::after{
     content:''; position:absolute; inset:0;
     background:linear-gradient(to top, rgba(20,16,10,0.35) 0%, rgba(20,16,10,0.08) 35%, rgba(20,16,10,0) 60%);
     pointer-events:none;
-  }
-  @media(max-width:900px){
-    .comfort-banner-img{height:260px;}
-  }
-  @media(max-width:600px){
-    .comfort-banner-img{height:190px;}
   }
 
   /* Why Lord Walker — intro copy above the feature cards */
@@ -491,10 +488,18 @@ fbq('track', 'PageView');
   }
   @media(max-width:600px){
     .site-footer{padding:40px 20px 24px;}
-    .footer-grid{grid-template-columns:1fr; gap:26px;}
-    .footer-newsletter{flex-direction:column; align-items:flex-start;}
+    .footer-grid{grid-template-columns:1fr; gap:0;}
+    .footer-col{padding-bottom:22px; margin-bottom:22px; border-bottom:1px solid rgba(255,255,255,0.1);}
+    .footer-col:last-child{border-bottom:none; margin-bottom:0; padding-bottom:0;}
+    .footer-col h4{margin-bottom:12px;}
+    .footer-col a{margin-bottom:8px;}
+    .footer-address{margin-bottom:14px; line-height:1.75;}
+    .footer-contact-line{margin-bottom:12px;}
+    .footer-newsletter{flex-direction:column; align-items:flex-start; gap:14px;}
     .footer-newsletter input{width:100%;}
-    .footer-policy-links{gap:6px 16px;}
+    .footer-social{width:100%; justify-content:flex-start;}
+    .footer-payments{gap:8px;}
+    .footer-policy-links{gap:8px 14px;}
   }
 
   /* WHY SECTION */
