@@ -178,4 +178,24 @@ router.delete('/categories/:id', requireAdmin, (req, res) => {
   }
 });
 
+// GET /api/admin/backup — download everything (products, categories, orders) as one JSON file.
+// This is a manual safety net while running on free hosting with no persistent disk —
+// download this periodically so a server restart/redeploy never means losing real data.
+router.get('/backup', requireAdmin, (req, res) => {
+  try {
+    const backup = {
+      exportedAt: new Date().toISOString(),
+      products: db.getProducts(),
+      categories: db.getCategories(),
+      orders: db.getAllOrders(),
+    };
+    const filename = `lordwalker-backup-${new Date().toISOString().slice(0, 10)}.json`;
+    res.setHeader('Content-Disposition', `attachment; filename="${filename}"`);
+    res.setHeader('Content-Type', 'application/json');
+    res.send(JSON.stringify(backup, null, 2));
+  } catch (err) {
+    res.status(400).json({ error: err.message });
+  }
+});
+
 module.exports = router;
