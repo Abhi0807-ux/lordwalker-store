@@ -291,6 +291,10 @@ fbq('track', 'PageView');
   footer{background:var(--paper); color:var(--ink); padding:0 32px 48px; text-align:center;}
   footer .line{height:1px; background:rgba(21,22,28,0.1); margin-bottom:36px;}
   footer p{font-size:13px; color:rgba(21,22,28,0.5);}
+  .footer-policy-links{display:flex; flex-wrap:wrap; justify-content:center; gap:8px 22px; margin-bottom:20px;}
+  .footer-policy-links a{font-size:12.5px; font-weight:600; color:rgba(21,22,28,0.55); transition:color .2s ease;}
+  .footer-policy-links a:hover{color:var(--accent-plum);}
+  @media(max-width:600px){.footer-policy-links{gap:6px 16px;}}
 
   /* WHY SECTION */
   #why{background:var(--wash-a); padding:64px 32px; text-align:center; position:relative; overflow:hidden;}
@@ -820,19 +824,18 @@ fbq('track', 'PageView');
   </div>
 </section>
 
-<section id="about" class="reveal">
-  <div class="gifting-wrap">
-    <div>
-      <div class="section-eyebrow" style="color:var(--accent-teal); font-family:'IBM Plex Mono',monospace; font-size:12px; letter-spacing:2px; text-transform:uppercase; margin-bottom:16px;">About Us</div>
-      <h2>Crafted since 1994. Now stepping into India.</h2>
-      <p class="desc">Lord Walker began three decades ago with a simple belief: the details you don't see are the ones you feel the most. What started as a small craftsmanship-first sock maker has grown into a name people trust for comfort that lasts an entire day, not just a photoshoot.</p>
-      <p class="desc">Today, Lord Walker brings that same premium cotton, finest craftsmanship, and timeless comfort to India — built for boardrooms, morning walks, match days, and every ordinary moment in between. Every pair is made for you, not just made to sell.</p>
+<section id="about" class="reveal" style="background:var(--paper); color:var(--ink); padding:64px 32px;">
+  <div class="wrap" style="max-width:760px;">
+    <div class="section-eyebrow" style="color:var(--accent-teal); font-family:'IBM Plex Mono',monospace; font-size:12px; letter-spacing:2px; text-transform:uppercase; margin-bottom:20px; text-align:center;">About Us</div>
+    <div style="border-radius:20px; overflow:hidden; margin-bottom:40px; box-shadow:0 20px 44px rgba(43,39,51,0.12);">
+      <img src="about-us-banner.webp" alt="Lord Walker — Everyday style, built to last" style="width:100%; display:block;">
     </div>
-    <div class="gift-swatchbox">
-      <div style="background:var(--lilac); color:rgba(43,39,51,0.6);">Since 1994</div>
-      <div style="background:var(--sky); color:rgba(43,39,51,0.6);">Premium Cotton</div>
-      <div style="background:var(--brass); color:rgba(43,39,51,0.6);">Made For You</div>
-    </div>
+    <p class="desc" style="max-width:none;">Lord Walker by Brahm is where timeless design, exceptional craftsmanship, and uncompromising comfort come together in every pair.</p>
+    <p class="desc" style="max-width:none;">We believe socks are more than an everyday essential. They are an integral part of how you move, work, travel, perform, and express your personal style. An accessory worn every day deserves the same attention to quality, craftsmanship, and design as every other part of your wardrobe.</p>
+    <p class="desc" style="max-width:none;">Rooted in a manufacturing legacy dating back to 1994, and crafted by Virat Industries Ltd., Lord Walker brings decades of global expertise to the Indian market. Having supplied premium socks to customers across the world for years, we are now bringing the same standards of quality, innovation, and craftsmanship to consumers in India.</p>
+    <p class="desc" style="max-width:none;">Every collection is thoughtfully designed using premium materials, refined construction, and meticulous attention to detail, ensuring lasting comfort, durability, and effortless style. Whether for work, travel, sport, celebrations, or everyday wear, Lord Walker offers a premium solution for every step of life.</p>
+    <p class="desc" style="max-width:none; margin-bottom:36px;">More than creating products, we are creating an experience — one that transforms socks from an afterthought into an essential accessory. Our focus is on building lasting trust through consistent quality, timeless design, and products people choose to wear every day.</p>
+    <p style="font-family:'Fraunces',serif; font-size:19px; font-weight:600; text-align:center; color:var(--accent-plum); letter-spacing:-0.3px; line-height:1.5;">Built on legacy. Crafted with precision. Designed for every step.</p>
   </div>
 </section>
 
@@ -892,8 +895,9 @@ fbq('track', 'PageView');
       <div class="section-eyebrow">Contact</div>
       <h2>Talk to us</h2>
       <p class="desc">Questions about an order, bulk gifting, or just want to say hello — reach out and we'll get back to you.</p>
-      <div class="contact-detail">📧 hello@lordwalker.in</div>
-      <div class="contact-detail">📱 WhatsApp: +91 78783 25805</div>
+      <div class="contact-detail">📧 shop@lordwalkerbybrham.com</div>
+      <div class="contact-detail">📱 +91-7878325805</div>
+      <div class="contact-detail">🌐 www.lordwalkerbybrham.com</div>
       <div class="contact-detail">📍 India</div>
     </div>
     <form class="contact-form" onsubmit="event.preventDefault(); alert('Thanks — we\'ll get back to you soon.'); this.reset();">
@@ -907,7 +911,14 @@ fbq('track', 'PageView');
 
 <footer>
   <div class="wrap"><div class="line"></div></div>
-  <p>Lord Walker · lordwalker.in · Built for people who'd rather think about anything else but their socks</p>
+  <div class="wrap footer-policy-links">
+    <a href="privacy-policy.html">Privacy Policy</a>
+    <a href="terms-and-conditions.html">Terms &amp; Conditions</a>
+    <a href="return-refund-policy.html">Return &amp; Refund Policy</a>
+    <a href="shipping-policy.html">Shipping Policy</a>
+    <a href="pricing-policy.html">Pricing Policy</a>
+  </div>
+  <p>Lord Walker by Brahm · www.lordwalkerbybrham.com · Built for people who'd rather think about anything else but their socks</p>
 </footer>
 
 <div id="size-overlay" onclick="closeSizeGuide()" style="position:fixed; inset:0; background:rgba(21,22,28,0.5); display:none; z-index:98;"></div>
@@ -954,7 +965,7 @@ fbq('track', 'PageView');
 </div>
 
 <script>
-// Point this at your deployed backend URL once live (e.g. https://api.lordwalker.in)
+// Point this at your deployed backend URL once live (e.g. https://api.lordwalkerbybrham.com)
 const API_BASE = "https://lordwalker-store.onrender.com";
 
 let PRODUCTS = [];
