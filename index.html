@@ -211,11 +211,10 @@ fbq('track', 'PageView');
   @media(max-width:600px){.shop-head h2.section-h2-compact{font-size:21px;}}
 
   /* "Comfort, every step" banner between Trending and About Us */
-  #comfort-banner{padding:0 32px; margin:8px 0;}
+  #comfort-banner{margin:8px 0;}
   .comfort-banner-img{width:100%; display:block; border-radius:20px; box-shadow:0 16px 36px rgba(43,39,51,0.14); object-fit:cover;}
   @media(max-width:600px){
-    #comfort-banner{padding:0 20px;}
-    .comfort-banner-img{height:150px; border-radius:14px;}
+    .comfort-banner-img{height:170px; border-radius:14px;}
   }
 
   /* Why Lord Walker — intro copy above the feature cards */
@@ -404,7 +403,7 @@ fbq('track', 'PageView');
   @media(max-width:720px){
     .nav-links{display:none;}
     #gifting, #contact{padding:44px 20px;}
-    #reviews{padding:44px 20px !important;}
+    #reviews{padding:44px 0 !important;}
   }
 
   /* ===================== HEADER v2 — full header + mobile drawer ===================== */
@@ -809,7 +808,7 @@ fbq('track', 'PageView');
   </div>
 </section>
 
-<section id="about" class="reveal" style="background:var(--paper); color:var(--ink); padding:64px 32px;">
+<section id="about" class="reveal" style="background:var(--paper); color:var(--ink); padding:64px 0;">
   <div class="wrap" style="max-width:1140px;">
     <div class="section-eyebrow" style="color:var(--accent-teal); font-family:'IBM Plex Mono',monospace; font-size:12px; letter-spacing:2px; text-transform:uppercase; margin-bottom:28px; text-align:center;">About Us</div>
     <div class="about-grid">
@@ -877,7 +876,7 @@ fbq('track', 'PageView');
   </div>
 </section>
 
-<section id="reviews" class="reveal" style="background:var(--paper); color:var(--ink); padding:56px 32px;">
+<section id="reviews" class="reveal" style="background:var(--paper); color:var(--ink); padding:56px 0;">
   <div class="wrap" style="text-align:center;">
     <div class="section-eyebrow" style="color:var(--accent-plum); font-family:'IBM Plex Mono',monospace; font-size:12px; letter-spacing:2px; text-transform:uppercase; margin-bottom:16px;">What customers say</div>
     <h2 style="font-family:'Fraunces',serif; font-size:36px; font-weight:600; letter-spacing:-0.5px; margin-bottom:48px;">Trusted by everyday walkers</h2>
@@ -902,7 +901,7 @@ fbq('track', 'PageView');
   </div>
 </section>
 
-<section id="blog" class="reveal" style="background:var(--wash-a); padding:56px 32px;">
+<section id="blog" class="reveal" style="background:var(--wash-a); padding:56px 0;">
   <div class="wrap" style="text-align:center;">
     <div class="section-eyebrow" style="color:var(--accent-teal); font-family:'IBM Plex Mono',monospace; font-size:12px; letter-spacing:2px; text-transform:uppercase; margin-bottom:16px;">From the Journal</div>
     <h2 style="font-family:'Fraunces',serif; font-size:36px; font-weight:600; letter-spacing:-0.5px; margin-bottom:36px;">Notes on comfort, craft &amp; everyday style</h2>
@@ -1045,6 +1044,57 @@ function renderProducts(){
   renderGrid('trending-grid', PRODUCTS.filter(p => TRENDING_IDS.includes(p.id)));
   renderGrid('new-arrivals-grid', PRODUCTS.filter(p => NEW_ARRIVAL_IDS.includes(p.id)));
   initReveal();
+  startAutoScroll('trending-grid');
+  startAutoScroll('new-arrivals-grid');
+}
+
+/* ===== Auto-scrolling product rows (Trending Now / New Arrivals) =====
+   Slowly and continuously slides the row sideways; pauses while the user
+   is actively touching/scrolling it, then resumes a couple seconds later. */
+const _autoScrollState = {};
+function startAutoScroll(elementId, speed){
+  speed = speed || 0.45;
+  const el = document.getElementById(elementId);
+  if (!el) return;
+
+  // If this element already has a running loop (e.g. renderProducts ran again
+  // after a search was cleared), tear it down first so speeds don't stack.
+  const prev = _autoScrollState[elementId];
+  if (prev){
+    cancelAnimationFrame(prev.rafId);
+    clearTimeout(prev.resumeTimer);
+    el.removeEventListener('touchstart', prev.pause);
+    el.removeEventListener('touchend', prev.resume);
+    el.removeEventListener('mousedown', prev.pause);
+    el.removeEventListener('mouseup', prev.resume);
+    el.removeEventListener('wheel', prev.resume);
+  }
+
+  const state = { paused: false, rafId: null, resumeTimer: null };
+  state.pause = function(){ state.paused = true; };
+  state.resume = function(){
+    clearTimeout(state.resumeTimer);
+    state.resumeTimer = setTimeout(function(){ state.paused = false; }, 2200);
+  };
+
+  function step(){
+    if (!state.paused && el.scrollWidth > el.clientWidth + 4){
+      el.scrollLeft += speed;
+      if (el.scrollLeft + el.clientWidth >= el.scrollWidth - 1){
+        el.scrollLeft = 0; // loop back to the start
+      }
+    }
+    state.rafId = requestAnimationFrame(step);
+  }
+
+  el.addEventListener('touchstart', state.pause, {passive:true});
+  el.addEventListener('touchend', state.resume, {passive:true});
+  el.addEventListener('mousedown', state.pause);
+  el.addEventListener('mouseup', state.resume);
+  el.addEventListener('wheel', state.resume, {passive:true});
+
+  _autoScrollState[elementId] = state;
+  state.rafId = requestAnimationFrame(step);
 }
 
 function renderGrid(elementId, list){
