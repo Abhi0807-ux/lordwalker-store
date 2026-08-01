@@ -115,10 +115,12 @@ fbq('track', 'PageView');
   }
   .nav-item-dropdown:hover .mega-menu, .nav-item-dropdown.mega-open .mega-menu{opacity:1; pointer-events:auto; transform:translateX(-50%) translateY(0);}
   .mega-col{display:flex; flex-direction:column; gap:12px;}
-  .mega-col h4{
+  .mega-col h4, .mega-col-heading{
     font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:1.5px; text-transform:uppercase;
     color:var(--accent-teal); margin-bottom:4px; font-weight:600;
   }
+  .mega-col-heading{display:block; cursor:pointer; text-decoration:none; transition:color .2s ease;}
+  .mega-col-heading:hover{color:var(--accent-plum);}
   .mega-col a{font-size:14px; font-weight:500; color:var(--ink); opacity:0.8; padding-bottom:0;}
   .mega-col a::after{display:none;}
   .mega-col a:hover{opacity:1; color:var(--accent-plum);}
@@ -506,16 +508,16 @@ fbq('track', 'PageView');
        hamburger vs icon-group widths being unequal (flex space-between can't do this). */
     nav{
       display:grid; grid-template-columns:1fr auto 1fr; align-items:center;
-      column-gap:8px; padding:10px 16px;
+      column-gap:12px; padding:14px 18px;
     }
-    .wrap{padding:0 16px;}
-    .nav-left{justify-self:start; gap:6px;}
-    .logo{justify-self:center; gap:0;}
-    .logo-img{height:30px;}
-    .lw-hamburger{width:28px; height:28px; gap:4px; flex-shrink:0;}
-    .lw-hamburger span{width:18px;}
-    .lw-icon-btn{font-size:15px; padding:4px; flex-shrink:0;}
-    .nav-right{justify-self:end; gap:2px;}
+    .wrap{padding:0 18px;}
+    .nav-left{justify-self:start; gap:8px;}
+    .logo{justify-self:center; gap:0; padding:0 10px;}
+    .logo-img{height:38px;}
+    .lw-hamburger{width:34px; height:34px; gap:5px; flex-shrink:0;}
+    .lw-hamburger span{width:20px;}
+    .lw-icon-btn{font-size:17px; padding:6px; flex-shrink:0;}
+    .nav-right{justify-self:end; gap:4px;}
 
     /* Cart now lives in the bottom tab bar on mobile — hide the header's cart button */
     #cart-btn{display:none;}
@@ -550,9 +552,9 @@ fbq('track', 'PageView');
     <div class="nav-links">
       <div class="nav-item-dropdown" id="shop-mega-parent">
         <a href="#shop" class="nav-shop-trigger" onclick="return toggleMegaMenu(event)">Shop <span class="chevron">▾</span></a>
-        <div class="mega-menu">
+        <div class="mega-menu" onclick="if(event.target.tagName==='A') closeMegaMenu();">
           <div class="mega-col">
-            <h4>Shop by Purpose</h4>
+            <a href="#shop" class="mega-col-heading">Shop by Purpose</a>
             <a href="#shop">Office &amp; Corporate</a>
             <a href="#shop">Everyday</a>
             <a href="#shop">Sports &amp; Active</a>
@@ -560,14 +562,14 @@ fbq('track', 'PageView');
             <a href="#gifting">Gifting</a>
           </div>
           <div class="mega-col">
-            <h4>Shop by Length</h4>
+            <a href="#shop" class="mega-col-heading">Shop by Length</a>
             <a href="#shop">Crew / Calf Length</a>
             <a href="#shop">Ankle Socks</a>
             <a href="#shop">No Show / Toe Socks</a>
             <a href="#shop">Quarter Length</a>
           </div>
           <div class="mega-col">
-            <h4>Shop by Wearer</h4>
+            <a href="#shop" class="mega-col-heading">Shop by Wearer</a>
             <a href="#shop">My Lord (Men)</a>
             <a href="#shop">Lady Walker (Women)</a>
             <a href="#shop">Li'l Walker (Kids)</a>
@@ -1188,6 +1190,10 @@ function toggleMegaMenu(e){
     return false;
   }
   return true;
+}
+function closeMegaMenu(){
+  const parent = document.getElementById('shop-mega-parent');
+  if (parent) parent.classList.remove('mega-open');
 }
 document.addEventListener('click', function(e){
   const parent = document.getElementById('shop-mega-parent');
