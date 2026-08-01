@@ -138,6 +138,12 @@
     <a href="shop.html?purpose=wellness" class="filter-pill" data-purpose="wellness">Wellness</a>
     <a href="shop.html?purpose=winter" class="filter-pill" data-purpose="winter">Winter</a>
   </div>
+  <div class="filter-row" id="socktype-filters">
+    <a href="shop.html?sockType=Crew" class="filter-pill" data-socktype="Crew">Crew / Calf Length</a>
+    <a href="shop.html?sockType=Ankle" class="filter-pill" data-socktype="Ankle">Ankle Socks</a>
+    <a href="shop.html?sockType=No%20Show" class="filter-pill" data-socktype="No Show">No Show / Toe Socks</a>
+    <a href="shop.html?sockType=Quarter" class="filter-pill" data-socktype="Quarter">Quarter Length</a>
+  </div>
 
   <div class="grid" id="product-grid">
     <div class="empty-state">Loading products…</div>
@@ -158,6 +164,7 @@ const API_BASE = "https://lordwalker-store.onrender.com";
 
 const WEARER_LABELS = { men: 'My Lord — Men', women: 'Lady Walker — Women', kids: "Li'l Walker — Kids" };
 const PURPOSE_LABELS = { formal: 'Office & Corporate', casual: 'Everyday', active: 'Sports & Active', wellness: 'Wellness', winter: 'Winter' };
+const SOCKTYPE_LABELS = { Crew: 'Crew / Calf Length', Ankle: 'Ankle Socks', 'No Show': 'No Show / Toe Socks', Quarter: 'Quarter Length' };
 
 function getParams(){
   const p = new URLSearchParams(window.location.search);
@@ -265,7 +272,7 @@ function closeProductModal(){
 }
 
 async function init(){
-  const { wearer, purpose } = getParams();
+  const { wearer, purpose, sockType } = getParams();
 
   // Highlight active filter pill
   document.querySelectorAll('#wearer-filters .filter-pill').forEach(el => {
@@ -274,11 +281,15 @@ async function init(){
   document.querySelectorAll('#purpose-filters .filter-pill').forEach(el => {
     el.classList.toggle('active', el.dataset.purpose === purpose);
   });
+  document.querySelectorAll('#socktype-filters .filter-pill').forEach(el => {
+    el.classList.toggle('active', el.dataset.socktype === sockType);
+  });
 
   // Title
   let title = 'All Socks';
   if (wearer && WEARER_LABELS[wearer]) title = WEARER_LABELS[wearer];
   else if (purpose && PURPOSE_LABELS[purpose]) title = PURPOSE_LABELS[purpose];
+  else if (sockType && SOCKTYPE_LABELS[sockType]) title = SOCKTYPE_LABELS[sockType];
   document.getElementById('shop-title').textContent = title;
 
   try{
@@ -286,6 +297,7 @@ async function init(){
     let products = await res.json();
     if (wearer) products = products.filter(p => p.wearer === wearer);
     if (purpose) products = products.filter(p => p.category === purpose);
+    if (sockType) products = products.filter(p => p.sockType === sockType);
     document.getElementById('result-count').textContent = `${products.length} product${products.length === 1 ? '' : 's'}`;
     renderCards(products);
   }catch(e){
