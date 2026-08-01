@@ -21,11 +21,11 @@ router.get('/products', requireAdmin, (req, res) => {
   res.json(db.getProducts());
 });
 
-// PUT /api/admin/products/:id — update stock, price, status, and/or image
-// body: { stock?, price?, status?, image? }
+// PUT /api/admin/products/:id — update stock, price, status, image(s)
+// body: { stock?, price?, status?, image?, images? }
 router.put('/products/:id', requireAdmin, (req, res) => {
   try {
-    const { stock, price, status, image } = req.body;
+    const { stock, price, status, image, images } = req.body;
     const updates = {};
     if (stock !== undefined) {
       const n = Number(stock);
@@ -42,7 +42,12 @@ router.put('/products/:id', requireAdmin, (req, res) => {
       updates.status = status;
     }
     if (image !== undefined) {
-      updates.image = image; // base64 data URL, or '' to clear it
+      updates.image = image; // base64 data URL, or '' to clear it (legacy single-image field)
+    }
+    if (images !== undefined) {
+      if (!Array.isArray(images)) throw new Error('images must be an array of data URLs');
+      updates.images = images; // full gallery — replaces the stored array
+      updates.image = images[0] || ''; // keep legacy single-image field in sync for older consumers
     }
     const updated = db.updateProduct(req.params.id, updates);
     res.json(updated);
@@ -52,10 +57,10 @@ router.put('/products/:id', requireAdmin, (req, res) => {
 });
 
 // POST /api/admin/products — create a new product
-// body: { id, name, price, stock, status?, image? }
+// body: { id, name, price, stock, status?, image?, images? }
 router.post('/products', requireAdmin, (req, res) => {
   try {
-    const { id, name, price, stock, status, image } = req.body;
+    const { id, name, price, stock, status, image, images } = req.body;
     if (!id || !String(id).trim()) throw new Error('Product code is required');
     if (!name || !String(name).trim()) throw new Error('Product name is required');
     const priceNum = Number(price);
@@ -70,7 +75,12 @@ router.post('/products', requireAdmin, (req, res) => {
       stock: stockNum,
       status: status === 'inactive' ? 'inactive' : 'active',
     };
-    if (image) product.image = image;
+    if (Array.isArray(images) && images.length) {
+      product.images = images;
+      product.image = images[0];
+    } else if (image) {
+      product.image = image;
+    }
 
     const created = db.addProduct(product);
     res.status(201).json(created);
