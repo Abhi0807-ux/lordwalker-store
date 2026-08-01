@@ -265,11 +265,23 @@ fbq('track', 'PageView');
   #comfort-banner{margin:8px 0;}
   .comfort-banner-wrap{position:relative; overflow:hidden;}
   .comfort-banner-img{width:100%; display:block; object-fit:cover; height:380px;}
+  .comfort-banner-wrap::after{
+    content:''; position:absolute; inset:0;
+    background:linear-gradient(to top, rgba(20,16,10,0.55) 0%, rgba(20,16,10,0.15) 35%, rgba(20,16,10,0) 60%);
+    pointer-events:none;
+  }
+  .comfort-banner-caption{
+    position:absolute; left:0; right:0; bottom:28px; text-align:center; z-index:2;
+    font-family:'Fraunces',serif; font-weight:600; color:#fff; font-size:clamp(24px, 3.2vw, 40px);
+    letter-spacing:-0.3px; text-shadow:0 2px 14px rgba(0,0,0,0.35);
+  }
   @media(max-width:900px){
     .comfort-banner-img{height:260px;}
+    .comfort-banner-caption{bottom:20px;}
   }
   @media(max-width:600px){
     .comfort-banner-img{height:190px;}
+    .comfort-banner-caption{bottom:14px; font-size:22px;}
   }
 
   /* Why Lord Walker — intro copy above the feature cards */
@@ -849,16 +861,16 @@ fbq('track', 'PageView');
 
 <section id="hero-carousel" class="hero-carousel">
   <div class="hero-track">
-    <a href="#shop" id="hero-slide-1" class="hero-slide active" aria-label="Lord Walker — Explore Collection"></a>
+    <a href="#shop" id="hero-slide-1" class="hero-slide" aria-label="Lord Walker — Explore Collection"></a>
     <a href="#shop" id="hero-slide-2" class="hero-slide" aria-label="Lady Walker — Explore Collection"></a>
     <a href="#shop" id="hero-slide-3" class="hero-slide" aria-label="Li'l Walker — Explore Collection"></a>
-    <a href="#shop" id="hero-slide-4" class="hero-slide" aria-label="Walk Like A Lord — Explore Collection"></a>
+    <a href="#shop" id="hero-slide-4" class="hero-slide active" aria-label="Walk Like A Lord — Explore Collection"></a>
   </div>
   <div class="hero-dots">
-    <button class="hero-dot active" onclick="goToHeroSlide(0, true)" aria-label="Slide 1"></button>
+    <button class="hero-dot" onclick="goToHeroSlide(0, true)" aria-label="Slide 1"></button>
     <button class="hero-dot" onclick="goToHeroSlide(1, true)" aria-label="Slide 2"></button>
     <button class="hero-dot" onclick="goToHeroSlide(2, true)" aria-label="Slide 3"></button>
-    <button class="hero-dot" onclick="goToHeroSlide(3, true)" aria-label="Slide 4"></button>
+    <button class="hero-dot active" onclick="goToHeroSlide(3, true)" aria-label="Slide 4"></button>
   </div>
 </section>
 
@@ -897,6 +909,7 @@ fbq('track', 'PageView');
 <section id="comfort-banner" class="reveal">
   <div class="comfort-banner-wrap">
     <img src="comfort-every-step-banner.jpg" alt="Comfort, every step — Lord Walker" class="comfort-banner-img">
+    <div class="comfort-banner-caption">Comfort, every step</div>
   </div>
 </section>
 
@@ -1378,7 +1391,7 @@ async function refreshQuote(ids){
   }
 }
 
-let heroIndex = 0;
+let heroIndex = 3;
 let heroTimer = null;
 function goToHeroSlide(i, manual){
   const slides = document.querySelectorAll('.hero-slide');
