@@ -9,7 +9,19 @@
     "category": "casual",
     "colors": "Purple • Pink • Brown • Off White",
     "sockType": "Quarter",
-    "wearer": "women"
+    "wearer": "women",
+    "careInstructions": "Wash at or below 40° c ,Do not bleach ,Do not tumble dry, Do not iron,Do not  dry clean",
+    "specification": {
+      "fabric": "78% Cotton,20% Nylon,2% Elastane",
+      "cushioning": "Plain",
+      "cuffStyle": "Ribbed Cuff",
+      "archSupport": "No",
+      "countryOfOrigin": "India",
+      "weight": "26.0 g",
+      "sockLength": "FOOT SIZE 21 CM",
+      "packQuantity": "4"
+    },
+    "originalPrice": null
   },
   {
     "id": "27185-COMBO-2",
@@ -21,7 +33,19 @@
     "category": "casual",
     "colors": "White • Royal • Lilac",
     "sockType": "Crew",
-    "wearer": "women"
+    "wearer": "women",
+    "careInstructions": "Wash at or below 40° c ,Do not bleach ,Do not tumble dry, Do not iron,Do not  dry clean",
+    "specification": {
+      "fabric": "78% Cotton,20% Nylon,2% Elastane",
+      "cushioning": "Cushioned Sole",
+      "cuffStyle": "Ribbed Cuff",
+      "archSupport": "NO",
+      "countryOfOrigin": "India",
+      "weight": "48.0 g",
+      "sockLength": "FOOT SIZE 21 CM",
+      "packQuantity": "3"
+    },
+    "originalPrice": null
   },
   {
     "id": "27187-COMBO-3",
@@ -33,7 +57,19 @@
     "category": "casual",
     "colors": "Green • Lavender • Pink • Yellow • Dk. Red",
     "sockType": "Crew",
-    "wearer": "women"
+    "wearer": "women",
+    "careInstructions": "Wash at or below 40° c ,Do not bleach ,Do not tumble dry, Do not iron,Do not  dry clean",
+    "specification": {
+      "fabric": "75% Cotton,23% Nylon,2% Elastane",
+      "cushioning": "Plain",
+      "cuffStyle": "Ribbed Cuff",
+      "archSupport": "NO",
+      "countryOfOrigin": "India",
+      "weight": "31.0 g",
+      "sockLength": "FOOT SIZE 21 CM",
+      "packQuantity": "5"
+    },
+    "originalPrice": null
   },
   {
     "id": "27184-COMBO-4",
@@ -45,7 +81,19 @@
     "category": "casual",
     "colors": "Rose • Olive • Grey",
     "sockType": "Quarter",
-    "wearer": "women"
+    "wearer": "women",
+    "careInstructions": "Wash at or below 40° c ,Do not bleach ,Do not tumble dry, Do not iron,Do not  dry clean",
+    "specification": {
+      "fabric": "78% Cotton,20% Nylon,2% Elastane",
+      "cushioning": "Cushioned Sole",
+      "cuffStyle": "Ribbed Cuff",
+      "archSupport": "NO",
+      "countryOfOrigin": "India",
+      "weight": "39.0 g",
+      "sockLength": "FOOT SIZE 21 CM",
+      "packQuantity": "3"
+    },
+    "originalPrice": null
   },
   {
     "id": "27179-COMBO-5",
@@ -57,7 +105,19 @@
     "category": "casual",
     "colors": "Green • Coral • Lilac",
     "sockType": "Quarter",
-    "wearer": "women"
+    "wearer": "women",
+    "careInstructions": "Wash at or below 40° c ,Do not bleach ,Do not tumble dry, Do not iron,Do not  dry clean",
+    "specification": {
+      "fabric": "75% Cotton,23% Nylon,2% Elastane",
+      "cushioning": "PLAIN",
+      "cuffStyle": "Ribbed Cuff",
+      "archSupport": "NO",
+      "countryOfOrigin": "India",
+      "weight": "28.0 g",
+      "sockLength": "FOOT SIZE 21 CM",
+      "packQuantity": "3"
+    },
+    "originalPrice": null
   },
   {
     "id": "27174-COMBO-6",
@@ -69,7 +129,19 @@
     "category": "casual",
     "colors": "Ecru • Olive • Navy",
     "sockType": "Quarter",
-    "wearer": "women"
+    "wearer": "women",
+    "careInstructions": "Wash at or below 40° c ,Do not bleach ,Do not tumble dry, Do not iron,Do not  dry clean",
+    "specification": {
+      "fabric": "75% Cotton,23% Nylon,2% Elastane",
+      "cushioning": "PLAIN",
+      "cuffStyle": "Ribbed Cuff",
+      "archSupport": "NO",
+      "countryOfOrigin": "India",
+      "weight": "25.0 g",
+      "sockLength": "FOOT SIZE 21 CM",
+      "packQuantity": "3"
+    },
+    "originalPrice": null
   },
   {
     "id": "27196-COMBO-7",
@@ -81,7 +153,19 @@
     "category": "casual",
     "colors": "Blue • Beige • Pink",
     "sockType": "Quarter",
-    "wearer": "women"
+    "wearer": "women",
+    "careInstructions": "Wash at or below 40° c ,Do not bleach ,Do not tumble dry, Do not iron,Do not  dry clean",
+    "specification": {
+      "fabric": "75% Cotton,23% Nylon,2% Elastane",
+      "cushioning": "PLAIN",
+      "cuffStyle": "Ribbed Cuff",
+      "archSupport": "NO",
+      "countryOfOrigin": "India",
+      "weight": "24.0 g",
+      "sockLength": "FOOT SIZE 21 CM",
+      "packQuantity": "3"
+    },
+    "originalPrice": null
   },
   {
     "id": "27144-COMBO-8",
@@ -93,7 +177,19 @@
     "category": "casual",
     "colors": "Orange • Parrot Green • Navy",
     "sockType": "Ankle",
-    "wearer": "men"
+    "wearer": "men",
+    "careInstructions": "Wash at or below 40° c ,Do not bleach ,Do not tumble dry, Do not iron,Do not  dry clean",
+    "specification": {
+      "fabric": "78% Cotton,20% Nylon,2% Elastane",
+      "cushioning": "Cushioned Sole",
+      "cuffStyle": "Ribbed Cuff",
+      "archSupport": "NO",
+      "countryOfOrigin": "India",
+      "weight": "32.0 g",
+      "sockLength": "FOOT SIZE 25 CM",
+      "packQuantity": "3"
+    },
+    "originalPrice": null
   },
   {
     "id": "27128-COMBO-9",
@@ -105,7 +201,19 @@
     "category": "winter",
     "colors": "Ecru • Ecru",
     "sockType": "Crew",
-    "wearer": "men"
+    "wearer": "men",
+    "careInstructions": "Wash at or below 40° c ,Do not bleach ,Do not tumble dry, Do not iron,Do not  dry clean",
+    "specification": {
+      "fabric": "60% Wool,39% Nylon,1% Elastane",
+      "cushioning": "PLAIN",
+      "cuffStyle": "Ribbed Cuff",
+      "archSupport": "NO",
+      "countryOfOrigin": "India",
+      "weight": "42.0 g",
+      "sockLength": "FOOT SIZE 25 CM",
+      "packQuantity": "2"
+    },
+    "originalPrice": null
   },
   {
     "id": "27141-COMBO-10",
@@ -117,7 +225,19 @@
     "category": "casual",
     "colors": "White/Green • White/Sky • White/Grey",
     "sockType": "Quarter",
-    "wearer": "men"
+    "wearer": "men",
+    "careInstructions": "Wash at or below 40° c ,Do not bleach ,Do not tumble dry, Do not iron,Do not  dry clean",
+    "specification": {
+      "fabric": "78% Cotton,20% Nylon,2% Elastane",
+      "cushioning": "PLAIN",
+      "cuffStyle": "Ribbed Cuff",
+      "archSupport": "NO",
+      "countryOfOrigin": "India",
+      "weight": "39.0 g",
+      "sockLength": "FOOT SIZE 25 CM",
+      "packQuantity": "3"
+    },
+    "originalPrice": null
   },
   {
     "id": "27140-COMBO-11",
@@ -129,7 +249,19 @@
     "category": "casual",
     "colors": "Grey • Ecru • Off White/ Butterscotch",
     "sockType": "Crew",
-    "wearer": "men"
+    "wearer": "men",
+    "careInstructions": "Wash at or below 40° c ,Do not bleach ,Do not tumble dry, Do not iron,Do not  dry clean",
+    "specification": {
+      "fabric": "75% Cotton,23% Nylon,2% Elastane",
+      "cushioning": "PLAIN",
+      "cuffStyle": "Ribbed Cuff",
+      "archSupport": "NO",
+      "countryOfOrigin": "India",
+      "weight": "36.0 g",
+      "sockLength": "FOOT SIZE 25 CM",
+      "packQuantity": "3"
+    },
+    "originalPrice": null
   },
   {
     "id": "27138-COMBO-12",
@@ -141,7 +273,19 @@
     "category": "casual",
     "colors": "Mid. Grey • Blue • Charcoal",
     "sockType": "Quarter",
-    "wearer": "men"
+    "wearer": "men",
+    "careInstructions": "Wash at or below 40° c ,Do not bleach ,Do not tumble dry, Do not iron,Do not  dry clean",
+    "specification": {
+      "fabric": "75% Cotton,23% Nylon,2% Elastane",
+      "cushioning": "PLAIN",
+      "cuffStyle": "Ribbed Cuff",
+      "archSupport": "NO",
+      "countryOfOrigin": "India",
+      "weight": "28.0 g",
+      "sockLength": "FOOT SIZE 25 CM",
+      "packQuantity": "3"
+    },
+    "originalPrice": null
   },
   {
     "id": "27126-COMBO-13",
@@ -153,7 +297,19 @@
     "category": "casual",
     "colors": "Off White • Olive • Beige",
     "sockType": "Crew",
-    "wearer": "men"
+    "wearer": "men",
+    "careInstructions": "Wash at or below 40° c ,Do not bleach ,Do not tumble dry, Do not iron,Do not  dry clean",
+    "specification": {
+      "fabric": "75% Cotton,23% Nylon,2% Elastane",
+      "cushioning": "PLAIN",
+      "cuffStyle": "Ribbed Cuff",
+      "archSupport": "NO",
+      "countryOfOrigin": "India",
+      "weight": "39.0 g",
+      "sockLength": "FOOT SIZE 25 CM",
+      "packQuantity": "3"
+    },
+    "originalPrice": null
   },
   {
     "id": "27103-COMBO-14",
@@ -165,7 +321,19 @@
     "category": "formal",
     "colors": "Grey • Beige",
     "sockType": "Crew",
-    "wearer": "men"
+    "wearer": "men",
+    "careInstructions": "Wash at or below 40° c ,Do not bleach ,Do not tumble dry, Do not iron,Do not  dry clean",
+    "specification": {
+      "fabric": "90% Cotton , 8% Nylon,2% Elastane",
+      "cushioning": "PLAIN",
+      "cuffStyle": "Ribbed Cuff",
+      "archSupport": "NO",
+      "countryOfOrigin": "India",
+      "weight": "65.0 g",
+      "sockLength": "FOOT SIZE 25 CM",
+      "packQuantity": "2"
+    },
+    "originalPrice": null
   },
   {
     "id": "27103-COMBO-15",
@@ -177,7 +345,19 @@
     "category": "formal",
     "colors": "Blue • Off White • Charcoal",
     "sockType": "Crew",
-    "wearer": "men"
+    "wearer": "men",
+    "careInstructions": "Wash at or below 40° c ,Do not bleach ,Do not tumble dry, Do not iron,Do not  dry clean",
+    "specification": {
+      "fabric": "90% Cotton , 8% Nylon,2% Elastane",
+      "cushioning": "PLAIN",
+      "cuffStyle": "Ribbed Cuff",
+      "archSupport": "NO",
+      "countryOfOrigin": "India",
+      "weight": "65.0 g",
+      "sockLength": "FOOT SIZE 25 CM",
+      "packQuantity": "3"
+    },
+    "originalPrice": null
   },
   {
     "id": "27139-COMBO-16",
@@ -189,7 +369,19 @@
     "category": "casual",
     "colors": "White/Yellow • White/Blue Mel. • White/Red",
     "sockType": "Crew",
-    "wearer": "men"
+    "wearer": "men",
+    "careInstructions": "Wash at or below 40° c ,Do not bleach ,Do not tumble dry, Do not iron,Do not  dry clean",
+    "specification": {
+      "fabric": "78 % Cotton , 20 % Nylon,2% Elastane",
+      "cushioning": "cushioned Sole",
+      "cuffStyle": "Ribbed Cuff",
+      "archSupport": "NO",
+      "countryOfOrigin": "India",
+      "weight": "47.0 g",
+      "sockLength": "FOOT SIZE 25 CM",
+      "packQuantity": "3"
+    },
+    "originalPrice": null
   },
   {
     "id": "27183-COMBO-17",
@@ -201,7 +393,19 @@
     "category": "formal",
     "colors": "Olive • Purple • Lt.Blue",
     "sockType": "Crew",
-    "wearer": "men"
+    "wearer": "men",
+    "careInstructions": "Wash at or below 40° c ,Do not bleach ,Do not tumble dry, Do not iron,Do not  dry clean",
+    "specification": {
+      "fabric": "75 % Cotton , 23 % Nylon,2% Elastane",
+      "cushioning": "Plain",
+      "cuffStyle": "Ribbed Cuff",
+      "archSupport": "NO",
+      "countryOfOrigin": "India",
+      "weight": "39.0 g",
+      "sockLength": "FOOT SIZE 25 CM",
+      "packQuantity": "3"
+    },
+    "originalPrice": null
   },
   {
     "id": "27181-COMBO-18",
@@ -213,7 +417,19 @@
     "category": "formal",
     "colors": "Black • Black • Black",
     "sockType": "Crew",
-    "wearer": "men"
+    "wearer": "men",
+    "careInstructions": "Wash at or below 40° c ,Do not bleach ,Do not tumble dry, Do not iron,Do not  dry clean",
+    "specification": {
+      "fabric": "75 % Cotton , 23 % Nylon,2% Elastane",
+      "cushioning": "Plain",
+      "cuffStyle": "Ribbed Cuff",
+      "archSupport": "NO",
+      "countryOfOrigin": "India",
+      "weight": "39.0 g",
+      "sockLength": "FOOT SIZE 25 CM",
+      "packQuantity": "3"
+    },
+    "originalPrice": null
   },
   {
     "id": "27127-COMBO-19",
@@ -225,7 +441,19 @@
     "category": "formal",
     "colors": "Charcoal • Navy • Grey",
     "sockType": "Crew",
-    "wearer": "men"
+    "wearer": "men",
+    "careInstructions": "Wash at or below 40° c ,Do not bleach ,Do not tumble dry, Do not iron,Do not  dry clean",
+    "specification": {
+      "fabric": "75 % Cotton , 23 % Nylon,2% Elastane",
+      "cushioning": "Plain",
+      "cuffStyle": "Ribbed Cuff",
+      "archSupport": "NO",
+      "countryOfOrigin": "India",
+      "weight": "37.0 g",
+      "sockLength": "FOOT SIZE 25 CM",
+      "packQuantity": "3"
+    },
+    "originalPrice": null
   },
   {
     "id": "27105-COMBO-20",
@@ -237,7 +465,19 @@
     "category": "casual",
     "colors": "Beige • Blue • Brown",
     "sockType": "Quarter",
-    "wearer": "men"
+    "wearer": "men",
+    "careInstructions": "Wash at or below 40° c ,Do not bleach ,Do not tumble dry, Do not iron,Do not  dry clean",
+    "specification": {
+      "fabric": "75 % Cotton , 23 % Nylon,2% Elastane",
+      "cushioning": "Plain",
+      "cuffStyle": "Ribbed Cuff",
+      "archSupport": "NO",
+      "countryOfOrigin": "India",
+      "weight": "29.0 g",
+      "sockLength": "FOOT SIZE 25 CM",
+      "packQuantity": "3"
+    },
+    "originalPrice": null
   },
   {
     "id": "27115-COMBO-21",
@@ -249,7 +489,19 @@
     "category": "casual",
     "colors": "Grey • Navy • Brown",
     "sockType": "Quarter",
-    "wearer": "men"
+    "wearer": "men",
+    "careInstructions": "Wash at or below 40° c ,Do not bleach ,Do not tumble dry, Do not iron,Do not  dry clean",
+    "specification": {
+      "fabric": "90% Cotton , 8% Nylon,2% Elastane",
+      "cushioning": "Plain",
+      "cuffStyle": "Ribbed Cuff",
+      "archSupport": "NO",
+      "countryOfOrigin": "India",
+      "weight": "45.0 g",
+      "sockLength": "FOOT SIZE 25 CM",
+      "packQuantity": "3"
+    },
+    "originalPrice": null
   },
   {
     "id": "27117-COMBO-22",
@@ -261,7 +513,19 @@
     "category": "wellness",
     "colors": "Brown • Green • Black",
     "sockType": "Crew",
-    "wearer": "men"
+    "wearer": "men",
+    "careInstructions": "Wash at or below 40° c ,Do not bleach ,Do not tumble dry, Do not iron,Do not  dry clean",
+    "specification": {
+      "fabric": "78% Viscose ,20% Nylon,2% Elastane",
+      "cushioning": "Plain",
+      "cuffStyle": "Ribbed Cuff",
+      "archSupport": "NO",
+      "countryOfOrigin": "India",
+      "weight": "42.0 g",
+      "sockLength": "FOOT SIZE 25 CM",
+      "packQuantity": "3"
+    },
+    "originalPrice": null
   },
   {
     "id": "27116-COMBO-23",
@@ -273,7 +537,19 @@
     "category": "wellness",
     "colors": "Grey • Black • Navy",
     "sockType": "Quarter",
-    "wearer": "men"
+    "wearer": "men",
+    "careInstructions": "Wash at or below 40° c ,Do not bleach ,Do not tumble dry, Do not iron,Do not  dry clean",
+    "specification": {
+      "fabric": "78% Viscose ,20% Nylon,2% Elastane",
+      "cushioning": "Plain",
+      "cuffStyle": "Ribbed Cuff",
+      "archSupport": "NO",
+      "countryOfOrigin": "India",
+      "weight": "31.0 g",
+      "sockLength": "FOOT SIZE 25 CM",
+      "packQuantity": "3"
+    },
+    "originalPrice": null
   },
   {
     "id": "27356-COMBO-24",
@@ -285,7 +561,19 @@
     "category": "formal",
     "colors": "Black • Navy • Beige",
     "sockType": "Crew",
-    "wearer": "men"
+    "wearer": "men",
+    "careInstructions": "Wash at or below 40° c ,Do not bleach ,Do not tumble dry, Do not iron,Do not  dry clean",
+    "specification": {
+      "fabric": "70% Cotton , 30 % Nylon",
+      "cushioning": "Plain",
+      "cuffStyle": "Ribbed Cuff",
+      "archSupport": "NO",
+      "countryOfOrigin": "India",
+      "weight": "",
+      "sockLength": "FOOT SIZE 25 CM",
+      "packQuantity": "3"
+    },
+    "originalPrice": null
   },
   {
     "id": "27355-COMBO-25",
@@ -297,7 +585,19 @@
     "category": "active",
     "colors": "Sky • Pink • Yellow",
     "sockType": "Quarter",
-    "wearer": "men"
+    "wearer": "men",
+    "careInstructions": "Wash at or below 40° c ,Do not bleach ,Do not tumble dry, Do not iron,Do not  dry clean",
+    "specification": {
+      "fabric": "98 % Nylon,2% Elastane",
+      "cushioning": "Plain",
+      "cuffStyle": "Ribbed Cuff",
+      "archSupport": "NO",
+      "countryOfOrigin": "India",
+      "weight": "",
+      "sockLength": "FOOT SIZE 25 CM",
+      "packQuantity": "3"
+    },
+    "originalPrice": null
   },
   {
     "id": "27357-COMBO-26",
@@ -309,7 +609,19 @@
     "category": "formal",
     "colors": "Beige • Brown • Grey",
     "sockType": "Crew",
-    "wearer": "men"
+    "wearer": "men",
+    "careInstructions": "Wash at or below 40° c ,Do not bleach ,Do not tumble dry, Do not iron,Do not  dry clean",
+    "specification": {
+      "fabric": "75% Cotton , 23 % Nylon,2% Elastane",
+      "cushioning": "Plain",
+      "cuffStyle": "Ribbed Cuff",
+      "archSupport": "NO",
+      "countryOfOrigin": "India",
+      "weight": "",
+      "sockLength": "FOOT SIZE 25 CM",
+      "packQuantity": "3"
+    },
+    "originalPrice": null
   },
   {
     "id": "27180-COMBO-27",
@@ -321,7 +633,19 @@
     "category": "kids",
     "colors": "Denim • Off White",
     "sockType": "Crew",
-    "wearer": "kids"
+    "wearer": "kids",
+    "careInstructions": "Wash at or below 40° c ,Do not bleach ,Do not tumble dry, Do not iron,Do not  dry clean",
+    "specification": {
+      "fabric": "75% Cotton , 23 % Nylon,2% Elastane",
+      "cushioning": "Plain",
+      "cuffStyle": "Ribbed Cuff",
+      "archSupport": "NO",
+      "countryOfOrigin": "India",
+      "weight": "28.0 g",
+      "sockLength": "FOOT SIZE 16 CM",
+      "packQuantity": "2"
+    },
+    "originalPrice": null
   },
   {
     "id": "27358-COMBO-28",
@@ -333,6 +657,18 @@
     "category": "kids",
     "colors": "Dark Blue • Navy",
     "sockType": "Crew",
-    "wearer": "kids"
+    "wearer": "kids",
+    "careInstructions": "Wash at or below 40° c ,Do not bleach ,Do not tumble dry, Do not iron,Do not  dry clean",
+    "specification": {
+      "fabric": "75% Cotton , 23 % Nylon,2% Elastane",
+      "cushioning": "Plain",
+      "cuffStyle": "Ribbed Cuff",
+      "archSupport": "NO",
+      "countryOfOrigin": "India",
+      "weight": "",
+      "sockLength": "FOOT SIZE 16 CM",
+      "packQuantity": "2"
+    },
+    "originalPrice": null
   }
 ]

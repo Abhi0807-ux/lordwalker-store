@@ -102,6 +102,14 @@
   .images-panel-row.open{display:table-row;}
   .images-panel-cell{background:var(--paper-dim); padding:16px !important;}
   .images-panel-inner input[type="file"]{font-size:12px; margin-top:8px;}
+  .detail-field-row{margin:14px 0;}
+  .detail-field-row label{display:block; font-size:11.5px; color:rgba(43,39,51,0.55); margin-bottom:5px; font-family:'IBM Plex Mono',monospace; text-transform:uppercase; letter-spacing:0.4px;}
+  .detail-field-row input, .detail-field-row select, .detail-field-row textarea{
+    width:100%; padding:9px 12px; border:1px solid var(--line); border-radius:8px; font-size:13px;
+    font-family:'Inter',sans-serif; background:#fff; color:var(--ink);
+  }
+  .detail-field-row textarea{resize:vertical;}
+  .detail-field-row--split{display:grid; grid-template-columns:1fr 1fr; gap:14px;}
   .delete-btn:hover{background:rgba(176,57,47,0.08);}
 </style>
 </head>
@@ -140,8 +148,12 @@
           <input type="text" id="new-name" placeholder="e.g. Lord Walker Crew Socks">
         </div>
         <div>
-          <label>Price (₹)</label>
+          <label>Selling Price (₹)</label>
           <input type="number" id="new-price" min="1">
+        </div>
+        <div>
+          <label>Original Price (₹) — optional</label>
+          <input type="number" id="new-original-price" min="1" placeholder="Leave blank for no discount">
         </div>
         <div>
           <label>Stock</label>
@@ -154,6 +166,34 @@
             <option value="inactive">Inactive</option>
           </select>
         </div>
+        <div>
+          <label>Category (Shop by Purpose)</label>
+          <select id="new-category">
+            <option value="casual">Everyday</option>
+            <option value="formal">Office & Corporate</option>
+            <option value="active">Sports & Active</option>
+            <option value="wellness">Wellness</option>
+            <option value="winter">Winter</option>
+            <option value="kids">Kids</option>
+          </select>
+        </div>
+        <div>
+          <label>Wearer (Shop by Wearer)</label>
+          <select id="new-wearer">
+            <option value="men">Men</option>
+            <option value="women">Women</option>
+            <option value="kids">Kids</option>
+            <option value="unisex">Unisex</option>
+          </select>
+        </div>
+      </div>
+      <div style="margin-bottom:14px;">
+        <label style="display:block; font-size:11.5px; color:rgba(43,39,51,0.55); margin-bottom:5px; font-family:'IBM Plex Mono',monospace; text-transform:uppercase; letter-spacing:0.5px;">Description</label>
+        <textarea id="new-description" rows="3" style="width:100%; padding:9px 12px; border:1px solid var(--line); border-radius:8px; font-size:13px; font-family:'Inter',sans-serif;" placeholder="Full product description"></textarea>
+      </div>
+      <div style="margin-bottom:14px;">
+        <label style="display:block; font-size:11.5px; color:rgba(43,39,51,0.55); margin-bottom:5px; font-family:'IBM Plex Mono',monospace; text-transform:uppercase; letter-spacing:0.5px;">Care Instructions</label>
+        <textarea id="new-care" rows="2" style="width:100%; padding:9px 12px; border:1px solid var(--line); border-radius:8px; font-size:13px; font-family:'Inter',sans-serif;" placeholder="e.g. Wash at or below 40°C, do not bleach"></textarea>
       </div>
       <div style="margin-bottom:14px;">
         <label style="display:block; font-size:11.5px; color:rgba(43,39,51,0.55); margin-bottom:5px; font-family:'IBM Plex Mono',monospace; text-transform:uppercase; letter-spacing:0.5px;">Product Images (optional — pick multiple)</label>
@@ -277,21 +317,37 @@ function fileToDataURL(file){
 
 let IMAGE_CACHE = {}; // productId -> array of data URLs, kept in sync with the manage-images panel
 
+const CATEGORY_OPTIONS = [
+  { value: 'casual', label: 'Everyday' },
+  { value: 'formal', label: 'Office & Corporate' },
+  { value: 'active', label: 'Sports & Active' },
+  { value: 'wellness', label: 'Wellness' },
+  { value: 'winter', label: 'Winter' },
+  { value: 'kids', label: 'Kids' },
+];
+const WEARER_OPTIONS = ['men', 'women', 'kids', 'unisex'];
+
 function renderTable(products){
   const body = document.getElementById('table-body');
   body.innerHTML = products.map(p => {
     const imgs = (p.images && p.images.length) ? p.images : (p.image ? [p.image] : []);
     IMAGE_CACHE[p.id] = imgs.slice();
     const thumb = imgs.length ? `<img class="thumb" src="${imgs[0]}">` : `<div class="thumb-empty">🧦</div>`;
+    const catOptionsHtml = CATEGORY_OPTIONS.map(c =>
+      `<option value="${c.value}" ${p.category === c.value ? 'selected' : ''}>${c.label}</option>`
+    ).join('');
+    const wearerOptionsHtml = WEARER_OPTIONS.map(w =>
+      `<option value="${w}" ${p.wearer === w ? 'selected' : ''}>${w.charAt(0).toUpperCase() + w.slice(1)}</option>`
+    ).join('');
     return `
     <tr data-id="${p.id}">
       <td>
         ${thumb}
-        <button type="button" class="manage-images-btn" onclick="toggleImagesPanel('${p.id}')" style="margin-top:6px;">🖼️ Manage (${imgs.length})</button>
+        <button type="button" class="manage-images-btn" onclick="toggleImagesPanel('${p.id}')" style="margin-top:6px;">🛠️ Manage Details</button>
       </td>
       <td class="code">${p.id}</td>
       <td class="name">${p.name}</td>
-      <td><input class="edit price-input" type="number" min="1" value="${p.price}"></td>
+      <td><input class="edit price-input" type="number" min="1" value="${p.price}" placeholder="Selling price"></td>
       <td><input class="edit stock-input" type="number" min="0" value="${p.stock}"></td>
       <td>
         <select class="edit status-input">
@@ -308,11 +364,40 @@ function renderTable(products){
     <tr class="images-panel-row" id="panel-${p.id}">
       <td colspan="7" class="images-panel-cell">
         <div class="images-panel-inner">
-          <strong style="font-size:13px;">Manage images — ${p.name}</strong>
+          <strong style="font-size:13px;">Manage details — ${p.name}</strong>
+
+          <div class="detail-field-row">
+            <label>Original Price (₹) — optional, shows as a struck-through "was" price</label>
+            <input type="number" min="1" class="detail-original-price" id="original-price-${p.id}" value="${p.originalPrice || ''}" placeholder="e.g. 1599 (leave blank for no discount shown)">
+          </div>
+
+          <div class="detail-field-row detail-field-row--split">
+            <div>
+              <label>Category (Shop by Purpose)</label>
+              <select id="category-${p.id}">${catOptionsHtml}</select>
+            </div>
+            <div>
+              <label>Wearer (Shop by Wearer)</label>
+              <select id="wearer-${p.id}">${wearerOptionsHtml}</select>
+            </div>
+          </div>
+
+          <div class="detail-field-row">
+            <label>Description</label>
+            <textarea id="description-${p.id}" rows="3" placeholder="Full product description shown on the product detail view">${(p.description || '').replace(/</g,'&lt;')}</textarea>
+          </div>
+
+          <div class="detail-field-row">
+            <label>Care Instructions</label>
+            <textarea id="care-${p.id}" rows="2" placeholder="e.g. Wash at or below 40°C, do not bleach, do not tumble dry">${(p.careInstructions || '').replace(/</g,'&lt;')}</textarea>
+          </div>
+
+          <strong style="font-size:13px; display:block; margin-top:16px;">Images</strong>
           <div class="img-preview-row" id="images-grid-${p.id}"></div>
           <input type="file" accept="image/*" multiple onchange="addMoreImages('${p.id}', event)">
-          <div style="margin-top:10px;">
-            <button class="save-btn" onclick="saveImages('${p.id}')">Save Images</button>
+
+          <div style="margin-top:14px;">
+            <button class="save-btn" onclick="saveDetails('${p.id}')">Save All Details</button>
             <button class="delete-btn" onclick="toggleImagesPanel('${p.id}')" style="border-color:var(--line); color:var(--ink);">Close</button>
             <span class="row-status" id="img-status-${p.id}"></span>
           </div>
@@ -361,15 +446,24 @@ function removeImageFromCache(id, idx){
   renderImagesGrid(id);
 }
 
-async function saveImages(id){
+async function saveDetails(id){
   const statusEl = document.getElementById(`img-status-${id}`);
   statusEl.textContent = 'Saving…';
   statusEl.className = 'row-status';
   try{
+    const originalPriceEl = document.getElementById(`original-price-${id}`);
+    const body = {
+      images: IMAGE_CACHE[id] || [],
+      category: document.getElementById(`category-${id}`).value,
+      wearer: document.getElementById(`wearer-${id}`).value,
+      description: document.getElementById(`description-${id}`).value,
+      careInstructions: document.getElementById(`care-${id}`).value,
+      originalPrice: originalPriceEl.value ? Number(originalPriceEl.value) : null,
+    };
     const res = await fetch(`${API_BASE}/api/admin/products/${id}`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json', 'x-admin-password': PASSWORD },
-      body: JSON.stringify({ images: IMAGE_CACHE[id] || [] })
+      body: JSON.stringify(body)
     });
     const data = await res.json();
     if(!res.ok) throw new Error(data.error || 'Save failed');
@@ -462,15 +556,24 @@ async function createProduct(){
   const id = document.getElementById('new-id').value.trim();
   const name = document.getElementById('new-name').value.trim();
   const price = document.getElementById('new-price').value;
+  const originalPrice = document.getElementById('new-original-price').value;
   const stock = document.getElementById('new-stock').value;
   const status = document.getElementById('new-status').value;
+  const category = document.getElementById('new-category').value;
+  const wearer = document.getElementById('new-wearer').value;
+  const description = document.getElementById('new-description').value;
+  const careInstructions = document.getElementById('new-care').value;
   const errEl = document.getElementById('add-error');
   const okEl = document.getElementById('add-success');
   errEl.textContent = '';
   okEl.textContent = '';
 
   try{
-    const body = { id, name, price, stock, status, images: NEW_PRODUCT_IMAGES };
+    const body = {
+      id, name, price, stock, status, category, wearer, description, careInstructions,
+      originalPrice: originalPrice || null,
+      images: NEW_PRODUCT_IMAGES
+    };
     const res = await fetch(`${API_BASE}/api/admin/products`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', 'x-admin-password': PASSWORD },
@@ -482,7 +585,10 @@ async function createProduct(){
     document.getElementById('new-id').value = '';
     document.getElementById('new-name').value = '';
     document.getElementById('new-price').value = '';
+    document.getElementById('new-original-price').value = '';
     document.getElementById('new-stock').value = '';
+    document.getElementById('new-description').value = '';
+    document.getElementById('new-care').value = '';
     NEW_PRODUCT_IMAGES = [];
     renderNewImagesPreview();
     loadProducts();

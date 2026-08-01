@@ -53,6 +53,50 @@
   .add-btn:hover{background:var(--accent-plum);}
   .stock-tag{font-size:9.5px; color:rgba(21,22,28,0.4); font-family:'IBM Plex Mono',monospace;}
   .empty-state{grid-column:1/-1; text-align:center; padding:60px 20px; color:rgba(21,22,28,0.45); font-size:14px;}
+  .price-original{font-size:12px; font-weight:500; color:rgba(21,22,28,0.4); text-decoration:line-through; margin-left:5px;}
+  .card-media, .card-code, .card-title{cursor:pointer;}
+
+  .product-modal{
+    position:fixed; top:50%; left:50%; transform:translate(-50%,-50%) scale(0.96); opacity:0; pointer-events:none;
+    transition:opacity .25s ease, transform .25s ease; background:var(--paper); color:var(--ink); z-index:99;
+    width:760px; max-width:92vw; max-height:88vh; overflow-y:auto; border-radius:20px; padding:0;
+    box-shadow:0 30px 70px rgba(21,22,28,0.35);
+  }
+  .product-modal.open{opacity:1; pointer-events:auto; transform:translate(-50%,-50%) scale(1);}
+  .product-modal__close{
+    position:sticky; top:14px; left:100%; transform:translateX(-100%); margin-right:14px; margin-top:14px;
+    background:rgba(21,22,28,0.08); border:none; border-radius:50%; width:34px; height:34px; font-size:20px;
+    cursor:pointer; color:var(--ink); z-index:2; float:right;
+  }
+  .product-modal__inner{padding:8px 32px 32px; clear:both;}
+  .pm-grid{display:grid; grid-template-columns:1fr 1fr; gap:32px; align-items:start;}
+  .pm-media{border-radius:16px; overflow:hidden; background:var(--paper-dim); min-height:280px; display:flex; align-items:center; justify-content:center;}
+  .pm-media img{width:100%; height:100%; object-fit:cover; display:block;}
+  .pm-thumbs{display:flex; gap:8px; margin-top:10px; flex-wrap:wrap;}
+  .pm-thumbs img{width:52px; height:52px; object-fit:cover; border-radius:8px; cursor:pointer; border:2px solid transparent; opacity:0.7;}
+  .pm-thumbs img.active{border-color:var(--accent-plum); opacity:1;}
+  .pm-code{font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:1px; text-transform:uppercase; color:rgba(21,22,28,0.4); margin-bottom:8px;}
+  .pm-title{font-family:'Fraunces',serif; font-size:24px; font-weight:600; letter-spacing:-0.3px; margin-bottom:12px; line-height:1.2;}
+  .pm-price{font-family:'Fraunces',serif; font-size:26px; font-weight:600; margin-bottom:4px;}
+  .pm-price .price-original{font-size:16px;}
+  .pm-stock{font-size:12.5px; color:rgba(21,22,28,0.5); margin-bottom:20px;}
+  .pm-add-btn{
+    background:var(--ink); color:var(--paper); border:none; border-radius:999px; padding:13px 32px;
+    font-weight:600; font-size:14px; cursor:pointer; margin-bottom:24px; transition:transform .2s ease;
+  }
+  .pm-add-btn:hover{transform:translateY(-2px);}
+  .pm-section{margin-bottom:20px;}
+  .pm-section h4{font-family:'Fraunces',serif; font-size:15px; font-weight:600; margin-bottom:8px;}
+  .pm-section p{font-size:13.5px; color:rgba(21,22,28,0.65); line-height:1.65;}
+  .pm-spec-table{width:100%; border-collapse:collapse; font-size:13px;}
+  .pm-spec-table td{padding:6px 0; border-bottom:1px solid var(--line); vertical-align:top;}
+  .pm-spec-table td:first-child{color:rgba(21,22,28,0.5); width:42%; font-weight:500;}
+  @media(max-width:720px){
+    .pm-grid{grid-template-columns:1fr;}
+    .product-modal__inner{padding:8px 20px 24px;}
+    .pm-title{font-size:19px;}
+    .pm-price{font-size:21px;}
+  }
 
   footer{border-top:1px solid var(--line); padding:28px 32px; text-align:center; font-size:12.5px; color:rgba(21,22,28,0.45);}
 
@@ -100,6 +144,12 @@
   </div>
 </main>
 
+<div id="product-overlay" onclick="closeProductModal()" style="position:fixed; inset:0; background:rgba(21,22,28,0.55); display:none; z-index:98;"></div>
+<div id="product-modal" class="product-modal">
+  <button class="product-modal__close" onclick="closeProductModal()" aria-label="Close">×</button>
+  <div class="product-modal__inner" id="product-modal-content"></div>
+</div>
+
 <footer>Lord Walker by Brahm · shop@lordwalkerbybrham.com · +91-7878325805 · www.lordwalkerbybrham.com</footer>
 
 <script>
@@ -118,7 +168,10 @@ function sockSVG(){
   return `<svg viewBox="0 0 100 100" width="46%" xmlns="http://www.w3.org/2000/svg"><path d="M35 5h30v40l20 35a12 12 0 0 1-10 18H25a12 12 0 0 1-10-18l20-35z" fill="none" stroke="rgba(43,39,51,0.28)" stroke-width="4"/></svg>`;
 }
 
+let CURRENT_PRODUCTS = [];
+
 function renderCards(products){
+  CURRENT_PRODUCTS = products;
   const grid = document.getElementById('product-grid');
   if (!products.length){
     grid.innerHTML = '<div class="empty-state">No products match this filter yet — check back soon.</div>';
@@ -127,18 +180,21 @@ function renderCards(products){
   grid.innerHTML = products.map(p => {
     const thumb = (p.images && p.images.length) ? p.images[0] : p.image;
     const media = thumb ? `<img src="${thumb}" alt="${p.name}">` : sockSVG();
+    const priceHtml = (p.originalPrice && p.originalPrice > p.price)
+      ? `₹${p.price} <span class="price-original">₹${p.originalPrice}</span>`
+      : `₹${p.price}`;
     return `
     <div class="card">
-      <div class="card-media">${media}</div>
+      <div class="card-media" onclick="openProductModal('${p.id}')">${media}</div>
       <div class="card-body">
-        <div class="card-code">Code ${p.id}</div>
-        <div class="card-title">${p.name}</div>
+        <div class="card-code" onclick="openProductModal('${p.id}')">Code ${p.id}</div>
+        <div class="card-title" onclick="openProductModal('${p.id}')">${p.name}</div>
         <div class="card-foot">
           <div>
-            <div class="price">₹${p.price}</div>
+            <div class="price">${priceHtml}</div>
             <div class="stock-tag">${p.stock > 50 ? 'In stock' : p.stock + ' left'}</div>
           </div>
-          <button class="add-btn" onclick="quickAdd('${p.id}')">+</button>
+          <button class="add-btn" onclick="event.stopPropagation(); quickAdd('${p.id}')">+</button>
         </div>
       </div>
     </div>`;
@@ -149,6 +205,63 @@ function quickAdd(id){
   // Keep cart state in the same localStorage-free, in-memory pattern as the homepage —
   // simplest reliable option here is to send the shopper to the homepage cart flow.
   window.location.href = `index.html?add=${encodeURIComponent(id)}#shop`;
+}
+
+function openProductModal(id){
+  const p = CURRENT_PRODUCTS.find(x => x.id === id);
+  if (!p) return;
+  const images = (p.images && p.images.length) ? p.images : (p.image ? [p.image] : []);
+  const mainImage = images.length ? `<img src="${images[0]}" alt="${p.name}" id="pm-main-img">` : sockSVG();
+  const thumbsHtml = images.length > 1
+    ? `<div class="pm-thumbs">${images.map((src, i) =>
+        `<img src="${src}" class="${i === 0 ? 'active' : ''}" onclick="switchModalImage(this, '${src}')">`
+      ).join('')}</div>`
+    : '';
+  const priceHtml = (p.originalPrice && p.originalPrice > p.price)
+    ? `₹${p.price} <span class="price-original">₹${p.originalPrice}</span>`
+    : `₹${p.price}`;
+  let specRows = '';
+  if (p.specification && typeof p.specification === 'object'){
+    const labels = {
+      fabric: 'Fabric', cushioning: 'Cushioning', cuffStyle: 'Cuff Style', archSupport: 'Arch Support',
+      countryOfOrigin: 'Country of Origin', weight: 'Weight', sockLength: 'Sock Length', packQuantity: 'Pack Quantity'
+    };
+    specRows = Object.keys(labels)
+      .filter(k => p.specification[k])
+      .map(k => `<tr><td>${labels[k]}</td><td>${p.specification[k]}</td></tr>`)
+      .join('');
+  }
+  document.getElementById('product-modal-content').innerHTML = `
+    <div class="pm-grid">
+      <div>
+        <div class="pm-media">${mainImage}</div>
+        ${thumbsHtml}
+      </div>
+      <div>
+        <div class="pm-code">Code ${p.id}${p.colors ? ' · ' + p.colors : ''}</div>
+        <div class="pm-title">${p.name}</div>
+        <div class="pm-price">${priceHtml}</div>
+        <div class="pm-stock">${p.stock > 50 ? 'In stock' : p.stock > 0 ? p.stock + ' left in stock' : 'Out of stock'}</div>
+        <button class="pm-add-btn" onclick="quickAdd('${p.id}')">Add to Cart</button>
+        ${p.description ? `<div class="pm-section"><h4>Description</h4><p>${p.description}</p></div>` : ''}
+        ${specRows ? `<div class="pm-section"><h4>Specification</h4><table class="pm-spec-table">${specRows}</table></div>` : ''}
+        ${p.careInstructions ? `<div class="pm-section"><h4>Care Instructions</h4><p>${p.careInstructions}</p></div>` : ''}
+      </div>
+    </div>
+  `;
+  document.getElementById('product-overlay').style.display = 'block';
+  document.getElementById('product-modal').classList.add('open');
+}
+
+function switchModalImage(el, src){
+  document.getElementById('pm-main-img').src = src;
+  document.querySelectorAll('.pm-thumbs img').forEach(img => img.classList.remove('active'));
+  el.classList.add('active');
+}
+
+function closeProductModal(){
+  document.getElementById('product-overlay').style.display = 'none';
+  document.getElementById('product-modal').classList.remove('open');
 }
 
 async function init(){
