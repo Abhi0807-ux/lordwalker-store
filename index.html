@@ -482,13 +482,16 @@ fbq('track', 'PageView');
   }
   @media(max-width:600px){
     .site-footer{padding:40px 20px 24px;}
-    .footer-grid{grid-template-columns:1fr; gap:0;}
-    .footer-col{padding-bottom:22px; margin-bottom:22px; border-bottom:1px solid rgba(255,255,255,0.1);}
-    .footer-col:last-child{border-bottom:none; margin-bottom:0; padding-bottom:0;}
-    .footer-col h4{margin-bottom:12px;}
-    .footer-col a{margin-bottom:8px;}
-    .footer-address{margin-bottom:14px; line-height:1.75;}
-    .footer-contact-line{margin-bottom:12px;}
+    .footer-grid{grid-template-columns:1fr 1fr; gap:24px 20px;}
+    .footer-col{padding-bottom:20px;}
+    .footer-col:nth-child(1), .footer-col:nth-child(2){
+      margin-bottom:20px; border-bottom:1px solid rgba(255,255,255,0.1);
+    }
+    .footer-col:nth-child(3), .footer-col:nth-child(4){padding-bottom:0;}
+    .footer-col h4{margin-bottom:12px; font-size:11px;}
+    .footer-col a{margin-bottom:8px; font-size:12.5px;}
+    .footer-address{margin-bottom:14px; line-height:1.7; font-size:12.5px;}
+    .footer-contact-line{margin-bottom:12px; font-size:12.5px;}
     .footer-newsletter{flex-direction:column; align-items:flex-start; gap:14px;}
     .footer-newsletter input{width:100%;}
     .footer-social{width:100%; justify-content:flex-start;}
@@ -1103,9 +1106,9 @@ fbq('track', 'PageView');
   <div class="footer-grid wrap">
     <div class="footer-col">
       <h4>Shop by Category</h4>
-      <a href="#shop">Shop by Purpose</a>
-      <a href="#shop">Shop by Length</a>
-      <a href="#shop">Shop by Wearer</a>
+      <a href="shop.html#purpose-filters">Shop by Purpose</a>
+      <a href="shop.html#socktype-filters">Shop by Length</a>
+      <a href="shop.html#wearer-filters">Shop by Wearer</a>
     </div>
     <div class="footer-col">
       <h4>Quick Links</h4>
