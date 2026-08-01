@@ -4,9 +4,51 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Lord Walker — Premium Socks, No Second Thoughts</title>
+<meta name="description" content="Premium socks for men, women, and kids — crafted since 1994, now in India. Shop crew, ankle, and no-show socks for office, everyday, sports, and wellness. Free shipping over ₹499.">
+<meta name="keywords" content="premium socks India, men's socks, women's socks, kids socks, office socks, cotton socks, gifting socks, Lord Walker">
+<link rel="canonical" href="https://www.lordwalkerbybrham.com/">
+
+<!-- Open Graph (Facebook, WhatsApp, LinkedIn link previews) -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="Lord Walker — Premium Socks, No Second Thoughts">
+<meta property="og:description" content="Premium socks for men, women, and kids — crafted since 1994, now in India. Free shipping over ₹499.">
+<meta property="og:image" content="https://www.lordwalkerbybrham.com/lord-walker-logo.jpg">
+<meta property="og:url" content="https://www.lordwalkerbybrham.com/">
+<meta property="og:site_name" content="Lord Walker by Brahm">
+
+<!-- Twitter / X card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Lord Walker — Premium Socks, No Second Thoughts">
+<meta name="twitter:description" content="Premium socks for men, women, and kids — crafted since 1994, now in India.">
+<meta name="twitter:image" content="https://www.lordwalkerbybrham.com/lord-walker-logo.jpg">
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+
+<!-- Structured data — helps Google show rich results (brand, logo, contact info) -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ClothingStore",
+  "name": "Lord Walker by Brahm",
+  "url": "https://www.lordwalkerbybrham.com/",
+  "logo": "https://www.lordwalkerbybrham.com/lord-walker-logo.jpg",
+  "image": "https://www.lordwalkerbybrham.com/lord-walker-logo.jpg",
+  "description": "Premium socks for men, women, and kids, crafted since 1994.",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "A-1/2, GIDC Industrial Estate, Kabilpore",
+    "addressLocality": "Navsari",
+    "addressRegion": "Gujarat",
+    "postalCode": "396424",
+    "addressCountry": "IN"
+  },
+  "telephone": "+91-7878325805",
+  "email": "shop@lordwalkerbybrham.com",
+  "sameAs": []
+}
+</script>
 
 <!-- Meta Pixel — replace 2281860309286532 with the real ID from Meta Events Manager -->
 <script>
@@ -717,6 +759,19 @@ fbq('track', 'PageView');
 
   body.lw-locked{overflow:hidden;}
 
+  /* Branded toast — replaces jarring native alert() popups for low-stakes messages */
+  .lw-toast{
+    position:fixed; left:50%; bottom:24px; transform:translate(-50%, 20px);
+    background:var(--ink); color:var(--paper); padding:13px 24px; border-radius:999px;
+    font-size:13.5px; font-weight:600; box-shadow:0 12px 30px rgba(21,22,28,0.3);
+    opacity:0; pointer-events:none; transition:opacity .3s ease, transform .3s ease; z-index:200;
+    max-width:88vw; text-align:center;
+  }
+  .lw-toast.show{opacity:1; transform:translate(-50%, 0);}
+  @media(max-width:720px){
+    .lw-toast{bottom:78px;} /* clear the fixed bottom tab bar on mobile */
+  }
+
   /* Bottom mobile tab bar — hidden on desktop, fixed on mobile */
   .lw-bottom-nav{
     display:none; align-items:center;
@@ -1163,7 +1218,7 @@ fbq('track', 'PageView');
       <div class="contact-detail">🌐 www.lordwalkerbybrham.com</div>
       <div class="contact-detail">📍 India</div>
     </div>
-    <form class="contact-form" onsubmit="event.preventDefault(); alert('Thanks — we\'ll get back to you soon.'); this.reset();">
+    <form class="contact-form" onsubmit="event.preventDefault(); showToast('Thanks — we\'ll get back to you soon.'); this.reset();">
       <input type="text" placeholder="Your name" required>
       <input type="email" placeholder="Your email" required>
       <textarea rows="4" placeholder="Your message" required></textarea>
@@ -1206,7 +1261,7 @@ fbq('track', 'PageView');
 
   <div class="footer-newsletter wrap">
     <p>Subscribe for exclusive offers and updates!</p>
-    <form onsubmit="event.preventDefault(); alert('Thanks for subscribing!'); this.reset();">
+    <form onsubmit="event.preventDefault(); showToast('Thanks for subscribing!'); this.reset();">
       <input type="email" placeholder="Your e-mail address" required>
       <button type="submit">Subscribe →</button>
     </form>
@@ -1615,6 +1670,17 @@ function showDrawerTab(idx){
 
 /* ===== Desktop inline search bar ===== */
 /* ===== About Us — mobile "Show more" toggle ===== */
+/* ===== Branded toast — for quick, non-blocking confirmations ===== */
+let _toastTimer = null;
+function showToast(message, duration){
+  const el = document.getElementById('lw-toast');
+  if (!el) return;
+  el.textContent = message;
+  el.classList.add('show');
+  clearTimeout(_toastTimer);
+  _toastTimer = setTimeout(() => { el.classList.remove('show'); }, duration || 2400);
+}
+
 function toggleAboutMore(btn){
   const panel = document.querySelector('#about-copy .about-copy__more');
   if (!panel) return;
@@ -1825,6 +1891,8 @@ initReveal();
 startAutoScroll('reviews-grid', 0.4);
 </script>
 
+<div id="lw-toast" class="lw-toast"></div>
+
 <!-- Bottom mobile tab bar -->
 <nav class="lw-bottom-nav" aria-label="Bottom navigation">
   <a href="#" class="lw-bnav-item" onclick="event.preventDefault(); window.scrollTo({top:0, behavior:'smooth'});">
@@ -1835,11 +1903,11 @@ startAutoScroll('reviews-grid', 0.4);
     <svg viewBox="0 0 24 24" width="21" height="21" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="4" width="7" height="7" rx="1"/><rect x="14" y="4" width="7" height="7" rx="1"/><rect x="3" y="15" width="7" height="7" rx="1"/><rect x="14" y="15" width="7" height="7" rx="1"/></svg>
     <span>Shop</span>
   </a>
-  <a href="#" class="lw-bnav-item" onclick="event.preventDefault(); alert('Wishlist is coming soon!');">
+  <a href="#" class="lw-bnav-item" onclick="event.preventDefault(); showToast('Wishlist is coming soon!');">
     <svg viewBox="0 0 24 24" width="21" height="21" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 20.5s-7.5-4.6-9.9-9.1C.5 8 2 4.5 5.6 4c2-.3 3.8.7 6.4 3.2C14.6 4.7 16.4 3.7 18.4 4c3.6.5 5.1 4 3.5 7.4C19.5 15.9 12 20.5 12 20.5Z"/></svg>
     <span>Wishlist</span>
   </a>
-  <a href="#" class="lw-bnav-item" onclick="event.preventDefault(); alert('Account login is coming soon!');">
+  <a href="#" class="lw-bnav-item" onclick="event.preventDefault(); showToast('Account login is coming soon!');">
     <svg viewBox="0 0 24 24" width="21" height="21" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="8" r="3.6"/><path d="M4.5 20c1.2-3.6 4.2-5.6 7.5-5.6s6.3 2 7.5 5.6"/></svg>
     <span>Account</span>
   </a>
