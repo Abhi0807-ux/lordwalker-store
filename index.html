@@ -736,18 +736,10 @@ fbq('track', 'PageView');
 
 <section id="shop" class="wrap reveal">
   <div class="shop-head">
-    <h2>The full range</h2>
-    <p>Every pair below is live inventory — priced, stocked, and ready to ship.
+    <h2>Trending Now</h2>
+    <p>What everyone's adding to cart this week.
       <a href="#" onclick="event.preventDefault(); openSizeGuide();" style="text-decoration:underline; color:inherit;">See size guide →</a>
     </p>
-  </div>
-  <div class="grid reveal-stagger" id="product-grid"></div>
-</section>
-
-<section id="trending" class="wrap reveal">
-  <div class="shop-head">
-    <h2>Trending Now</h2>
-    <p>What everyone's adding to cart this week.</p>
   </div>
   <div class="grid reveal-stagger" id="trending-grid"></div>
 </section>
@@ -761,6 +753,7 @@ fbq('track', 'PageView');
 </section>
 
 <section id="why" class="reveal">
+
   <div class="blob" style="width:300px;height:300px;top:20%;left:-140px;background:var(--brass); opacity:0.4;"></div>
   <div class="section-eyebrow">Why Lord Walker</div>
   <h2>The details you feel,<br>not just the ones you see</h2>
@@ -976,7 +969,7 @@ async function loadProducts(){
     const res = await fetch(`${API_BASE}/api/products`);
     PRODUCTS = await res.json();
   }catch(e){
-    document.getElementById('product-grid').innerHTML =
+    document.getElementById('trending-grid').innerHTML =
       '<p style="grid-column:1/-1;text-align:center;color:rgba(21,22,28,0.5);">Could not load products — is the backend running at ' + API_BASE + '?</p>';
     return;
   }
@@ -994,11 +987,10 @@ function sockSVG(hex){
 
 // Curated picks for the homepage sections — swap these IDs any time to feature different products.
 // Curated picks for the homepage sections — swap these IDs any time to feature different products.
-const TRENDING_IDS = ['27177-COMBO-1', '27187-COMBO-3', '27179-COMBO-5', '27144-COMBO-8', '27128-COMBO-9', '27140-COMBO-11', '27103-COMBO-14', '27103-COMBO-15', '27183-COMBO-17', '27181-COMBO-18', '27127-COMBO-19', '27115-COMBO-21', '27357-COMBO-26', '27180-COMBO-27'];
-const NEW_ARRIVAL_IDS = ['27185-COMBO-2', '27184-COMBO-4', '27174-COMBO-6', '27196-COMBO-7', '27141-COMBO-10', '27138-COMBO-12', '27126-COMBO-13', '27139-COMBO-16', '27105-COMBO-20', '27117-COMBO-22', '27116-COMBO-23', '27356-COMBO-24', '27355-COMBO-25', '27358-COMBO-28'];
+const TRENDING_IDS = ['27177-COMBO-1', '27187-COMBO-3', '27179-COMBO-5', '27144-COMBO-8', '27128-COMBO-9'];
+const NEW_ARRIVAL_IDS = ['27185-COMBO-2', '27184-COMBO-4', '27174-COMBO-6', '27196-COMBO-7', '27141-COMBO-10'];
 
 function renderProducts(){
-  renderGrid('product-grid', PRODUCTS);
   renderGrid('trending-grid', PRODUCTS.filter(p => TRENDING_IDS.includes(p.id)));
   renderGrid('new-arrivals-grid', PRODUCTS.filter(p => NEW_ARRIVAL_IDS.includes(p.id)));
   initReveal();
@@ -1244,14 +1236,13 @@ function runSiteSearch(query){
   const q = (query || '').trim().toLowerCase();
   document.getElementById('shop').scrollIntoView({behavior:'smooth'});
   if(!q){
-    renderGrid('product-grid', PRODUCTS);
-    initReveal();
+    renderProducts(); // restore the curated Trending/New Arrivals picks
     return;
   }
   const matches = PRODUCTS.filter(p =>
     p.name.toLowerCase().includes(q) || String(p.id).toLowerCase().includes(q)
   );
-  renderGrid('product-grid', matches);
+  renderGrid('trending-grid', matches);
   initReveal();
 }
 
