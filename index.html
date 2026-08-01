@@ -311,6 +311,16 @@ fbq('track', 'PageView');
   /* GIFTING SECTION */
   #gifting{background:var(--paper); color:var(--ink); padding:64px 32px;}
   .gifting-wrap{max-width:1100px; margin:0 auto; display:grid; grid-template-columns:1fr 1fr; gap:56px; align-items:center;}
+
+  /* ABOUT US — image and copy side by side */
+  .about-grid{display:grid; grid-template-columns:0.85fr 1fr; gap:52px; align-items:start;}
+  .about-grid__media{position:sticky; top:100px; border-radius:20px; overflow:hidden; box-shadow:0 20px 44px rgba(43,39,51,0.12);}
+  .about-grid__media img{width:100%; display:block; object-fit:cover;}
+  .about-grid__copy .desc{margin-bottom:20px;}
+  @media(max-width:900px){
+    .about-grid{grid-template-columns:1fr; gap:32px;}
+    .about-grid__media{position:static; top:auto;}
+  }
   #gifting .section-eyebrow{font-family:'IBM Plex Mono',monospace; font-size:12px; letter-spacing:2px; text-transform:uppercase; color:var(--accent-plum); margin-bottom:16px;}
   #gifting h2{font-family:'Fraunces',serif; font-size:38px; font-weight:600; letter-spacing:-0.5px; margin-bottom:18px; line-height:1.15;}
   #gifting p.desc{font-size:15px; color:rgba(21,22,28,0.6); line-height:1.7; margin-bottom:28px; max-width:440px;}
@@ -825,17 +835,21 @@ fbq('track', 'PageView');
 </section>
 
 <section id="about" class="reveal" style="background:var(--paper); color:var(--ink); padding:64px 32px;">
-  <div class="wrap" style="max-width:760px;">
-    <div class="section-eyebrow" style="color:var(--accent-teal); font-family:'IBM Plex Mono',monospace; font-size:12px; letter-spacing:2px; text-transform:uppercase; margin-bottom:20px; text-align:center;">About Us</div>
-    <div style="border-radius:20px; overflow:hidden; margin-bottom:40px; box-shadow:0 20px 44px rgba(43,39,51,0.12);">
-      <img src="about-us-banner.webp" alt="Lord Walker — Everyday style, built to last" style="width:100%; display:block;">
+  <div class="wrap" style="max-width:1140px;">
+    <div class="section-eyebrow" style="color:var(--accent-teal); font-family:'IBM Plex Mono',monospace; font-size:12px; letter-spacing:2px; text-transform:uppercase; margin-bottom:28px; text-align:center;">About Us</div>
+    <div class="about-grid">
+      <div class="about-grid__media">
+        <img src="about-us-banner.webp" alt="Lord Walker — Everyday style, built to last">
+      </div>
+      <div class="about-grid__copy">
+        <p class="desc" style="max-width:none;">Lord Walker by Brahm is where timeless design, exceptional craftsmanship, and uncompromising comfort come together in every pair.</p>
+        <p class="desc" style="max-width:none;">We believe socks are more than an everyday essential. They are an integral part of how you move, work, travel, perform, and express your personal style. An accessory worn every day deserves the same attention to quality, craftsmanship, and design as every other part of your wardrobe.</p>
+        <p class="desc" style="max-width:none;">Rooted in a manufacturing legacy dating back to 1994, and crafted by Virat Industries Ltd., Lord Walker brings decades of global expertise to the Indian market. Having supplied premium socks to customers across the world for years, we are now bringing the same standards of quality, innovation, and craftsmanship to consumers in India.</p>
+        <p class="desc" style="max-width:none;">Every collection is thoughtfully designed using premium materials, refined construction, and meticulous attention to detail, ensuring lasting comfort, durability, and effortless style. Whether for work, travel, sport, celebrations, or everyday wear, Lord Walker offers a premium solution for every step of life.</p>
+        <p class="desc" style="max-width:none; margin-bottom:28px;">More than creating products, we are creating an experience — one that transforms socks from an afterthought into an essential accessory. Our focus is on building lasting trust through consistent quality, timeless design, and products people choose to wear every day.</p>
+        <p style="font-family:'Fraunces',serif; font-size:18px; font-weight:600; color:var(--accent-plum); letter-spacing:-0.3px; line-height:1.5;">Built on legacy. Crafted with precision. Designed for every step.</p>
+      </div>
     </div>
-    <p class="desc" style="max-width:none;">Lord Walker by Brahm is where timeless design, exceptional craftsmanship, and uncompromising comfort come together in every pair.</p>
-    <p class="desc" style="max-width:none;">We believe socks are more than an everyday essential. They are an integral part of how you move, work, travel, perform, and express your personal style. An accessory worn every day deserves the same attention to quality, craftsmanship, and design as every other part of your wardrobe.</p>
-    <p class="desc" style="max-width:none;">Rooted in a manufacturing legacy dating back to 1994, and crafted by Virat Industries Ltd., Lord Walker brings decades of global expertise to the Indian market. Having supplied premium socks to customers across the world for years, we are now bringing the same standards of quality, innovation, and craftsmanship to consumers in India.</p>
-    <p class="desc" style="max-width:none;">Every collection is thoughtfully designed using premium materials, refined construction, and meticulous attention to detail, ensuring lasting comfort, durability, and effortless style. Whether for work, travel, sport, celebrations, or everyday wear, Lord Walker offers a premium solution for every step of life.</p>
-    <p class="desc" style="max-width:none; margin-bottom:36px;">More than creating products, we are creating an experience — one that transforms socks from an afterthought into an essential accessory. Our focus is on building lasting trust through consistent quality, timeless design, and products people choose to wear every day.</p>
-    <p style="font-family:'Fraunces',serif; font-size:19px; font-weight:600; text-align:center; color:var(--accent-plum); letter-spacing:-0.3px; line-height:1.5;">Built on legacy. Crafted with precision. Designed for every step.</p>
   </div>
 </section>
 
