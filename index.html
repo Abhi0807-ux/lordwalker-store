@@ -240,14 +240,17 @@ fbq('track', 'PageView');
   }
 
   /* SHOP BY PURPOSE — proper cards (rounded, gapped, shadowed), unlike the full-bleed wearer tiles */
-  .purpose-grid{display:grid; grid-template-columns:repeat(auto-fit, minmax(190px,1fr)); gap:16px;}
+  .purpose-grid{display:grid; grid-template-columns:repeat(auto-fit, minmax(190px,1fr)); gap:16px; margin:0 -32px;}
+  @media(max-width:720px){
+    .purpose-grid{margin:0 -18px;}
+  }
   .purpose-tile{
     position:relative; display:block; overflow:hidden; border-radius:18px; height:380px; text-decoration:none;
     box-shadow:0 14px 32px rgba(43,39,51,0.12);
   }
   .purpose-tile img{width:100%; height:100%; object-fit:cover; display:block; transition:transform .5s ease;}
   .purpose-tile:hover img{transform:scale(1.06);}
-  .purpose-tile__scrim{position:absolute; inset:0; background:linear-gradient(to top, rgba(20,16,10,0.62) 0%, rgba(20,16,10,0.05) 55%);}
+  .purpose-tile__scrim{position:absolute; inset:0; background:linear-gradient(to top, rgba(10,8,6,0.94) 0%, rgba(10,8,6,0.55) 30%, rgba(10,8,6,0.05) 58%);}
   .purpose-tile__label{
     position:absolute; left:18px; bottom:60px; font-family:'Fraunces',serif; font-size:18px; font-weight:600;
     color:#fff; line-height:1.25; text-shadow:0 2px 8px rgba(0,0,0,0.3);
@@ -264,7 +267,7 @@ fbq('track', 'PageView');
   @media(max-width:600px){
     .purpose-grid{
       display:flex; flex-wrap:nowrap; overflow-x:auto; scroll-snap-type:x mandatory;
-      -webkit-overflow-scrolling:touch; gap:12px; padding-bottom:8px;
+      -webkit-overflow-scrolling:touch; gap:10px; margin:0 -18px; padding:0 0 8px;
     }
     .purpose-tile{flex:0 0 62vw; height:260px; scroll-snap-align:start;}
     .purpose-tile__label{font-size:16px; left:14px; bottom:50px;}
@@ -395,10 +398,14 @@ fbq('track', 'PageView');
   .grid--scroll{
     display:flex; flex-wrap:nowrap; overflow-x:auto; scroll-snap-type:x mandatory;
     -webkit-overflow-scrolling:touch; padding-bottom:10px; scrollbar-width:thin;
+    margin:0 -32px; padding-left:0; padding-right:0;
   }
   .grid--scroll::-webkit-scrollbar{height:6px;}
   .grid--scroll::-webkit-scrollbar-thumb{background:rgba(43,39,51,0.18); border-radius:999px;}
   .grid--scroll .card{flex:0 0 200px; scroll-snap-align:start;}
+  @media(max-width:720px){
+    .grid--scroll{margin:0 -18px;}
+  }
   @media(max-width:600px){
     .grid--scroll .card{flex:0 0 150px;}
   }
