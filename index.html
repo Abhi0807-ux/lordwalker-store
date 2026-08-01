@@ -210,14 +210,49 @@ fbq('track', 'PageView');
   .shop-head h2.section-h2-compact{font-size:26px;}
   @media(max-width:600px){.shop-head h2.section-h2-compact{font-size:21px;}}
 
-  /* "Comfort, every step" banner between Trending and About Us — full-bleed, edge to edge */
+  /* SHOP BY WEARER — full-bleed 3-tile visual section */
+  .wearer-grid{display:grid; grid-template-columns:1fr 1fr 1fr;}
+  .wearer-tile{position:relative; display:block; overflow:hidden; height:460px; text-decoration:none;}
+  .wearer-tile img{width:100%; height:100%; object-fit:cover; display:block; transition:transform .5s ease;}
+  .wearer-tile:hover img{transform:scale(1.05);}
+  .wearer-tile__scrim{position:absolute; inset:0; background:linear-gradient(to top, rgba(20,16,10,0.55) 0%, rgba(20,16,10,0.05) 55%);}
+  .wearer-tile__label{position:absolute; left:24px; bottom:70px; font-family:'Fraunces',serif; font-size:26px; font-weight:600; color:#fff; text-shadow:0 2px 10px rgba(0,0,0,0.3);}
+  .wearer-tile__cta{
+    position:absolute; left:24px; bottom:24px; display:inline-block; padding:9px 18px;
+    border:1px solid rgba(255,255,255,0.85); color:#fff; font-size:11.5px; font-weight:700;
+    letter-spacing:0.5px; text-transform:uppercase; border-radius:999px; backdrop-filter:blur(2px);
+  }
+  @media(max-width:900px){
+    .wearer-tile{height:340px;}
+    .wearer-tile__label{font-size:21px; left:18px; bottom:58px;}
+    .wearer-tile__cta{left:18px; bottom:18px;}
+  }
+  @media(max-width:600px){
+    .wearer-grid{grid-template-columns:1fr; }
+    .wearer-tile{height:280px;}
+  }
+
+
   #comfort-banner{margin:8px 0;}
+  .comfort-banner-wrap{position:relative; overflow:hidden;}
   .comfort-banner-img{width:100%; display:block; object-fit:cover; height:380px;}
+  .comfort-banner-wrap::after{
+    content:''; position:absolute; inset:0;
+    background:linear-gradient(to top, rgba(20,16,10,0.55) 0%, rgba(20,16,10,0.15) 35%, rgba(20,16,10,0) 60%);
+    pointer-events:none;
+  }
+  .comfort-banner-caption{
+    position:absolute; left:0; right:0; bottom:28px; text-align:center; z-index:2;
+    font-family:'Fraunces',serif; font-weight:600; color:#fff; font-size:clamp(24px, 3.2vw, 40px);
+    letter-spacing:-0.3px; text-shadow:0 2px 14px rgba(0,0,0,0.35);
+  }
   @media(max-width:900px){
     .comfort-banner-img{height:260px;}
+    .comfort-banner-caption{bottom:20px;}
   }
   @media(max-width:600px){
     .comfort-banner-img{height:190px;}
+    .comfort-banner-caption{bottom:14px; font-size:22px;}
   }
 
   /* Why Lord Walker — intro copy above the feature cards */
@@ -345,13 +380,52 @@ fbq('track', 'PageView');
   }
   .empty-msg{text-align:center; padding:60px 20px; color:rgba(21,22,28,0.45); font-size:14px;}
 
-  footer{background:var(--paper); color:var(--ink); padding:0 32px 48px; text-align:center;}
-  footer .line{height:1px; background:rgba(21,22,28,0.1); margin-bottom:36px;}
-  footer p{font-size:13px; color:rgba(21,22,28,0.5);}
-  .footer-policy-links{display:flex; flex-wrap:wrap; justify-content:center; gap:8px 22px; margin-bottom:20px;}
-  .footer-policy-links a{font-size:12.5px; font-weight:600; color:rgba(21,22,28,0.55); transition:color .2s ease;}
-  .footer-policy-links a:hover{color:var(--accent-plum);}
-  @media(max-width:600px){.footer-policy-links{gap:6px 16px;}}
+  /* FOOTER — dark, multi-column, matches the reference design */
+  .site-footer{background:var(--ink); color:rgba(255,255,255,0.75); padding:56px 32px 28px;}
+  .footer-grid{display:grid; grid-template-columns:repeat(4, 1fr); gap:36px; margin-bottom:44px;}
+  .footer-col h4{font-family:'IBM Plex Mono',monospace; font-size:12px; letter-spacing:1.5px; text-transform:uppercase; color:#fff; margin-bottom:16px; font-weight:600;}
+  .footer-col a{display:block; font-size:13.5px; color:rgba(255,255,255,0.65); margin-bottom:10px; transition:color .2s ease;}
+  .footer-col a:hover{color:var(--brass);}
+  .footer-address, .footer-contact-line{font-size:13.5px; color:rgba(255,255,255,0.65); margin-bottom:10px; line-height:1.6;}
+  .footer-address strong{color:#fff;}
+  .footer-contact-line a{color:rgba(255,255,255,0.75);}
+  .footer-contact-line a:hover{color:var(--brass);}
+
+  .footer-newsletter{display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:20px; padding:24px 0; border-top:1px solid rgba(255,255,255,0.12);}
+  .footer-newsletter p{font-size:13.5px; color:rgba(255,255,255,0.7); margin:0;}
+  .footer-newsletter form{display:flex; gap:0; border:1px solid rgba(255,255,255,0.25); border-radius:8px; overflow:hidden;}
+  .footer-newsletter input{background:transparent; border:none; padding:10px 14px; color:#fff; font-size:13px; width:200px;}
+  .footer-newsletter input::placeholder{color:rgba(255,255,255,0.45);}
+  .footer-newsletter input:focus{outline:none;}
+  .footer-newsletter button{background:var(--accent-gold); color:var(--ink); border:none; padding:10px 16px; font-weight:700; font-size:12.5px; cursor:pointer;}
+  .footer-social{display:flex; gap:10px;}
+  .footer-social a{
+    width:34px; height:34px; border-radius:50%; border:1px solid rgba(255,255,255,0.25); color:#fff;
+    display:flex; align-items:center; justify-content:center; font-size:11px; font-weight:700; text-decoration:none;
+  }
+  .footer-social a:hover{border-color:var(--brass); color:var(--brass);}
+
+  .footer-payments{display:flex; flex-wrap:wrap; gap:10px; padding:20px 0; border-top:1px solid rgba(255,255,255,0.12);}
+  .footer-payments span{
+    font-size:11px; font-weight:700; letter-spacing:0.3px; color:rgba(255,255,255,0.6);
+    border:1px solid rgba(255,255,255,0.2); border-radius:6px; padding:5px 10px;
+  }
+
+  .footer-policy-links{display:flex; flex-wrap:wrap; justify-content:center; gap:8px 22px; padding:20px 0 8px; border-top:1px solid rgba(255,255,255,0.12);}
+  .footer-policy-links a{font-size:12.5px; font-weight:600; color:rgba(255,255,255,0.55); transition:color .2s ease;}
+  .footer-policy-links a:hover{color:var(--brass);}
+  .footer-copyright{text-align:center; font-size:12px; color:rgba(255,255,255,0.4); margin-top:8px;}
+
+  @media(max-width:780px){
+    .footer-grid{grid-template-columns:1fr 1fr; gap:28px;}
+  }
+  @media(max-width:600px){
+    .site-footer{padding:40px 20px 24px;}
+    .footer-grid{grid-template-columns:1fr; gap:26px;}
+    .footer-newsletter{flex-direction:column; align-items:flex-start;}
+    .footer-newsletter input{width:100%;}
+    .footer-policy-links{gap:6px 16px;}
+  }
 
   /* WHY SECTION */
 
@@ -811,6 +885,29 @@ fbq('track', 'PageView');
   <div class="category-grid reveal-stagger" id="category-grid"></div>
 </section>
 
+<section id="wearer-tiles" class="reveal">
+  <div class="wearer-grid">
+    <a href="#shop" class="wearer-tile">
+      <img src="wearer-men.jpg" alt="My Lord — Men's socks">
+      <div class="wearer-tile__scrim"></div>
+      <div class="wearer-tile__label">My Lord</div>
+      <span class="wearer-tile__cta">Shop Now</span>
+    </a>
+    <a href="#shop" class="wearer-tile">
+      <img src="wearer-women.jpg" alt="Lady Walker — Women's socks">
+      <div class="wearer-tile__scrim"></div>
+      <div class="wearer-tile__label">Lady Walker</div>
+      <span class="wearer-tile__cta">Shop Now</span>
+    </a>
+    <a href="#shop" class="wearer-tile">
+      <img src="wearer-kids.jpg" alt="Li'l Walker — Kids' socks">
+      <div class="wearer-tile__scrim"></div>
+      <div class="wearer-tile__label">Li'l Walker</div>
+      <span class="wearer-tile__cta">Shop Now</span>
+    </a>
+  </div>
+</section>
+
 <section id="shop" class="wrap reveal">
   <div class="shop-head">
     <h2 class="section-h2-compact">Trending Now</h2>
@@ -822,7 +919,10 @@ fbq('track', 'PageView');
 </section>
 
 <section id="comfort-banner" class="reveal">
-  <img src="comfort-every-step-banner.jpg" alt="Comfort, every step — Lord Walker" class="comfort-banner-img">
+  <div class="comfort-banner-wrap">
+    <img src="comfort-every-step-banner.jpg" alt="Comfort, every step — Lord Walker" class="comfort-banner-img">
+    <div class="comfort-banner-caption">Comfort, every step</div>
+  </div>
 </section>
 
 <section id="about" class="reveal" style="background:var(--paper); color:var(--ink); padding:64px 0;">
@@ -960,8 +1060,55 @@ fbq('track', 'PageView');
   </div>
 </section>
 
-<footer>
-  <div class="wrap"><div class="line"></div></div>
+<footer class="site-footer">
+  <div class="footer-grid wrap">
+    <div class="footer-col">
+      <h4>Shop by Category</h4>
+      <a href="#shop">Shop by Purpose</a>
+      <a href="#shop">Shop by Length</a>
+      <a href="#shop">Shop by Wearer</a>
+    </div>
+    <div class="footer-col">
+      <h4>Quick Links</h4>
+      <a href="index.html#about">About Us</a>
+      <a href="index.html#contact">Contact Us</a>
+      <a href="index.html#blog">Blogs</a>
+    </div>
+    <div class="footer-col">
+      <h4>Info</h4>
+      <a href="privacy-policy.html">Privacy Policy</a>
+      <a href="shipping-policy.html">Shipping Policy</a>
+      <a href="return-refund-policy.html">Return &amp; Refund</a>
+      <a href="terms-and-conditions.html">Terms &amp; Conditions</a>
+      <a href="pricing-policy.html">Pricing Policy</a>
+    </div>
+    <div class="footer-col">
+      <h4>Contact Us</h4>
+      <p class="footer-address"><strong>Registered office:</strong><br>
+        A-1/2, GIDC Industrial Estate, Kabilpore,<br>
+        Navsari, Gujarat 396424, India</p>
+      <p class="footer-contact-line">📞 <a href="tel:+917878325805">+91-7878325805</a></p>
+      <p class="footer-contact-line">✉️ <a href="mailto:shop@lordwalkerbybrham.com">shop@lordwalkerbybrham.com</a></p>
+    </div>
+  </div>
+
+  <div class="footer-newsletter wrap">
+    <p>Subscribe for exclusive offers and updates!</p>
+    <form onsubmit="event.preventDefault(); alert('Thanks for subscribing!'); this.reset();">
+      <input type="email" placeholder="Your e-mail address" required>
+      <button type="submit">Subscribe →</button>
+    </form>
+    <div class="footer-social">
+      <a href="#" aria-label="Facebook">FB</a>
+      <a href="#" aria-label="Twitter / X">X</a>
+      <a href="https://www.instagram.com/lordwalker_/" target="_blank" rel="noopener" aria-label="Instagram">IG</a>
+    </div>
+  </div>
+
+  <div class="footer-payments wrap">
+    <span>PhonePe</span><span>G Pay</span><span>Paytm</span><span>UPI</span><span>RuPay</span><span>Mastercard</span><span>Visa</span>
+  </div>
+
   <div class="wrap footer-policy-links">
     <a href="privacy-policy.html">Privacy Policy</a>
     <a href="terms-and-conditions.html">Terms &amp; Conditions</a>
@@ -969,7 +1116,7 @@ fbq('track', 'PageView');
     <a href="shipping-policy.html">Shipping Policy</a>
     <a href="pricing-policy.html">Pricing Policy</a>
   </div>
-  <p>Lord Walker by Brahm · www.lordwalkerbybrham.com · Built for people who'd rather think about anything else but their socks</p>
+  <p class="footer-copyright">© 2026 Lord Walker by Brahm · www.lordwalkerbybrham.com</p>
 </footer>
 
 <div id="size-overlay" onclick="closeSizeGuide()" style="position:fixed; inset:0; background:rgba(21,22,28,0.5); display:none; z-index:98;"></div>
