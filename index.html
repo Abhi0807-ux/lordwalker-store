@@ -239,6 +239,38 @@ fbq('track', 'PageView');
     .feature-split__media img{min-height:170px;}
   }
 
+  /* SHOP BY PURPOSE — proper cards (rounded, gapped, shadowed), unlike the full-bleed wearer tiles */
+  .purpose-grid{display:grid; grid-template-columns:repeat(auto-fit, minmax(190px,1fr)); gap:16px;}
+  .purpose-tile{
+    position:relative; display:block; overflow:hidden; border-radius:18px; height:380px; text-decoration:none;
+    box-shadow:0 14px 32px rgba(43,39,51,0.12);
+  }
+  .purpose-tile img{width:100%; height:100%; object-fit:cover; display:block; transition:transform .5s ease;}
+  .purpose-tile:hover img{transform:scale(1.06);}
+  .purpose-tile__scrim{position:absolute; inset:0; background:linear-gradient(to top, rgba(20,16,10,0.62) 0%, rgba(20,16,10,0.05) 55%);}
+  .purpose-tile__label{
+    position:absolute; left:18px; bottom:60px; font-family:'Fraunces',serif; font-size:18px; font-weight:600;
+    color:#fff; line-height:1.25; text-shadow:0 2px 8px rgba(0,0,0,0.3);
+  }
+  .purpose-tile__cta{
+    position:absolute; left:18px; bottom:18px; display:inline-block; padding:8px 16px;
+    border:1px solid rgba(255,255,255,0.85); color:#fff; font-size:11px; font-weight:700;
+    letter-spacing:0.4px; text-transform:uppercase; border-radius:999px; backdrop-filter:blur(2px);
+  }
+  @media(max-width:900px){
+    .purpose-tile{height:300px;}
+  }
+  /* Horizontal scroll on mobile — keeps 5 category cards from stacking into a long column */
+  @media(max-width:600px){
+    .purpose-grid{
+      display:flex; flex-wrap:nowrap; overflow-x:auto; scroll-snap-type:x mandatory;
+      -webkit-overflow-scrolling:touch; gap:12px; padding-bottom:8px;
+    }
+    .purpose-tile{flex:0 0 62vw; height:260px; scroll-snap-align:start;}
+    .purpose-tile__label{font-size:16px; left:14px; bottom:50px;}
+    .purpose-tile__cta{left:14px; bottom:14px; padding:6px 13px; font-size:10px;}
+  }
+
   /* SHOP BY WEARER — full-bleed 3-tile visual section */
   #wearer-tiles{margin-top:32px;}
   .wearer-grid{display:grid; grid-template-columns:1fr 1fr 1fr;}
@@ -935,7 +967,38 @@ fbq('track', 'PageView');
     <h2>Shop by Purpose</h2>
     <p>Find the right pair for wherever your day takes you.</p>
   </div>
-  <div class="category-grid reveal-stagger" id="category-grid"></div>
+  <div class="purpose-grid">
+    <a href="shop.html?purpose=formal" class="purpose-tile">
+      <img src="purpose-office.jpg" alt="Office & Corporate">
+      <div class="purpose-tile__scrim"></div>
+      <div class="purpose-tile__label">Office &amp; Corporate</div>
+      <span class="purpose-tile__cta">Shop Now</span>
+    </a>
+    <a href="shop.html?purpose=casual" class="purpose-tile">
+      <img src="purpose-everyday.jpg" alt="Everyday">
+      <div class="purpose-tile__scrim"></div>
+      <div class="purpose-tile__label">Everyday</div>
+      <span class="purpose-tile__cta">Shop Now</span>
+    </a>
+    <a href="shop.html?purpose=active" class="purpose-tile">
+      <img src="purpose-active.jpg" alt="Sports & Active">
+      <div class="purpose-tile__scrim"></div>
+      <div class="purpose-tile__label">Sports &amp; Active</div>
+      <span class="purpose-tile__cta">Shop Now</span>
+    </a>
+    <a href="shop.html?purpose=wellness" class="purpose-tile">
+      <img src="purpose-wellness.jpg" alt="Wellness">
+      <div class="purpose-tile__scrim"></div>
+      <div class="purpose-tile__label">Wellness</div>
+      <span class="purpose-tile__cta">Explore Now</span>
+    </a>
+    <a href="gifting.html" class="purpose-tile">
+      <img src="purpose-gifting.jpg" alt="Gifting">
+      <div class="purpose-tile__scrim"></div>
+      <div class="purpose-tile__label">Gifting</div>
+      <span class="purpose-tile__cta">Shop Now</span>
+    </a>
+  </div>
 </section>
 
 <section id="shop" class="wrap reveal">
