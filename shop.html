@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shop — Lord Walker</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#2b2733; --ink-soft:#fdfbf9; --paper:#fbf3ef; --paper-dim:#f3e6df;
+    --line:rgba(43,39,51,0.10); --accent-teal:#5b9c93; --accent-plum:#9b6fa0; --accent-gold:#bb8a2e;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{background:var(--paper); color:var(--ink); font-family:'Inter',sans-serif; line-height:1.6; -webkit-font-smoothing:antialiased;}
+  a{color:var(--accent-plum); text-decoration:none;}
+  .wrap{max-width:1180px; margin:0 auto; padding:0 32px;}
+
+  header{padding:20px 0; border-bottom:1px solid var(--line); background:rgba(251,243,239,0.9);}
+  header .wrap{display:flex; align-items:center; justify-content:space-between;}
+  .logo-link{font-family:'Fraunces',serif; font-weight:600; font-size:18px; color:var(--ink);}
+  .back-link{font-size:13px; font-weight:600;}
+  .back-link:hover{text-decoration:underline;}
+
+  main{padding:40px 0 80px;}
+  .shop-title-row{display:flex; justify-content:space-between; align-items:flex-end; flex-wrap:wrap; gap:14px; margin-bottom:8px;}
+  .eyebrow{font-family:'IBM Plex Mono',monospace; font-size:12px; letter-spacing:2px; text-transform:uppercase; color:var(--accent-teal); margin-bottom:8px;}
+  h1{font-family:'Fraunces',serif; font-size:clamp(26px,4vw,38px); font-weight:600; letter-spacing:-0.5px;}
+  .result-count{font-size:13px; color:rgba(21,22,28,0.5);}
+
+  .filter-row{display:flex; flex-wrap:wrap; gap:8px; margin:20px 0 32px;}
+  .filter-pill{
+    padding:8px 16px; border-radius:999px; border:1px solid var(--line); font-size:13px; font-weight:600;
+    color:var(--ink); background:#fff; transition:all .2s ease;
+  }
+  .filter-pill.active{background:var(--ink); color:var(--paper); border-color:var(--ink);}
+  .filter-pill:hover{border-color:var(--accent-plum);}
+
+  .grid{display:grid; grid-template-columns:repeat(auto-fill, minmax(190px,1fr)); gap:18px;}
+  .card{
+    background:#fff; border-radius:14px; overflow:hidden; border:1px solid rgba(21,22,28,0.08);
+    display:flex; flex-direction:column; transition:transform .25s ease, box-shadow .25s ease;
+  }
+  .card:hover{transform:translateY(-4px); box-shadow:0 16px 32px rgba(21,22,28,0.10);}
+  .card-media{height:150px; display:flex; align-items:center; justify-content:center; font-size:36px; background:var(--paper-dim); position:relative;}
+  .card-media img{width:100%; height:100%; object-fit:cover;}
+  .card-body{padding:14px; display:flex; flex-direction:column; gap:6px; flex:1;}
+  .card-code{font-family:'IBM Plex Mono',monospace; font-size:9px; letter-spacing:1px; text-transform:uppercase; color:rgba(21,22,28,0.4);}
+  .card-title{font-size:13px; font-weight:600; line-height:1.35; flex:1;}
+  .card-foot{display:flex; align-items:center; justify-content:space-between; margin-top:auto;}
+  .price{font-family:'Fraunces',serif; font-size:17px; font-weight:600;}
+  .add-btn{background:var(--ink); color:var(--paper); border:none; border-radius:999px; width:30px; height:30px; font-size:16px; cursor:pointer; line-height:1;}
+  .add-btn:hover{background:var(--accent-plum);}
+  .stock-tag{font-size:9.5px; color:rgba(21,22,28,0.4); font-family:'IBM Plex Mono',monospace;}
+  .empty-state{grid-column:1/-1; text-align:center; padding:60px 20px; color:rgba(21,22,28,0.45); font-size:14px;}
+
+  footer{border-top:1px solid var(--line); padding:28px 32px; text-align:center; font-size:12.5px; color:rgba(21,22,28,0.45);}
+
+  @media(max-width:600px){
+    .wrap{padding:0 20px;}
+    header .wrap{padding:0 20px;}
+    main{padding:28px 0 56px;}
+    .grid{grid-template-columns:1fr 1fr; gap:10px;}
+    .card-media{height:110px;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <a href="index.html" class="logo-link">Lord Walker</a>
+    <a href="index.html" class="back-link">← Back to site</a>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="eyebrow" id="shop-eyebrow">Shop</div>
+  <div class="shop-title-row">
+    <h1 id="shop-title">All Socks</h1>
+    <div class="result-count" id="result-count"></div>
+  </div>
+
+  <div class="filter-row" id="wearer-filters">
+    <a href="shop.html" class="filter-pill" data-wearer="">All</a>
+    <a href="shop.html?wearer=men" class="filter-pill" data-wearer="men">My Lord (Men)</a>
+    <a href="shop.html?wearer=women" class="filter-pill" data-wearer="women">Lady Walker (Women)</a>
+    <a href="shop.html?wearer=kids" class="filter-pill" data-wearer="kids">Li'l Walker (Kids)</a>
+  </div>
+  <div class="filter-row" id="purpose-filters">
+    <a href="shop.html?purpose=formal" class="filter-pill" data-purpose="formal">Office &amp; Corporate</a>
+    <a href="shop.html?purpose=casual" class="filter-pill" data-purpose="casual">Everyday</a>
+    <a href="shop.html?purpose=active" class="filter-pill" data-purpose="active">Sports &amp; Active</a>
+    <a href="shop.html?purpose=wellness" class="filter-pill" data-purpose="wellness">Wellness</a>
+    <a href="shop.html?purpose=winter" class="filter-pill" data-purpose="winter">Winter</a>
+  </div>
+
+  <div class="grid" id="product-grid">
+    <div class="empty-state">Loading products…</div>
+  </div>
+</main>
+
+<footer>Lord Walker by Brahm · shop@lordwalkerbybrham.com · +91-7878325805 · www.lordwalkerbybrham.com</footer>
+
+<script>
+// Point this at your deployed backend URL once live (e.g. https://api.lordwalkerbybrham.com)
+const API_BASE = "https://lordwalker-store.onrender.com";
+
+const WEARER_LABELS = { men: 'My Lord — Men', women: 'Lady Walker — Women', kids: "Li'l Walker — Kids" };
+const PURPOSE_LABELS = { formal: 'Office & Corporate', casual: 'Everyday', active: 'Sports & Active', wellness: 'Wellness', winter: 'Winter' };
+
+function getParams(){
+  const p = new URLSearchParams(window.location.search);
+  return { wearer: p.get('wearer') || '', purpose: p.get('purpose') || '', sockType: p.get('sockType') || '' };
+}
+
+function sockSVG(){
+  return `<svg viewBox="0 0 100 100" width="46%" xmlns="http://www.w3.org/2000/svg"><path d="M35 5h30v40l20 35a12 12 0 0 1-10 18H25a12 12 0 0 1-10-18l20-35z" fill="none" stroke="rgba(43,39,51,0.28)" stroke-width="4"/></svg>`;
+}
+
+function renderCards(products){
+  const grid = document.getElementById('product-grid');
+  if (!products.length){
+    grid.innerHTML = '<div class="empty-state">No products match this filter yet — check back soon.</div>';
+    return;
+  }
+  grid.innerHTML = products.map(p => {
+    const thumb = (p.images && p.images.length) ? p.images[0] : p.image;
+    const media = thumb ? `<img src="${thumb}" alt="${p.name}">` : sockSVG();
+    return `
+    <div class="card">
+      <div class="card-media">${media}</div>
+      <div class="card-body">
+        <div class="card-code">Code ${p.id}</div>
+        <div class="card-title">${p.name}</div>
+        <div class="card-foot">
+          <div>
+            <div class="price">₹${p.price}</div>
+            <div class="stock-tag">${p.stock > 50 ? 'In stock' : p.stock + ' left'}</div>
+          </div>
+          <button class="add-btn" onclick="quickAdd('${p.id}')">+</button>
+        </div>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function quickAdd(id){
+  // Keep cart state in the same localStorage-free, in-memory pattern as the homepage —
+  // simplest reliable option here is to send the shopper to the homepage cart flow.
+  window.location.href = `index.html?add=${encodeURIComponent(id)}#shop`;
+}
+
+async function init(){
+  const { wearer, purpose } = getParams();
+
+  // Highlight active filter pill
+  document.querySelectorAll('#wearer-filters .filter-pill').forEach(el => {
+    el.classList.toggle('active', el.dataset.wearer === wearer);
+  });
+  document.querySelectorAll('#purpose-filters .filter-pill').forEach(el => {
+    el.classList.toggle('active', el.dataset.purpose === purpose);
+  });
+
+  // Title
+  let title = 'All Socks';
+  if (wearer && WEARER_LABELS[wearer]) title = WEARER_LABELS[wearer];
+  else if (purpose && PURPOSE_LABELS[purpose]) title = PURPOSE_LABELS[purpose];
+  document.getElementById('shop-title').textContent = title;
+
+  try{
+    const res = await fetch(`${API_BASE}/api/products`);
+    let products = await res.json();
+    if (wearer) products = products.filter(p => p.wearer === wearer);
+    if (purpose) products = products.filter(p => p.category === purpose);
+    document.getElementById('result-count').textContent = `${products.length} product${products.length === 1 ? '' : 's'}`;
+    renderCards(products);
+  }catch(e){
+    document.getElementById('product-grid').innerHTML =
+      '<div class="empty-state">Could not load products — is the backend running?</div>';
+  }
+}
+
+init();
+</script>
+</body>
+</html>

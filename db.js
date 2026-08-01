@@ -11,10 +11,10 @@ const ORDERS_FILE = path.join(DATA_DIR, 'orders.json');
 const CATEGORIES_FILE = path.join(DATA_DIR, 'categories.json');
 
 const DEFAULT_CATEGORIES = [
-  { id: 'office-corporate', title: 'Office & Corporate', link: '#shop', glyph: '💼' },
-  { id: 'everyday', title: 'Everyday', link: '#shop', glyph: '🚶' },
-  { id: 'sports-active', title: 'Sports & Active', link: '#shop', glyph: '🏃' },
-  { id: 'wellness', title: 'Wellness', link: '#shop', glyph: '🌿' },
+  { id: 'office-corporate', title: 'Office & Corporate', link: 'shop.html?purpose=formal', glyph: '💼' },
+  { id: 'everyday', title: 'Everyday', link: 'shop.html?purpose=casual', glyph: '🚶' },
+  { id: 'sports-active', title: 'Sports & Active', link: 'shop.html?purpose=active', glyph: '🏃' },
+  { id: 'wellness', title: 'Wellness', link: 'shop.html?purpose=wellness', glyph: '🌿' },
   { id: 'gifting', title: 'Gifting', link: 'gifting.html', glyph: '🎁' },
 ];
 

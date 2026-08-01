@@ -166,7 +166,7 @@ fbq('track', 'PageView');
   @media(max-width:720px){
     /* Capped with max-height (vh) so header + banner always fit in one screen —
        no scrolling needed just to see the whole banner on load. */
-    .hero-track{aspect-ratio:4/3; max-height:36vh; min-height:200px;}
+    .hero-track{aspect-ratio:4/3; max-height:28vh; min-height:170px;}
 
     /* Swap to the square, mobile-cropped versions so faces/text aren't cut off */
     #hero-slide-1{background-image:url('hero-slide-men-mobile.jpg');}
@@ -203,6 +203,7 @@ fbq('track', 'PageView');
 
   /* SHOP */
   #shop{background:var(--paper-dim); color:var(--ink); padding:48px 32px 64px; border-radius:32px 32px 0 0; margin-top:32px;}
+  #categories{margin-bottom:28px;}
   .shop-head{display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:28px; flex-wrap:wrap; gap:16px;}
   .shop-head h2{font-family:'Fraunces',serif; font-size:38px; font-weight:600; letter-spacing:-0.5px;}
   .shop-head p{font-size:14px; color:rgba(21,22,28,0.55); max-width:360px;}
@@ -267,21 +268,14 @@ fbq('track', 'PageView');
   .comfort-banner-img{width:100%; display:block; object-fit:cover; height:380px;}
   .comfort-banner-wrap::after{
     content:''; position:absolute; inset:0;
-    background:linear-gradient(to top, rgba(20,16,10,0.55) 0%, rgba(20,16,10,0.15) 35%, rgba(20,16,10,0) 60%);
+    background:linear-gradient(to top, rgba(20,16,10,0.35) 0%, rgba(20,16,10,0.08) 35%, rgba(20,16,10,0) 60%);
     pointer-events:none;
-  }
-  .comfort-banner-caption{
-    position:absolute; left:0; right:0; bottom:28px; text-align:center; z-index:2;
-    font-family:'Fraunces',serif; font-weight:600; color:#fff; font-size:clamp(24px, 3.2vw, 40px);
-    letter-spacing:-0.3px; text-shadow:0 2px 14px rgba(0,0,0,0.35);
   }
   @media(max-width:900px){
     .comfort-banner-img{height:260px;}
-    .comfort-banner-caption{bottom:20px;}
   }
   @media(max-width:600px){
     .comfort-banner-img{height:190px;}
-    .comfort-banner-caption{bottom:14px; font-size:22px;}
   }
 
   /* Why Lord Walker — intro copy above the feature cards */
@@ -360,6 +354,8 @@ fbq('track', 'PageView');
     .price{font-size:14px;}
     .add-btn{width:26px; height:26px; font-size:14px; flex-shrink:0;}
     .stock-tag{font-size:8.5px;}
+    #categories{margin-bottom:24px;}
+    #shop{margin-top:24px;}
   }
 
   /* CATEGORY PILLS — compact, single row (wraps on small screens), replaces the old tall cards */
@@ -716,25 +712,25 @@ fbq('track', 'PageView');
         <a href="#shop" class="nav-shop-trigger" onclick="return toggleMegaMenu(event)">Shop <span class="chevron">▾</span></a>
         <div class="mega-menu" onclick="if(event.target.tagName==='A') closeMegaMenu();">
           <div class="mega-col">
-            <a href="#shop" class="mega-col-heading">Shop by Purpose</a>
-            <a href="#shop">Office &amp; Corporate</a>
-            <a href="#shop">Everyday</a>
-            <a href="#shop">Sports &amp; Active</a>
-            <a href="#shop">Wellness</a>
+            <a href="shop.html" class="mega-col-heading">Shop by Purpose</a>
+            <a href="shop.html?purpose=formal">Office &amp; Corporate</a>
+            <a href="shop.html?purpose=casual">Everyday</a>
+            <a href="shop.html?purpose=active">Sports &amp; Active</a>
+            <a href="shop.html?purpose=wellness">Wellness</a>
             <a href="gifting.html">Gifting</a>
           </div>
           <div class="mega-col">
-            <a href="#shop" class="mega-col-heading">Shop by Length</a>
-            <a href="#shop">Crew / Calf Length</a>
-            <a href="#shop">Ankle Socks</a>
-            <a href="#shop">No Show / Toe Socks</a>
-            <a href="#shop">Quarter Length</a>
+            <a href="shop.html" class="mega-col-heading">Shop by Length</a>
+            <a href="shop.html?sockType=Crew">Crew / Calf Length</a>
+            <a href="shop.html?sockType=Ankle">Ankle Socks</a>
+            <a href="shop.html?sockType=No%20Show">No Show / Toe Socks</a>
+            <a href="shop.html?sockType=Quarter">Quarter Length</a>
           </div>
           <div class="mega-col">
-            <a href="#shop" class="mega-col-heading">Shop by Wearer</a>
-            <a href="#shop">My Lord (Men)</a>
-            <a href="#shop">Lady Walker (Women)</a>
-            <a href="#shop">Li'l Walker (Kids)</a>
+            <a href="shop.html" class="mega-col-heading">Shop by Wearer</a>
+            <a href="shop.html?wearer=men">My Lord (Men)</a>
+            <a href="shop.html?wearer=women">Lady Walker (Women)</a>
+            <a href="shop.html?wearer=kids">Li'l Walker (Kids)</a>
           </div>
           <a href="gifting.html" class="mega-feature" style="background:linear-gradient(160deg, var(--violet), var(--lilac));">
             <span class="mf-eyebrow">Bundle &amp; Save</span>
@@ -798,16 +794,16 @@ fbq('track', 'PageView');
     <div class="lw-panel" id="lw-panel">
       <div class="lw-panel__pane active" data-pane="0">
         <div class="lw-imgrid">
-          <a href="#shop" class="lw-imgcard" style="background:linear-gradient(160deg,var(--violet),var(--lilac));" onclick="closeDrawer()">
+          <a href="shop.html?purpose=formal" class="lw-imgcard" style="background:linear-gradient(160deg,var(--violet),var(--lilac));" onclick="closeDrawer()">
             <span class="lw-imgcard__glyph">💼</span><span class="lw-imgcard__name">Office &amp; Corporate</span>
           </a>
-          <a href="#shop" class="lw-imgcard" style="background:linear-gradient(160deg,var(--sky),var(--wash-a));" onclick="closeDrawer()">
+          <a href="shop.html?purpose=casual" class="lw-imgcard" style="background:linear-gradient(160deg,var(--sky),var(--wash-a));" onclick="closeDrawer()">
             <span class="lw-imgcard__glyph">☀️</span><span class="lw-imgcard__name">Everyday</span>
           </a>
-          <a href="#shop" class="lw-imgcard" style="background:linear-gradient(160deg,var(--brass),var(--rose));" onclick="closeDrawer()">
+          <a href="shop.html?purpose=active" class="lw-imgcard" style="background:linear-gradient(160deg,var(--brass),var(--rose));" onclick="closeDrawer()">
             <span class="lw-imgcard__glyph">🏃</span><span class="lw-imgcard__name">Sports &amp; Active</span>
           </a>
-          <a href="#shop" class="lw-imgcard" style="background:linear-gradient(160deg,var(--wash-b),var(--sky));" onclick="closeDrawer()">
+          <a href="shop.html?purpose=wellness" class="lw-imgcard" style="background:linear-gradient(160deg,var(--wash-b),var(--sky));" onclick="closeDrawer()">
             <span class="lw-imgcard__glyph">🌿</span><span class="lw-imgcard__name">Wellness</span>
           </a>
           <a href="gifting.html" class="lw-imgcard" style="background:linear-gradient(160deg,var(--rose),var(--violet));" onclick="closeDrawer()">
@@ -815,44 +811,44 @@ fbq('track', 'PageView');
           </a>
         </div>
         <div class="lw-panel__viewall-row">
-          <a href="#shop" class="lw-panel__viewall" onclick="closeDrawer()">View All →</a>
+          <a href="shop.html" class="lw-panel__viewall" onclick="closeDrawer()">View All →</a>
         </div>
       </div>
 
       <div class="lw-panel__pane" data-pane="1">
         <div class="lw-imgrid">
-          <a href="#shop" class="lw-imgcard" style="background:linear-gradient(160deg,var(--violet),var(--wash-a));" onclick="closeDrawer()">
+          <a href="shop.html?sockType=Crew" class="lw-imgcard" style="background:linear-gradient(160deg,var(--violet),var(--wash-a));" onclick="closeDrawer()">
             <span class="lw-imgcard__glyph">🧦</span><span class="lw-imgcard__name">Crew / Calf</span>
           </a>
-          <a href="#shop" class="lw-imgcard" style="background:linear-gradient(160deg,var(--sky),var(--lilac));" onclick="closeDrawer()">
+          <a href="shop.html?sockType=Ankle" class="lw-imgcard" style="background:linear-gradient(160deg,var(--sky),var(--lilac));" onclick="closeDrawer()">
             <span class="lw-imgcard__glyph">👟</span><span class="lw-imgcard__name">Ankle</span>
           </a>
-          <a href="#shop" class="lw-imgcard" style="background:linear-gradient(160deg,var(--brass),var(--wash-b));" onclick="closeDrawer()">
+          <a href="shop.html?sockType=No%20Show" class="lw-imgcard" style="background:linear-gradient(160deg,var(--brass),var(--wash-b));" onclick="closeDrawer()">
             <span class="lw-imgcard__glyph">🫥</span><span class="lw-imgcard__name">No Show / Toe</span>
           </a>
-          <a href="#shop" class="lw-imgcard" style="background:linear-gradient(160deg,var(--rose),var(--sky));" onclick="closeDrawer()">
+          <a href="shop.html?sockType=Quarter" class="lw-imgcard" style="background:linear-gradient(160deg,var(--rose),var(--sky));" onclick="closeDrawer()">
             <span class="lw-imgcard__glyph">📏</span><span class="lw-imgcard__name">Quarter Length</span>
           </a>
         </div>
         <div class="lw-panel__viewall-row">
-          <a href="#shop" class="lw-panel__viewall" onclick="closeDrawer()">View All →</a>
+          <a href="shop.html" class="lw-panel__viewall" onclick="closeDrawer()">View All →</a>
         </div>
       </div>
 
       <div class="lw-panel__pane" data-pane="2">
         <div class="lw-imgrid">
-          <a href="#shop" class="lw-imgcard" style="background:linear-gradient(160deg,var(--sky),var(--violet));" onclick="closeDrawer()">
+          <a href="shop.html?wearer=men" class="lw-imgcard" style="background:linear-gradient(160deg,var(--sky),var(--violet));" onclick="closeDrawer()">
             <span class="lw-imgcard__glyph">🤵</span><span class="lw-imgcard__name">My Lord (Men)</span>
           </a>
-          <a href="#shop" class="lw-imgcard" style="background:linear-gradient(160deg,var(--rose),var(--lilac));" onclick="closeDrawer()">
+          <a href="shop.html?wearer=women" class="lw-imgcard" style="background:linear-gradient(160deg,var(--rose),var(--lilac));" onclick="closeDrawer()">
             <span class="lw-imgcard__glyph">👑</span><span class="lw-imgcard__name">Lady Walker (Women)</span>
           </a>
-          <a href="#shop" class="lw-imgcard" style="background:linear-gradient(160deg,var(--brass),var(--sky));" onclick="closeDrawer()">
+          <a href="shop.html?wearer=kids" class="lw-imgcard" style="background:linear-gradient(160deg,var(--brass),var(--sky));" onclick="closeDrawer()">
             <span class="lw-imgcard__glyph">🧒</span><span class="lw-imgcard__name">Li'l Walker (Kids)</span>
           </a>
         </div>
         <div class="lw-panel__viewall-row">
-          <a href="#shop" class="lw-panel__viewall" onclick="closeDrawer()">View All →</a>
+          <a href="shop.html" class="lw-panel__viewall" onclick="closeDrawer()">View All →</a>
         </div>
       </div>
     </div>
@@ -909,7 +905,6 @@ fbq('track', 'PageView');
 <section id="comfort-banner" class="reveal">
   <div class="comfort-banner-wrap">
     <img src="comfort-every-step-banner.jpg" alt="Comfort, every step — Lord Walker" class="comfort-banner-img">
-    <div class="comfort-banner-caption">Comfort, every step</div>
   </div>
 </section>
 
@@ -971,19 +966,19 @@ fbq('track', 'PageView');
 
 <section id="wearer-tiles" class="reveal">
   <div class="wearer-grid">
-    <a href="#shop" class="wearer-tile">
+    <a href="shop.html?wearer=men" class="wearer-tile">
       <img src="wearer-men.jpg" alt="My Lord — Men's socks">
       <div class="wearer-tile__scrim"></div>
       <div class="wearer-tile__label">My Lord</div>
       <span class="wearer-tile__cta">Shop Now</span>
     </a>
-    <a href="#shop" class="wearer-tile">
+    <a href="shop.html?wearer=women" class="wearer-tile">
       <img src="wearer-women.jpg" alt="Lady Walker — Women's socks">
       <div class="wearer-tile__scrim"></div>
       <div class="wearer-tile__label">Lady Walker</div>
       <span class="wearer-tile__cta">Shop Now</span>
     </a>
-    <a href="#shop" class="wearer-tile">
+    <a href="shop.html?wearer=kids" class="wearer-tile">
       <img src="wearer-kids.jpg" alt="Li'l Walker — Kids' socks">
       <div class="wearer-tile__scrim"></div>
       <div class="wearer-tile__label">Li'l Walker</div>
@@ -1186,6 +1181,14 @@ async function loadProducts(){
     return;
   }
   renderProducts();
+
+  // If we arrived here from a shop.html "quick add" link (?add=PRODUCT_ID), add it now.
+  const addId = new URLSearchParams(window.location.search).get('add');
+  if (addId && PRODUCTS.some(p => p.id === addId)){
+    addToCart(addId);
+    const cleanUrl = window.location.pathname + window.location.hash;
+    window.history.replaceState({}, '', cleanUrl);
+  }
 }
 
 function sockSVG(hex){

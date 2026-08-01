@@ -8,7 +8,8 @@
     "description": "Crafted with global export-quality craftsmanship, these Organic Cotton Rich Quarter Socks are made from a soft organic cotton-rich blend with added stretch for breathable comfort and everyday durability. Finished with stripe detail and a ribbed cuff, they offer a secure, comfortable fit for all-day wear.",
     "category": "casual",
     "colors": "Purple • Pink • Brown • Off White",
-    "sockType": "Quarter"
+    "sockType": "Quarter",
+    "wearer": "women"
   },
   {
     "id": "27185-COMBO-2",
@@ -19,7 +20,8 @@
     "description": "Crafted with global export-quality craftsmanship, these Organic Cotton Rich Crew Socks are made from a soft organic cotton-rich blend with added stretch for breathable comfort and everyday durability. Finished with a cushioned sole, retro stripe detail and a ribbed cuff, they offer a secure, comfortable fit for all-day wear.",
     "category": "casual",
     "colors": "White • Royal • Lilac",
-    "sockType": "Crew"
+    "sockType": "Crew",
+    "wearer": "women"
   },
   {
     "id": "27187-COMBO-3",
@@ -30,7 +32,8 @@
     "description": "Crafted with global export-quality craftsmanship, these Organic Cotton Rich Crew Socks are made from a soft organic cotton-rich blend with added stretch for breathable comfort and everyday durability. Finished with contrast heel & toe and a ribbed cuff, they offer a secure, comfortable fit for all-day wear.",
     "category": "casual",
     "colors": "Green • Lavender • Pink • Yellow • Dk. Red",
-    "sockType": "Crew"
+    "sockType": "Crew",
+    "wearer": "women"
   },
   {
     "id": "27184-COMBO-4",
@@ -41,7 +44,8 @@
     "description": "Crafted with global export-quality craftsmanship, these Organic Cotton Rich Quarter Socks are made from a soft organic cotton-rich blend with added stretch for breathable comfort and everyday durability. Finished with a cushioned sole and a ribbed cuff, they offer a secure, comfortable fit for all-day wear.",
     "category": "casual",
     "colors": "Rose • Olive • Grey",
-    "sockType": "Quarter"
+    "sockType": "Quarter",
+    "wearer": "women"
   },
   {
     "id": "27179-COMBO-5",
@@ -52,7 +56,8 @@
     "description": "Crafted with global export-quality craftsmanship, these Organic Cotton Rich Quarter Socks are made from a soft organic cotton-rich blend with added stretch for breathable comfort and everyday durability. Finished with stripe detail and a ribbed cuff, they offer a secure, comfortable fit for all-day wear.",
     "category": "casual",
     "colors": "Green • Coral • Lilac",
-    "sockType": "Quarter"
+    "sockType": "Quarter",
+    "wearer": "women"
   },
   {
     "id": "27174-COMBO-6",
@@ -63,7 +68,8 @@
     "description": "Crafted with global export-quality craftsmanship, these Organic Cotton Rich Quarter Socks are made from a soft organic cotton-rich blend with added stretch for breathable comfort and everyday durability. Finished with cable knit texture and a ribbed cuff, they offer a secure, comfortable fit for all-day wear.",
     "category": "casual",
     "colors": "Ecru • Olive • Navy",
-    "sockType": "Quarter"
+    "sockType": "Quarter",
+    "wearer": "women"
   },
   {
     "id": "27196-COMBO-7",
@@ -74,7 +80,8 @@
     "description": "Crafted with global export-quality craftsmanship, these Organic Cotton Rich Quarter Socks are made from a soft organic cotton-rich blend with added stretch for breathable comfort and everyday durability. Finished with ribbed texture and a ribbed cuff, they offer a secure, comfortable fit for all-day wear.",
     "category": "casual",
     "colors": "Blue • Beige • Pink",
-    "sockType": "Quarter"
+    "sockType": "Quarter",
+    "wearer": "women"
   },
   {
     "id": "27144-COMBO-8",
@@ -85,7 +92,8 @@
     "description": "Crafted with global export-quality craftsmanship, these Organic Cotton Rich Ankle Socks are made from a soft organic cotton-rich blend with added stretch for breathable comfort and everyday durability. Finished with a cushioned sole, colour block design and a ribbed cuff, they offer a secure, comfortable fit for all-day wear.",
     "category": "casual",
     "colors": "Orange • Parrot Green • Navy",
-    "sockType": "Ankle"
+    "sockType": "Ankle",
+    "wearer": "men"
   },
   {
     "id": "27128-COMBO-9",
@@ -96,7 +104,8 @@
     "description": "Crafted with global export-quality craftsmanship, these Wool Rich Crew Socks are wool blend with added stretch for breathable comfort and everyday durability. Finished with contrast heel & toe and a ribbed cuff, they offer a secure, comfortable fit for winter season.",
     "category": "winter",
     "colors": "Ecru • Ecru",
-    "sockType": "Crew"
+    "sockType": "Crew",
+    "wearer": "men"
   },
   {
     "id": "27141-COMBO-10",
@@ -107,7 +116,8 @@
     "description": "Crafted with global export-quality craftsmanship, these Organic Cotton Rich Quarter Socks are made from a soft organic cotton-rich blend with added stretch for breathable comfort and everyday durability. Finished with vertical stripe detail and a ribbed cuff, they offer a secure, comfortable fit for all-day wear.",
     "category": "casual",
     "colors": "White/Green • White/Sky • White/Grey",
-    "sockType": "Quarter"
+    "sockType": "Quarter",
+    "wearer": "men"
   },
   {
     "id": "27140-COMBO-11",
@@ -118,7 +128,8 @@
     "description": "Crafted with global export-quality craftsmanship, these Organic Cotton Rich Crew Socks are made from a soft organic cotton-rich blend with added stretch for breathable comfort and everyday durability. Finished with stripe detail with contrast heel & toe and a ribbed cuff, they offer a secure, comfortable fit for all-day wear.",
     "category": "casual",
     "colors": "Grey • Ecru • Off White/ Butterscotch",
-    "sockType": "Crew"
+    "sockType": "Crew",
+    "wearer": "men"
   },
   {
     "id": "27138-COMBO-12",
@@ -129,7 +140,8 @@
     "description": "Crafted with global export-quality craftsmanship, these Organic Cotton Rich Quarter Socks are made from a soft organic cotton-rich blend with added stretch for breathable comfort and everyday durability. Finished with contrast heel & toe and a ribbed cuff, they offer a secure, comfortable fit for all-day wear.",
     "category": "casual",
     "colors": "Mid. Grey • Blue • Charcoal",
-    "sockType": "Quarter"
+    "sockType": "Quarter",
+    "wearer": "men"
   },
   {
     "id": "27126-COMBO-13",
@@ -140,7 +152,8 @@
     "description": "Crafted with global export-quality craftsmanship, these Organic Cotton Rich Crew Socks are made from a soft organic cotton-rich blend with added stretch for breathable comfort and everyday durability. Finished with link rope texture and a ribbed cuff, they offer a secure, comfortable fit for all-day wear.",
     "category": "casual",
     "colors": "Off White • Olive • Beige",
-    "sockType": "Crew"
+    "sockType": "Crew",
+    "wearer": "men"
   },
   {
     "id": "27103-COMBO-14",
@@ -151,7 +164,8 @@
     "description": "Crafted with global export-quality craftsmanship, these Organic Cotton Rich Crew Socks are made from a soft organic cotton-rich blend with added stretch for breathable comfort and everyday durability. Finished with ribbed texture with contrast heel & toe and a ribbed cuff, they offer a secure, comfortable fit for all-day wear.",
     "category": "formal",
     "colors": "Grey • Beige",
-    "sockType": "Crew"
+    "sockType": "Crew",
+    "wearer": "men"
   },
   {
     "id": "27103-COMBO-15",
@@ -162,7 +176,8 @@
     "description": "Crafted with global export-quality craftsmanship, these Organic Cotton Rich Crew Socks are made from a soft organic cotton-rich blend with added stretch for breathable comfort and everyday durability. Finished with ribbed texture with contrast heel & toe and a ribbed cuff, they offer a secure, comfortable fit for all-day wear.",
     "category": "formal",
     "colors": "Blue • Off White • Charcoal",
-    "sockType": "Crew"
+    "sockType": "Crew",
+    "wearer": "men"
   },
   {
     "id": "27139-COMBO-16",
@@ -173,7 +188,8 @@
     "description": "Crafted with global export-quality craftsmanship, these Organic Cotton Rich Crew Socks are made from a soft organic cotton-rich blend with added stretch for breathable comfort and everyday durability. Finished with a cushioned sole, retro stripe detail and a ribbed cuff, they offer a secure, comfortable fit for all-day wear.",
     "category": "casual",
     "colors": "White/Yellow • White/Blue Mel. • White/Red",
-    "sockType": "Crew"
+    "sockType": "Crew",
+    "wearer": "men"
   },
   {
     "id": "27183-COMBO-17",
@@ -184,7 +200,8 @@
     "description": "Crafted with global export-quality craftsmanship, these Organic Cotton Rich Crew Socks are made from a soft organic cotton-rich blend with added stretch for breathable comfort and everyday durability. Finished with colour block design and a ribbed cuff, they offer a secure, comfortable fit for all-day wear.",
     "category": "formal",
     "colors": "Olive • Purple • Lt.Blue",
-    "sockType": "Crew"
+    "sockType": "Crew",
+    "wearer": "men"
   },
   {
     "id": "27181-COMBO-18",
@@ -195,7 +212,8 @@
     "description": "Crafted with global export-quality craftsmanship, these Organic Cotton Rich Crew Socks are made from a soft organic cotton-rich blend with added stretch for breathable comfort and everyday durability. Finished with geometric pattern and a ribbed cuff, they offer a secure, comfortable fit for all-day wear.",
     "category": "formal",
     "colors": "Black • Black • Black",
-    "sockType": "Crew"
+    "sockType": "Crew",
+    "wearer": "men"
   },
   {
     "id": "27127-COMBO-19",
@@ -206,7 +224,8 @@
     "description": "Crafted with global export-quality craftsmanship, these Organic Cotton Rich Crew Socks are made from a soft organic cotton-rich blend with added stretch for breathable comfort and everyday durability. Finished with argyle pattern and a ribbed cuff, they offer a secure, comfortable fit for all-day wear.",
     "category": "formal",
     "colors": "Charcoal • Navy • Grey",
-    "sockType": "Crew"
+    "sockType": "Crew",
+    "wearer": "men"
   },
   {
     "id": "27105-COMBO-20",
@@ -217,7 +236,8 @@
     "description": "Crafted with global export-quality craftsmanship, these Organic Cotton Rich Quarter Socks are made from a soft organic cotton-rich blend with added stretch for breathable comfort and everyday durability. Finished with argyle pattern and a ribbed cuff, they offer a secure, comfortable fit for all-day wear.",
     "category": "casual",
     "colors": "Beige • Blue • Brown",
-    "sockType": "Quarter"
+    "sockType": "Quarter",
+    "wearer": "men"
   },
   {
     "id": "27115-COMBO-21",
@@ -228,7 +248,8 @@
     "description": "Crafted with global export-quality craftsmanship, these Organic Cotton Rich Quarter Socks are made from a soft organic cotton-rich blend with added stretch for breathable comfort and everyday durability. Finished with ribbed texture with contrast heel & toe and a ribbed cuff, they offer a secure, comfortable fit for all-day wear.",
     "category": "casual",
     "colors": "Grey • Navy • Brown",
-    "sockType": "Quarter"
+    "sockType": "Quarter",
+    "wearer": "men"
   },
   {
     "id": "27117-COMBO-22",
@@ -239,7 +260,8 @@
     "description": "Crafted with global export-quality craftsmanship, these Bamboo Crew Socks are made from a soft bamboo blend with added stretch for breathable comfort and everyday durability. Finished with ribbed texture with contrast heel & toe and a ribbed cuff, they offer a secure, comfortable fit for all-day wear.",
     "category": "wellness",
     "colors": "Brown • Green • Black",
-    "sockType": "Crew"
+    "sockType": "Crew",
+    "wearer": "men"
   },
   {
     "id": "27116-COMBO-23",
@@ -250,7 +272,8 @@
     "description": "Crafted with global export-quality craftsmanship, these Bamboo Quarter Socks are made from a soft organic bamboo blend with added stretch for breathable comfort and everyday durability. Finished with ribbed texture with contrast heel & toe and a ribbed cuff, they offer a secure, comfortable fit for all-day wear.",
     "category": "wellness",
     "colors": "Grey • Black • Navy",
-    "sockType": "Quarter"
+    "sockType": "Quarter",
+    "wearer": "men"
   },
   {
     "id": "27356-COMBO-24",
@@ -261,7 +284,8 @@
     "description": "Crafted with global export-quality craftsmanship, these Organic Cotton Rich Crew Socks are made from a soft organic cotton-rich blend with added stretch for breathable comfort and everyday durability. Finished with a ribbed cuff, they offer a secure, comfortable fit for all-day wear.",
     "category": "formal",
     "colors": "Black • Navy • Beige",
-    "sockType": "Crew"
+    "sockType": "Crew",
+    "wearer": "men"
   },
   {
     "id": "27355-COMBO-25",
@@ -272,7 +296,8 @@
     "description": "Crafted with global export-quality craftsmanship, these Polyamide  Quarter Socks are made from a soft polyamide with added stretch for breathable comfort and everyday durability. Finished with ribbed stripe detail and a ribbed cuff, they offer a secure, comfortable fit for all-day wear.",
     "category": "active",
     "colors": "Sky • Pink • Yellow",
-    "sockType": "Quarter"
+    "sockType": "Quarter",
+    "wearer": "men"
   },
   {
     "id": "27357-COMBO-26",
@@ -283,7 +308,8 @@
     "description": "Crafted with global export-quality craftsmanship, these Organic Cotton Rich Crew Socks are made from a soft organic cotton-rich blend with added stretch for breathable comfort and everyday durability. Finished with link rope texture and a ribbed cuff, they offer a secure, comfortable fit for all-day wear.",
     "category": "formal",
     "colors": "Beige • Brown • Grey",
-    "sockType": "Crew"
+    "sockType": "Crew",
+    "wearer": "men"
   },
   {
     "id": "27180-COMBO-27",
@@ -294,7 +320,8 @@
     "description": "Crafted with global export-quality craftsmanship, these Organic Cotton Rich Crew Socks are made from a soft organic cotton-rich blend with added stretch for breathable comfort and everyday durability. Finished with floral themed print and a ribbed cuff, they offer a secure, comfortable fit for all-day wear.",
     "category": "kids",
     "colors": "Denim • Off White",
-    "sockType": "Crew"
+    "sockType": "Crew",
+    "wearer": "kids"
   },
   {
     "id": "27358-COMBO-28",
@@ -305,6 +332,7 @@
     "description": "Crafted with global export-quality craftsmanship, these Organic Cotton Rich Crew Socks are made from a soft organic cotton-rich blend with added stretch for breathable comfort and everyday durability. Finished with space themed print and a ribbed cuff, they offer a secure, comfortable fit for all-day wear.",
     "category": "kids",
     "colors": "Dark Blue • Navy",
-    "sockType": "Crew"
+    "sockType": "Crew",
+    "wearer": "kids"
   }
 ]
