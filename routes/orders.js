@@ -82,7 +82,11 @@ router.post('/create', async (req, res) => {
     });
   } catch (err) {
     console.error(err);
-    res.status(400).json({ error: err.message || 'Could not create order' });
+    // The Razorpay SDK rejects with a plain object like { error: { description } }
+    // rather than a real Error, so err.message is often undefined — pull the
+    // actual reason out from wherever it's hiding so the frontend can show it.
+    const detail = (err && err.error && err.error.description) || err.message || 'Could not create order';
+    res.status(400).json({ error: detail });
   }
 });
 
