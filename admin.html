@@ -84,6 +84,24 @@
     background:transparent; color:var(--bad); border:1px solid rgba(176,57,47,0.35); border-radius:8px;
     padding:7px 12px; font-size:12.5px; font-weight:600; cursor:pointer; margin-left:6px;
   }
+
+  /* Multi-image preview + manage panel */
+  .img-preview-row{display:flex; flex-wrap:wrap; gap:8px; margin-top:10px;}
+  .img-preview-item{position:relative; width:56px; height:56px; border-radius:8px; overflow:hidden; border:1px solid var(--line); flex-shrink:0;}
+  .img-preview-item img{width:100%; height:100%; object-fit:cover; display:block;}
+  .img-preview-item .rm-x{
+    position:absolute; top:2px; right:2px; width:18px; height:18px; border-radius:50%;
+    background:rgba(21,22,28,0.75); color:#fff; border:none; font-size:11px; line-height:1;
+    cursor:pointer; display:flex; align-items:center; justify-content:center; padding:0;
+  }
+  .manage-images-btn{
+    background:transparent; color:var(--accent-teal); border:1px solid rgba(91,156,147,0.4); border-radius:8px;
+    padding:7px 10px; font-size:12px; font-weight:600; cursor:pointer;
+  }
+  .images-panel-row{display:none;}
+  .images-panel-row.open{display:table-row;}
+  .images-panel-cell{background:var(--paper-dim); padding:16px !important;}
+  .images-panel-inner input[type="file"]{font-size:12px; margin-top:8px;}
   .delete-btn:hover{background:rgba(176,57,47,0.08);}
 </style>
 </head>
@@ -138,15 +156,16 @@
         </div>
       </div>
       <div style="margin-bottom:14px;">
-        <label style="display:block; font-size:11.5px; color:rgba(43,39,51,0.55); margin-bottom:5px; font-family:'IBM Plex Mono',monospace; text-transform:uppercase; letter-spacing:0.5px;">Product Image (optional)</label>
-        <input type="file" id="new-image" accept="image/*">
+        <label style="display:block; font-size:11.5px; color:rgba(43,39,51,0.55); margin-bottom:5px; font-family:'IBM Plex Mono',monospace; text-transform:uppercase; letter-spacing:0.5px;">Product Images (optional — pick multiple)</label>
+        <input type="file" id="new-images" accept="image/*" multiple onchange="handleNewImagesPicked(event)">
+        <div id="new-images-preview" class="img-preview-row"></div>
       </div>
       <button class="btn" onclick="createProduct()">Create Product</button>
     </div>
 
     <table id="product-table">
       <thead>
-        <tr><th>Image</th><th>Code</th><th>Name</th><th>Price (₹)</th><th>Stock</th><th>Status</th><th></th></tr>
+        <tr><th>Images</th><th>Code</th><th>Name</th><th>Price (₹)</th><th>Stock</th><th>Status</th><th></th></tr>
       </thead>
       <tbody id="table-body"></tbody>
     </table>
@@ -256,13 +275,19 @@ function fileToDataURL(file){
   });
 }
 
+let IMAGE_CACHE = {}; // productId -> array of data URLs, kept in sync with the manage-images panel
+
 function renderTable(products){
   const body = document.getElementById('table-body');
-  body.innerHTML = products.map(p => `
+  body.innerHTML = products.map(p => {
+    const imgs = (p.images && p.images.length) ? p.images : (p.image ? [p.image] : []);
+    IMAGE_CACHE[p.id] = imgs.slice();
+    const thumb = imgs.length ? `<img class="thumb" src="${imgs[0]}">` : `<div class="thumb-empty">🧦</div>`;
+    return `
     <tr data-id="${p.id}">
       <td>
-        ${p.image ? `<img class="thumb" src="${p.image}">` : `<div class="thumb-empty">🧦</div>`}
-        <input type="file" class="img-input image-input" accept="image/*">
+        ${thumb}
+        <button type="button" class="manage-images-btn" onclick="toggleImagesPanel('${p.id}')" style="margin-top:6px;">🖼️ Manage (${imgs.length})</button>
       </td>
       <td class="code">${p.id}</td>
       <td class="name">${p.name}</td>
@@ -280,7 +305,81 @@ function renderTable(products){
         <span class="row-status" id="status-${p.id}"></span>
       </td>
     </tr>
-  `).join('');
+    <tr class="images-panel-row" id="panel-${p.id}">
+      <td colspan="7" class="images-panel-cell">
+        <div class="images-panel-inner">
+          <strong style="font-size:13px;">Manage images — ${p.name}</strong>
+          <div class="img-preview-row" id="images-grid-${p.id}"></div>
+          <input type="file" accept="image/*" multiple onchange="addMoreImages('${p.id}', event)">
+          <div style="margin-top:10px;">
+            <button class="save-btn" onclick="saveImages('${p.id}')">Save Images</button>
+            <button class="delete-btn" onclick="toggleImagesPanel('${p.id}')" style="border-color:var(--line); color:var(--ink);">Close</button>
+            <span class="row-status" id="img-status-${p.id}"></span>
+          </div>
+        </div>
+      </td>
+    </tr>
+  `;
+  }).join('');
+}
+
+function renderImagesGrid(id){
+  const grid = document.getElementById(`images-grid-${id}`);
+  if (!grid) return;
+  const imgs = IMAGE_CACHE[id] || [];
+  grid.innerHTML = imgs.map((src, idx) => `
+    <div class="img-preview-item">
+      <img src="${src}">
+      <button type="button" class="rm-x" onclick="removeImageFromCache('${id}', ${idx})">×</button>
+    </div>
+  `).join('') || '<span style="font-size:12px;color:rgba(43,39,51,0.5);">No images yet — add some below.</span>';
+}
+
+function toggleImagesPanel(id){
+  const panel = document.getElementById(`panel-${id}`);
+  if (!panel) return;
+  const opening = !panel.classList.contains('open');
+  document.querySelectorAll('.images-panel-row.open').forEach(r => r.classList.remove('open'));
+  if (opening){
+    panel.classList.add('open');
+    renderImagesGrid(id);
+  }
+}
+
+function addMoreImages(id, event){
+  const files = Array.from(event.target.files || []);
+  if (!files.length) return;
+  Promise.all(files.map(fileToDataURL)).then(dataUrls => {
+    IMAGE_CACHE[id] = (IMAGE_CACHE[id] || []).concat(dataUrls);
+    renderImagesGrid(id);
+    event.target.value = '';
+  });
+}
+
+function removeImageFromCache(id, idx){
+  (IMAGE_CACHE[id] || []).splice(idx, 1);
+  renderImagesGrid(id);
+}
+
+async function saveImages(id){
+  const statusEl = document.getElementById(`img-status-${id}`);
+  statusEl.textContent = 'Saving…';
+  statusEl.className = 'row-status';
+  try{
+    const res = await fetch(`${API_BASE}/api/admin/products/${id}`, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json', 'x-admin-password': PASSWORD },
+      body: JSON.stringify({ images: IMAGE_CACHE[id] || [] })
+    });
+    const data = await res.json();
+    if(!res.ok) throw new Error(data.error || 'Save failed');
+    statusEl.textContent = '✓ Saved';
+    statusEl.className = 'row-status ok';
+    loadProducts();
+  }catch(e){
+    statusEl.textContent = '✗ ' + e.message;
+    statusEl.className = 'row-status err';
+  }
 }
 
 async function saveRow(id){
@@ -288,27 +387,21 @@ async function saveRow(id){
   const price = row.querySelector('.price-input').value;
   const stock = row.querySelector('.stock-input').value;
   const status = row.querySelector('.status-input').value;
-  const imageFile = row.querySelector('.image-input').files[0];
   const statusEl = document.getElementById(`status-${id}`);
   statusEl.textContent = 'Saving…';
   statusEl.className = 'row-status';
 
   try{
-    const body = { price, stock, status };
-    if(imageFile){
-      body.image = await fileToDataURL(imageFile);
-    }
     const res = await fetch(`${API_BASE}/api/admin/products/${id}`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json', 'x-admin-password': PASSWORD },
-      body: JSON.stringify(body)
+      body: JSON.stringify({ price, stock, status })
     });
     const data = await res.json();
     if(!res.ok) throw new Error(data.error || 'Save failed');
     statusEl.textContent = '✓ Saved';
     statusEl.className = 'row-status ok';
     setTimeout(() => { statusEl.textContent = ''; }, 2500);
-    if(imageFile) loadProducts(); // refresh thumbnail
   }catch(e){
     statusEl.textContent = '✗ ' + e.message;
     statusEl.className = 'row-status err';
@@ -338,23 +431,46 @@ function toggleAddForm(){
   document.getElementById('add-form').classList.toggle('open');
 }
 
+let NEW_PRODUCT_IMAGES = [];
+
+function handleNewImagesPicked(event){
+  const files = Array.from(event.target.files || []);
+  if (!files.length) return;
+  Promise.all(files.map(fileToDataURL)).then(dataUrls => {
+    NEW_PRODUCT_IMAGES = NEW_PRODUCT_IMAGES.concat(dataUrls);
+    renderNewImagesPreview();
+    event.target.value = '';
+  });
+}
+
+function renderNewImagesPreview(){
+  const grid = document.getElementById('new-images-preview');
+  grid.innerHTML = NEW_PRODUCT_IMAGES.map((src, idx) => `
+    <div class="img-preview-item">
+      <img src="${src}">
+      <button type="button" class="rm-x" onclick="removeNewImage(${idx})">×</button>
+    </div>
+  `).join('');
+}
+
+function removeNewImage(idx){
+  NEW_PRODUCT_IMAGES.splice(idx, 1);
+  renderNewImagesPreview();
+}
+
 async function createProduct(){
   const id = document.getElementById('new-id').value.trim();
   const name = document.getElementById('new-name').value.trim();
   const price = document.getElementById('new-price').value;
   const stock = document.getElementById('new-stock').value;
   const status = document.getElementById('new-status').value;
-  const imageFile = document.getElementById('new-image').files[0];
   const errEl = document.getElementById('add-error');
   const okEl = document.getElementById('add-success');
   errEl.textContent = '';
   okEl.textContent = '';
 
   try{
-    const body = { id, name, price, stock, status };
-    if(imageFile){
-      body.image = await fileToDataURL(imageFile);
-    }
+    const body = { id, name, price, stock, status, images: NEW_PRODUCT_IMAGES };
     const res = await fetch(`${API_BASE}/api/admin/products`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', 'x-admin-password': PASSWORD },
@@ -367,7 +483,8 @@ async function createProduct(){
     document.getElementById('new-name').value = '';
     document.getElementById('new-price').value = '';
     document.getElementById('new-stock').value = '';
-    document.getElementById('new-image').value = '';
+    NEW_PRODUCT_IMAGES = [];
+    renderNewImagesPreview();
     loadProducts();
     setTimeout(() => { okEl.textContent = ''; document.getElementById('add-form').classList.remove('open'); }, 1200);
   }catch(e){
