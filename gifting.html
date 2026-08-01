@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gifting — Lord Walker</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#2b2733; --ink-soft:#fdfbf9; --paper:#fbf3ef; --paper-dim:#f3e6df;
+    --lilac:#e4d6f6; --brass:#f7dcab; --rose:#f7d7df; --violet:#e1d4ef;
+    --line:rgba(43,39,51,0.10); --accent-teal:#5b9c93; --accent-plum:#9b6fa0; --accent-gold:#bb8a2e;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{background:var(--paper); color:var(--ink); font-family:'Inter',sans-serif; line-height:1.7; -webkit-font-smoothing:antialiased;}
+  a{color:var(--accent-plum); text-decoration:none;}
+  .wrap{max-width:1000px; margin:0 auto; padding:0 32px;}
+
+  header{padding:20px 0; border-bottom:1px solid var(--line); background:rgba(251,243,239,0.9);}
+  header .wrap{display:flex; align-items:center; justify-content:space-between; max-width:1180px;}
+  .logo-link{font-family:'Fraunces',serif; font-weight:600; font-size:18px; color:var(--ink);}
+  .back-link{font-size:13px; font-weight:600;}
+  .back-link:hover{text-decoration:underline;}
+
+  .hero-banner{position:relative; width:100%; overflow:hidden;}
+  .hero-banner img{width:100%; display:block; object-fit:cover; height:420px;}
+  @media(max-width:600px){.hero-banner img{height:260px;}}
+
+  main{padding:56px 0 0;}
+  .eyebrow{font-family:'IBM Plex Mono',monospace; font-size:12px; letter-spacing:2px; text-transform:uppercase; color:var(--accent-teal); margin-bottom:14px; text-align:center;}
+  .intro{max-width:680px; margin:0 auto 48px; text-align:center;}
+  .intro p{font-size:15.5px; color:rgba(21,22,28,0.68);}
+
+  .feature-grid{display:grid; grid-template-columns:repeat(3, 1fr); gap:24px; margin-bottom:64px;}
+  .feature-card{background:var(--ink-soft); border:1px solid var(--line); border-radius:16px; padding:28px 22px; text-align:center;}
+  .feature-card h3{font-family:'Fraunces',serif; font-size:17px; font-weight:600; margin-bottom:8px;}
+  .feature-card p{font-size:13.5px; color:rgba(43,39,51,0.6);}
+
+  .thoughtful{background:var(--paper-dim); padding:56px 0; margin-bottom:0;}
+  .thoughtful .wrap{max-width:760px; text-align:center;}
+  .thoughtful h2{font-family:'Fraunces',serif; font-size:30px; font-weight:600; margin-bottom:18px; letter-spacing:-0.3px;}
+  .thoughtful p{font-size:15px; color:rgba(21,22,28,0.68); margin-bottom:14px;}
+
+  .occasions{padding:56px 0;}
+  .occasions .wrap{max-width:1000px;}
+  .occasion-grid{display:grid; grid-template-columns:repeat(4, 1fr); gap:20px;}
+  .occasion-card{background:#fff; border:1px solid var(--line); border-radius:14px; padding:22px 18px; text-align:center; transition:transform .25s ease, box-shadow .25s ease;}
+  .occasion-card:hover{transform:translateY(-4px); box-shadow:0 14px 28px rgba(43,39,51,0.10);}
+  .occasion-card h4{font-family:'Fraunces',serif; font-size:16px; font-weight:600; margin-bottom:6px;}
+  .occasion-card p{font-size:12.5px; color:rgba(43,39,51,0.55);}
+
+  .cta-section{background:var(--ink); color:#fff; padding:56px 32px; text-align:center;}
+  .cta-section h2{font-family:'Fraunces',serif; font-size:28px; font-weight:600; margin-bottom:14px;}
+  .cta-section p{font-size:14.5px; color:rgba(255,255,255,0.7); max-width:520px; margin:0 auto 28px;}
+  .cta-contacts{display:flex; flex-wrap:wrap; justify-content:center; gap:14px 28px; margin-bottom:8px;}
+  .cta-contacts a{color:#fff; font-size:14px; font-weight:600;}
+  .cta-contacts a:hover{color:var(--brass);}
+
+  footer{border-top:1px solid var(--line); padding:28px 32px; text-align:center; font-size:12.5px; color:rgba(21,22,28,0.45); background:var(--paper);}
+
+  @media(max-width:780px){
+    .feature-grid{grid-template-columns:1fr;}
+    .occasion-grid{grid-template-columns:1fr 1fr; gap:14px;}
+  }
+  @media(max-width:600px){
+    main{padding:40px 0 0;}
+    .wrap{padding:0 20px;}
+    header .wrap{padding:0 20px;}
+    .thoughtful, .occasions, .cta-section{padding:40px 20px;}
+    .thoughtful h2, .cta-section h2{font-size:23px;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <a href="index.html" class="logo-link">Lord Walker</a>
+    <a href="index.html" class="back-link">← Back to site</a>
+  </div>
+</header>
+
+<div class="hero-banner">
+  <img src="gifting-banner.jpg" alt="Gifts that stay with them — Lord Walker gifting">
+</div>
+
+<main>
+  <div class="wrap" style="padding-top:56px;">
+    <div class="eyebrow">Gifting</div>
+    <div class="intro">
+      <p>Premium socks, elegant packaging, and a gifting experience that feels thoughtful — not predictable. Designed for corporate gifting, festive hampers, weddings, and personal milestones.</p>
+    </div>
+
+    <div class="feature-grid">
+      <div class="feature-card">
+        <h3>Premium Comfort</h3>
+        <p>Thoughtfully designed socks that feel great all day.</p>
+      </div>
+      <div class="feature-card">
+        <h3>Timeless Presentation</h3>
+        <p>Minimal, elegant packaging — ready to gift.</p>
+      </div>
+      <div class="feature-card">
+        <h3>Effortless Gifting</h3>
+        <p>Simple process, smooth coordination, dependable service.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="thoughtful">
+    <div class="wrap">
+      <h2>Thoughtful gifting, done right</h2>
+      <p>The best gifts are not loud. They are intentional. Lord Walker gifting is designed for moments where you want to express appreciation, respect, and good taste — without excess or noise.</p>
+      <p>Whether it's a corporate order, festive hamper, wedding favour, or a personal gesture, our socks offer comfort, elegance, and everyday usefulness — making your gift truly memorable.</p>
+    </div>
+  </div>
+
+  <div class="occasions">
+    <div class="wrap">
+      <div class="occasion-grid">
+        <div class="occasion-card">
+          <h4>Corporate Gifting</h4>
+          <p>Employees • Clients • Channel partners</p>
+        </div>
+        <div class="occasion-card">
+          <h4>Festive Hampers</h4>
+          <p>Diwali • New Year • Seasonal celebrations</p>
+        </div>
+        <div class="occasion-card">
+          <h4>Wedding Favours</h4>
+          <p>Premium return gifts • Guest giveaways</p>
+        </div>
+        <div class="occasion-card">
+          <h4>Personal Gifting</h4>
+          <p>Birthdays • Anniversaries • Thank-you moments</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="cta-section">
+    <h2>Let's create something beautiful</h2>
+    <p>Share your requirement and timeline — our team will help you curate the perfect Lord Walker gifting experience.</p>
+    <div class="cta-contacts">
+      <a href="https://wa.me/917878325805" target="_blank" rel="noopener">WhatsApp: +91-7878325805</a>
+      <a href="tel:+917878325805">Call: +91-7878325805</a>
+      <a href="mailto:shop@lordwalkerbybrham.com">Email: shop@lordwalkerbybrham.com</a>
+    </div>
+  </div>
+</main>
+
+<footer>Lord Walker by Brahm · shop@lordwalkerbybrham.com · +91-7878325805 · www.lordwalkerbybrham.com</footer>
+
+</body>
+</html>

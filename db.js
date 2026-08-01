@@ -15,7 +15,7 @@ const DEFAULT_CATEGORIES = [
   { id: 'everyday', title: 'Everyday', link: '#shop', glyph: '🚶' },
   { id: 'sports-active', title: 'Sports & Active', link: '#shop', glyph: '🏃' },
   { id: 'wellness', title: 'Wellness', link: '#shop', glyph: '🌿' },
-  { id: 'gifting', title: 'Gifting', link: '#gifting', glyph: '🎁' },
+  { id: 'gifting', title: 'Gifting', link: 'gifting.html', glyph: '🎁' },
 ];
 
 function ensureData() {

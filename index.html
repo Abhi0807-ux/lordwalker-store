@@ -210,6 +210,27 @@ fbq('track', 'PageView');
   .shop-head h2.section-h2-compact{font-size:26px;}
   @media(max-width:600px){.shop-head h2.section-h2-compact{font-size:21px;}}
 
+  /* DIABETIC-SOCKS FEATURE — full-bleed split, text left / image right */
+  #diabetic-feature{background:var(--paper-dim);}
+  .feature-split{display:grid; grid-template-columns:1fr 1fr; align-items:stretch; min-height:480px;}
+  .feature-split__copy{padding:56px 48px; display:flex; flex-direction:column; justify-content:center;}
+  .feature-split__copy h2{font-family:'Fraunces',serif; font-size:28px; font-weight:600; letter-spacing:-0.3px; margin-bottom:14px; line-height:1.2;}
+  .feature-split__copy h3{font-family:'Fraunces',serif; font-size:16px; font-weight:600; margin:16px 0 8px;}
+  .feature-split__copy ul{margin:0 0 4px 20px; font-size:14px; color:rgba(21,22,28,0.7); line-height:1.6;}
+  .feature-split__copy li{margin-bottom:5px;}
+  .feature-split__btn{margin-top:18px; align-self:flex-start;}
+  .feature-split__media{position:relative; overflow:hidden;}
+  .feature-split__media img{width:100%; height:100%; object-fit:cover; display:block; min-height:320px;}
+  @media(max-width:900px){
+    .feature-split{grid-template-columns:1fr;}
+    .feature-split__copy{padding:36px 24px;}
+    .feature-split__media img{min-height:260px;}
+  }
+  @media(max-width:600px){
+    .feature-split__copy{padding:28px 20px;}
+    .feature-split__copy h2{font-size:22px;}
+  }
+
   /* SHOP BY WEARER — full-bleed 3-tile visual section */
   .wearer-grid{display:grid; grid-template-columns:1fr 1fr 1fr;}
   .wearer-tile{position:relative; display:block; overflow:hidden; height:460px; text-decoration:none;}
@@ -437,10 +458,6 @@ fbq('track', 'PageView');
   .why-card h3{font-family:'Fraunces',serif; font-size:18px; font-weight:600; margin-bottom:10px;}
   .why-card p{font-size:13.5px; color:rgba(43,39,51,0.6); line-height:1.6;}
 
-  /* GIFTING SECTION */
-  #gifting{background:var(--paper); color:var(--ink); padding:64px 32px;}
-  .gifting-wrap{max-width:1100px; margin:0 auto; display:grid; grid-template-columns:1fr 1fr; gap:56px; align-items:center;}
-
   /* ABOUT US — full-bleed: image touches the left edge, copy has its own inner padding */
   .about-grid{display:grid; grid-template-columns:0.85fr 1fr; gap:52px; align-items:start;}
   .about-grid__media{position:sticky; top:100px; overflow:hidden;}
@@ -456,17 +473,6 @@ fbq('track', 'PageView');
     .about-grid__media img{height:260px;}
     .about-grid__copy{padding:0 18px;}
   }
-  #gifting .section-eyebrow{font-family:'IBM Plex Mono',monospace; font-size:12px; letter-spacing:2px; text-transform:uppercase; color:var(--accent-plum); margin-bottom:16px;}
-  #gifting h2{font-family:'Fraunces',serif; font-size:38px; font-weight:600; letter-spacing:-0.5px; margin-bottom:18px; line-height:1.15;}
-  #gifting p.desc{font-size:15px; color:rgba(21,22,28,0.6); line-height:1.7; margin-bottom:28px; max-width:440px;}
-  .gift-bundles{display:grid; grid-template-columns:1fr 1fr; gap:16px;}
-  .gift-card{background:#fff; border-radius:16px; padding:22px; border:1px solid rgba(21,22,28,0.08); transition:transform .3s ease, box-shadow .3s ease;}
-  .gift-card:hover{transform:translateY(-5px); box-shadow:0 14px 28px rgba(21,22,28,0.10);}
-  .gift-card .tag{font-family:'IBM Plex Mono',monospace; font-size:10px; text-transform:uppercase; letter-spacing:1px; color:rgba(21,22,28,0.4); margin-bottom:8px; display:block;}
-  .gift-card h4{font-family:'Fraunces',serif; font-size:17px; font-weight:600; margin-bottom:6px;}
-  .gift-card p{font-size:12.5px; color:rgba(21,22,28,0.55);}
-  .gift-swatchbox{border-radius:16px; overflow:hidden; height:100%; min-height:340px; display:grid; grid-template-rows:repeat(3,1fr);}
-  .gift-swatchbox div{display:flex; align-items:flex-end; padding:16px; font-family:'IBM Plex Mono',monospace; font-size:11px; text-transform:uppercase; letter-spacing:1px;}
 
   /* CONTACT SECTION */
   #contact{background:var(--wash-b); padding:64px 32px;}
@@ -489,13 +495,12 @@ fbq('track', 'PageView');
   .contact-form input:focus, .contact-form textarea:focus{outline:none; border-color:var(--accent-gold);}
 
   @media(max-width:780px){
-    .gifting-wrap, .contact-wrap{grid-template-columns:1fr;}
-    .gift-swatchbox{min-height:220px;}
+    .contact-wrap{grid-template-columns:1fr;}
   }
 
   @media(max-width:720px){
     .nav-links{display:none;}
-    #gifting, #contact{padding:44px 20px;}
+    #contact{padding:44px 20px;}
     #reviews{padding:44px 0 !important;}
   }
 
@@ -708,7 +713,7 @@ fbq('track', 'PageView');
             <a href="#shop">Everyday</a>
             <a href="#shop">Sports &amp; Active</a>
             <a href="#shop">Wellness</a>
-            <a href="#gifting">Gifting</a>
+            <a href="gifting.html">Gifting</a>
           </div>
           <div class="mega-col">
             <a href="#shop" class="mega-col-heading">Shop by Length</a>
@@ -723,7 +728,7 @@ fbq('track', 'PageView');
             <a href="#shop">Lady Walker (Women)</a>
             <a href="#shop">Li'l Walker (Kids)</a>
           </div>
-          <a href="#gifting" class="mega-feature" style="background:linear-gradient(160deg, var(--violet), var(--lilac));">
+          <a href="gifting.html" class="mega-feature" style="background:linear-gradient(160deg, var(--violet), var(--lilac));">
             <span class="mf-eyebrow">Bundle &amp; Save</span>
             <span class="mf-title">Mix &amp; Match Gift Sets</span>
             <span class="mf-cta">Shop gifting →</span>
@@ -731,7 +736,7 @@ fbq('track', 'PageView');
         </div>
       </div>
       <a href="why-lord-walker.html">Why Lord Walker</a>
-      <a href="#gifting">Gifting</a>
+      <a href="gifting.html">Gifting</a>
       <a href="#reviews">Reviews</a>
       <a href="#blog">Blog</a>
       <a href="#contact">Contact</a>
@@ -776,7 +781,7 @@ fbq('track', 'PageView');
       <button class="lw-sidebar__label" data-tab="1" onclick="showDrawerTab(1)">Length</button>
       <button class="lw-sidebar__label" data-tab="2" onclick="showDrawerTab(2)">Wearer</button>
       <a href="why-lord-walker.html" class="lw-sidebar__link">Why Lord Walker</a>
-      <a href="#gifting" class="lw-sidebar__link" onclick="closeDrawer()">Gifting</a>
+      <a href="gifting.html" class="lw-sidebar__link" onclick="closeDrawer()">Gifting</a>
       <a href="#reviews" class="lw-sidebar__link" onclick="closeDrawer()">Reviews</a>
       <a href="#blog" class="lw-sidebar__link" onclick="closeDrawer()">Blog</a>
       <a href="#contact" class="lw-sidebar__link" onclick="closeDrawer()">Contact</a>
@@ -797,7 +802,7 @@ fbq('track', 'PageView');
           <a href="#shop" class="lw-imgcard" style="background:linear-gradient(160deg,var(--wash-b),var(--sky));" onclick="closeDrawer()">
             <span class="lw-imgcard__glyph">🌿</span><span class="lw-imgcard__name">Wellness</span>
           </a>
-          <a href="#gifting" class="lw-imgcard" style="background:linear-gradient(160deg,var(--rose),var(--violet));" onclick="closeDrawer()">
+          <a href="gifting.html" class="lw-imgcard" style="background:linear-gradient(160deg,var(--rose),var(--violet));" onclick="closeDrawer()">
             <span class="lw-imgcard__glyph">🎁</span><span class="lw-imgcard__name">Gifting</span>
           </a>
         </div>
@@ -885,29 +890,6 @@ fbq('track', 'PageView');
   <div class="category-grid reveal-stagger" id="category-grid"></div>
 </section>
 
-<section id="wearer-tiles" class="reveal">
-  <div class="wearer-grid">
-    <a href="#shop" class="wearer-tile">
-      <img src="wearer-men.jpg" alt="My Lord — Men's socks">
-      <div class="wearer-tile__scrim"></div>
-      <div class="wearer-tile__label">My Lord</div>
-      <span class="wearer-tile__cta">Shop Now</span>
-    </a>
-    <a href="#shop" class="wearer-tile">
-      <img src="wearer-women.jpg" alt="Lady Walker — Women's socks">
-      <div class="wearer-tile__scrim"></div>
-      <div class="wearer-tile__label">Lady Walker</div>
-      <span class="wearer-tile__cta">Shop Now</span>
-    </a>
-    <a href="#shop" class="wearer-tile">
-      <img src="wearer-kids.jpg" alt="Li'l Walker — Kids' socks">
-      <div class="wearer-tile__scrim"></div>
-      <div class="wearer-tile__label">Li'l Walker</div>
-      <span class="wearer-tile__cta">Shop Now</span>
-    </a>
-  </div>
-</section>
-
 <section id="shop" class="wrap reveal">
   <div class="shop-head">
     <h2 class="section-h2-compact">Trending Now</h2>
@@ -953,41 +935,54 @@ fbq('track', 'PageView');
   <div class="grid grid--scroll reveal-stagger" id="new-arrivals-grid"></div>
 </section>
 
-<section id="gifting" class="reveal">
+<section id="diabetic-feature" class="reveal">
+  <div class="feature-split">
+    <div class="feature-split__copy">
+      <h2>Designed For Men &amp; Women With Diabetes</h2>
+      <p class="desc" style="max-width:none;">These socks are made to support comfort and foot health for people with diabetes and sensitive feet. The non-restrictive design helps improve circulation while reducing pressure and irritation.</p>
+      <h3>Benefits:</h3>
+      <ul>
+        <li>Helps relieve neuropathy discomfort</li>
+        <li>Supports better circulation</li>
+        <li>Reduces swelling in feet and ankles</li>
+        <li>Gentle on sensitive skin</li>
+        <li>Helps prevent blisters and infections</li>
+      </ul>
+      <h3>Comfort Features:</h3>
+      <ul>
+        <li>Non-binding, pressure-free fit</li>
+        <li>Seamless toe to reduce friction</li>
+        <li>Breathable for all-day wear</li>
+      </ul>
+      <p class="desc" style="max-width:none;">Designed for daily comfort, protection, and peace of mind.</p>
+      <a href="#shop" class="btn-ghost feature-split__btn">Learn More</a>
+    </div>
+    <div class="feature-split__media">
+      <img src="diabetic-socks-feature.jpg" alt="Lord Walker diabetic-friendly socks — designed for men and women with diabetes">
+    </div>
+  </div>
+</section>
 
-  <div class="gifting-wrap">
-    <div>
-      <div class="section-eyebrow">Gifting</div>
-      <h2>Socks are underrated as gifts. We'd like to fix that.</h2>
-      <p class="desc">Curated boxes for birthdays, festivals, onboarding kits, or just because. Mix colourways, pick a pack size, and we'll box it properly — no second thoughts needed on your end either.</p>
-      <div class="gift-bundles">
-        <div class="gift-card">
-          <span class="tag">Pack of 3</span>
-          <h4>Everyday Trio</h4>
-          <p>A starter set in three signature shades.</p>
-        </div>
-        <div class="gift-card">
-          <span class="tag">Pack of 5</span>
-          <h4>The Full Drawer</h4>
-          <p>Our most-gifted bundle, mixed styles.</p>
-        </div>
-        <div class="gift-card">
-          <span class="tag">Corporate</span>
-          <h4>Bulk Onboarding Kits</h4>
-          <p>Branded boxes for teams, in volume.</p>
-        </div>
-        <div class="gift-card">
-          <span class="tag">Festival</span>
-          <h4>Seasonal Bundles</h4>
-          <p>Limited colourways, refreshed each season.</p>
-        </div>
-      </div>
-    </div>
-    <div class="gift-swatchbox">
-      <div style="background:var(--lilac); color:rgba(21,22,28,0.6);">Lilac Set</div>
-      <div style="background:var(--sky); color:rgba(21,22,28,0.6);">Sky Set</div>
-      <div style="background:var(--violet); color:rgba(43,39,51,0.6);">Violet Set</div>
-    </div>
+<section id="wearer-tiles" class="reveal">
+  <div class="wearer-grid">
+    <a href="#shop" class="wearer-tile">
+      <img src="wearer-men.jpg" alt="My Lord — Men's socks">
+      <div class="wearer-tile__scrim"></div>
+      <div class="wearer-tile__label">My Lord</div>
+      <span class="wearer-tile__cta">Shop Now</span>
+    </a>
+    <a href="#shop" class="wearer-tile">
+      <img src="wearer-women.jpg" alt="Lady Walker — Women's socks">
+      <div class="wearer-tile__scrim"></div>
+      <div class="wearer-tile__label">Lady Walker</div>
+      <span class="wearer-tile__cta">Shop Now</span>
+    </a>
+    <a href="#shop" class="wearer-tile">
+      <img src="wearer-kids.jpg" alt="Li'l Walker — Kids' socks">
+      <div class="wearer-tile__scrim"></div>
+      <div class="wearer-tile__label">Li'l Walker</div>
+      <span class="wearer-tile__cta">Shop Now</span>
+    </a>
   </div>
 </section>
 
