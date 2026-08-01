@@ -21,11 +21,11 @@ router.get('/products', requireAdmin, (req, res) => {
   res.json(db.getProducts());
 });
 
-// PUT /api/admin/products/:id — update stock, price, status, image(s)
-// body: { stock?, price?, status?, image?, images? }
+// PUT /api/admin/products/:id — update stock, price, status, image(s), category, wearer, etc.
+// body: { stock?, price?, originalPrice?, status?, image?, images?, category?, wearer?, description?, careInstructions? }
 router.put('/products/:id', requireAdmin, (req, res) => {
   try {
-    const { stock, price, status, image, images } = req.body;
+    const { stock, price, originalPrice, status, image, images, category, wearer, description, careInstructions } = req.body;
     const updates = {};
     if (stock !== undefined) {
       const n = Number(stock);
@@ -37,10 +37,23 @@ router.put('/products/:id', requireAdmin, (req, res) => {
       if (!Number.isFinite(n) || n <= 0) throw new Error('Price must be a positive number');
       updates.price = n;
     }
+    if (originalPrice !== undefined) {
+      if (originalPrice === null || originalPrice === '') {
+        updates.originalPrice = null; // clears the "was" price / strikethrough
+      } else {
+        const n = Number(originalPrice);
+        if (!Number.isFinite(n) || n <= 0) throw new Error('Original price must be a positive number');
+        updates.originalPrice = n;
+      }
+    }
     if (status !== undefined) {
       if (!['active', 'inactive'].includes(status)) throw new Error('Status must be active or inactive');
       updates.status = status;
     }
+    if (category !== undefined) updates.category = String(category).trim();
+    if (wearer !== undefined) updates.wearer = String(wearer).trim();
+    if (description !== undefined) updates.description = String(description);
+    if (careInstructions !== undefined) updates.careInstructions = String(careInstructions);
     if (image !== undefined) {
       updates.image = image; // base64 data URL, or '' to clear it (legacy single-image field)
     }
@@ -57,10 +70,10 @@ router.put('/products/:id', requireAdmin, (req, res) => {
 });
 
 // POST /api/admin/products — create a new product
-// body: { id, name, price, stock, status?, image?, images? }
+// body: { id, name, price, originalPrice?, stock, status?, image?, images?, category?, wearer?, description?, careInstructions? }
 router.post('/products', requireAdmin, (req, res) => {
   try {
-    const { id, name, price, stock, status, image, images } = req.body;
+    const { id, name, price, originalPrice, stock, status, image, images, category, wearer, description, careInstructions } = req.body;
     if (!id || !String(id).trim()) throw new Error('Product code is required');
     if (!name || !String(name).trim()) throw new Error('Product name is required');
     const priceNum = Number(price);
@@ -74,7 +87,15 @@ router.post('/products', requireAdmin, (req, res) => {
       price: priceNum,
       stock: stockNum,
       status: status === 'inactive' ? 'inactive' : 'active',
+      category: category ? String(category).trim() : '',
+      wearer: wearer ? String(wearer).trim() : 'unisex',
+      description: description ? String(description) : '',
+      careInstructions: careInstructions ? String(careInstructions) : '',
     };
+    if (originalPrice !== undefined && originalPrice !== null && originalPrice !== '') {
+      const opNum = Number(originalPrice);
+      if (Number.isFinite(opNum) && opNum > 0) product.originalPrice = opNum;
+    }
     if (Array.isArray(images) && images.length) {
       product.images = images;
       product.image = images[0];
