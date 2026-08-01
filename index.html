@@ -210,11 +210,14 @@ fbq('track', 'PageView');
   .shop-head h2.section-h2-compact{font-size:26px;}
   @media(max-width:600px){.shop-head h2.section-h2-compact{font-size:21px;}}
 
-  /* "Comfort, every step" banner between Trending and About Us */
+  /* "Comfort, every step" banner between Trending and About Us — full-bleed, edge to edge */
   #comfort-banner{margin:8px 0;}
-  .comfort-banner-img{width:100%; display:block; border-radius:20px; box-shadow:0 16px 36px rgba(43,39,51,0.14); object-fit:cover;}
+  .comfort-banner-img{width:100%; display:block; object-fit:cover; height:380px;}
+  @media(max-width:900px){
+    .comfort-banner-img{height:260px;}
+  }
   @media(max-width:600px){
-    .comfort-banner-img{height:170px; border-radius:14px;}
+    .comfort-banner-img{height:190px;}
   }
 
   /* Why Lord Walker — intro copy above the feature cards */
@@ -266,6 +269,19 @@ fbq('track', 'PageView');
   .grid--scroll .card{flex:0 0 200px; scroll-snap-align:start;}
   @media(max-width:600px){
     .grid--scroll .card{flex:0 0 150px;}
+  }
+
+  /* Reviews — same horizontal auto-scroll treatment, side by side on desktop AND mobile */
+  .reviews-scroll{
+    display:flex; flex-wrap:nowrap; gap:20px; overflow-x:auto; scroll-snap-type:x mandatory;
+    -webkit-overflow-scrolling:touch; padding-bottom:10px; scrollbar-width:thin; text-align:left;
+  }
+  .reviews-scroll::-webkit-scrollbar{height:6px;}
+  .reviews-scroll::-webkit-scrollbar-thumb{background:rgba(43,39,51,0.18); border-radius:999px;}
+  .reviews-scroll .why-card{flex:0 0 300px; scroll-snap-align:start;}
+  @media(max-width:600px){
+    .reviews-scroll{gap:14px;}
+    .reviews-scroll .why-card{flex:0 0 260px;}
   }
 
   /* Compact 2-up grid on mobile — this is the main fix for excessive mobile scrolling */
@@ -351,17 +367,20 @@ fbq('track', 'PageView');
   #gifting{background:var(--paper); color:var(--ink); padding:64px 32px;}
   .gifting-wrap{max-width:1100px; margin:0 auto; display:grid; grid-template-columns:1fr 1fr; gap:56px; align-items:center;}
 
-  /* ABOUT US — image and copy side by side */
+  /* ABOUT US — full-bleed: image touches the left edge, copy has its own inner padding */
   .about-grid{display:grid; grid-template-columns:0.85fr 1fr; gap:52px; align-items:start;}
-  .about-grid__media{position:sticky; top:100px; border-radius:20px; overflow:hidden; box-shadow:0 20px 44px rgba(43,39,51,0.12);}
-  .about-grid__media img{width:100%; display:block; object-fit:cover;}
+  .about-grid__media{position:sticky; top:100px; overflow:hidden;}
+  .about-grid__media img{width:100%; display:block; object-fit:cover; height:520px;}
+  .about-grid__copy{padding-right:48px;}
   .about-grid__copy .desc{margin-bottom:20px;}
   @media(max-width:900px){
-    .about-grid{grid-template-columns:1fr; gap:32px;}
+    .about-grid{grid-template-columns:1fr; gap:24px;}
     .about-grid__media{position:static; top:auto;}
+    .about-grid__copy{padding:0 32px;}
   }
   @media(max-width:600px){
-    .about-grid__media img{height:220px; border-radius:16px;}
+    .about-grid__media img{height:260px;}
+    .about-grid__copy{padding:0 18px;}
   }
   #gifting .section-eyebrow{font-family:'IBM Plex Mono',monospace; font-size:12px; letter-spacing:2px; text-transform:uppercase; color:var(--accent-plum); margin-bottom:16px;}
   #gifting h2{font-family:'Fraunces',serif; font-size:38px; font-weight:600; letter-spacing:-0.5px; margin-bottom:18px; line-height:1.15;}
@@ -803,29 +822,25 @@ fbq('track', 'PageView');
 </section>
 
 <section id="comfort-banner" class="reveal">
-  <div class="wrap">
-    <img src="comfort-every-step-banner.jpg" alt="Comfort, every step — Lord Walker" class="comfort-banner-img">
-  </div>
+  <img src="comfort-every-step-banner.jpg" alt="Comfort, every step — Lord Walker" class="comfort-banner-img">
 </section>
 
 <section id="about" class="reveal" style="background:var(--paper); color:var(--ink); padding:64px 0;">
-  <div class="wrap" style="max-width:1140px;">
-    <div class="section-eyebrow" style="color:var(--accent-teal); font-family:'IBM Plex Mono',monospace; font-size:12px; letter-spacing:2px; text-transform:uppercase; margin-bottom:28px; text-align:center;">About Us</div>
-    <div class="about-grid">
-      <div class="about-grid__media">
-        <img src="about-us-banner.webp" alt="Lord Walker — Everyday style, built to last">
+  <div class="section-eyebrow" style="color:var(--accent-teal); font-family:'IBM Plex Mono',monospace; font-size:12px; letter-spacing:2px; text-transform:uppercase; margin-bottom:28px; text-align:center;">About Us</div>
+  <div class="about-grid">
+    <div class="about-grid__media">
+      <img src="about-us-banner.webp" alt="Lord Walker — Everyday style, built to last">
+    </div>
+    <div class="about-grid__copy" id="about-copy">
+      <h3 class="about-copy__heading">About Us — Lord Walker</h3>
+      <p class="desc" style="max-width:none;">Every seam, rib, and stitch is obsessively considered. Our socks are made not for trend — but for the daily act of walking well.</p>
+      <div class="about-copy__more">
+        <h3 class="about-copy__heading">Premium, Without Excess</h3>
+        <p class="desc" style="max-width:none;">To us, premium means thoughtful — not complicated. It means choosing the right materials, refining the fit, and ensuring comfort that lasts through the day. No loud logos. No unnecessary gimmicks. Just well-made socks that do their job, consistently.</p>
+        <h3 class="about-copy__heading">How We Think</h3>
+        <p class="desc" style="max-width:none; margin-bottom:0;">We believe that when you feel comfortable and put together, you move differently. You walk with clarity. With confidence. With intent.</p>
       </div>
-      <div class="about-grid__copy" id="about-copy">
-        <h3 class="about-copy__heading">About Us — Lord Walker</h3>
-        <p class="desc" style="max-width:none;">Every seam, rib, and stitch is obsessively considered. Our socks are made not for trend — but for the daily act of walking well.</p>
-        <div class="about-copy__more">
-          <h3 class="about-copy__heading">Premium, Without Excess</h3>
-          <p class="desc" style="max-width:none;">To us, premium means thoughtful — not complicated. It means choosing the right materials, refining the fit, and ensuring comfort that lasts through the day. No loud logos. No unnecessary gimmicks. Just well-made socks that do their job, consistently.</p>
-          <h3 class="about-copy__heading">How We Think</h3>
-          <p class="desc" style="max-width:none; margin-bottom:0;">We believe that when you feel comfortable and put together, you move differently. You walk with clarity. With confidence. With intent.</p>
-        </div>
-        <button type="button" class="about-show-more-btn" onclick="toggleAboutMore(this)">Show more</button>
-      </div>
+      <button type="button" class="about-show-more-btn" onclick="toggleAboutMore(this)">Show more</button>
     </div>
   </div>
 </section>
@@ -880,7 +895,7 @@ fbq('track', 'PageView');
   <div class="wrap" style="text-align:center;">
     <div class="section-eyebrow" style="color:var(--accent-plum); font-family:'IBM Plex Mono',monospace; font-size:12px; letter-spacing:2px; text-transform:uppercase; margin-bottom:16px;">What customers say</div>
     <h2 style="font-family:'Fraunces',serif; font-size:36px; font-weight:600; letter-spacing:-0.5px; margin-bottom:48px;">Trusted by everyday walkers</h2>
-    <div class="why-grid" style="max-width:1000px; margin:0 auto;">
+    <div class="reviews-scroll" id="reviews-grid">
       <div class="why-card" style="background:#fff; border:1px solid rgba(21,22,28,0.08);">
         <div style="color:var(--brass); margin-bottom:10px; font-size:14px;">★★★★★</div>
         <p style="font-size:13.5px; color:rgba(21,22,28,0.65); line-height:1.6; margin-bottom:14px;">"Genuinely the most comfortable socks I've bought online. The heel grip actually works — no slipping by evening."</p>
@@ -906,23 +921,22 @@ fbq('track', 'PageView');
     <div class="section-eyebrow" style="color:var(--accent-teal); font-family:'IBM Plex Mono',monospace; font-size:12px; letter-spacing:2px; text-transform:uppercase; margin-bottom:16px;">From the Journal</div>
     <h2 style="font-family:'Fraunces',serif; font-size:36px; font-weight:600; letter-spacing:-0.5px; margin-bottom:36px;">Notes on comfort, craft &amp; everyday style</h2>
     <div class="why-grid" style="max-width:1000px; margin:0 auto;">
-      <a href="#" class="why-card" style="text-decoration:none; display:block;">
+      <a href="blog-sock-length-guide.html" class="why-card" style="text-decoration:none; display:block;">
         <span class="glyph">🧦</span>
         <h3>How to Choose the Right Sock Length</h3>
         <p>A quick guide to crew, ankle, and no-show fits — and when to wear each one.</p>
       </a>
-      <a href="#" class="why-card" style="text-decoration:none; display:block;">
+      <a href="blog-sock-care.html" class="why-card" style="text-decoration:none; display:block;">
         <span class="glyph">🧺</span>
         <h3>Caring for Your Cotton Socks</h3>
         <p>Simple washing habits that keep colours sharp and elastic intact for longer.</p>
       </a>
-      <a href="#" class="why-card" style="text-decoration:none; display:block;">
+      <a href="blog-gifting-guide.html" class="why-card" style="text-decoration:none; display:block;">
         <span class="glyph">🎁</span>
         <h3>A Gifting Guide for Every Occasion</h3>
         <p>From onboarding kits to festival bundles — how to pick the right pack size.</p>
       </a>
     </div>
-    <p style="font-size:11.5px; color:rgba(21,22,28,0.4); margin-top:32px;">Placeholder posts — replace with real articles before launch, or link out to a Medium/Substack blog.</p>
   </div>
 </section>
 
@@ -1469,6 +1483,7 @@ loadProducts();
 loadCategories();
 updateCartUI();
 initReveal();
+startAutoScroll('reviews-grid', 0.4);
 </script>
 
 <!-- Bottom mobile tab bar -->
