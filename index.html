@@ -164,7 +164,9 @@ fbq('track', 'PageView');
   #hero-slide-4{background-image:url('hero-slide-walk.jpg');}
 
   @media(max-width:720px){
-    .hero-track{aspect-ratio:1024/1024; min-height:320px;}
+    /* Capped with max-height (vh) so header + banner always fit in one screen —
+       no scrolling needed just to see the whole banner on load. */
+    .hero-track{aspect-ratio:4/3; max-height:36vh; min-height:200px;}
 
     /* Swap to the square, mobile-cropped versions so faces/text aren't cut off */
     #hero-slide-1{background-image:url('hero-slide-men-mobile.jpg');}
@@ -210,7 +212,11 @@ fbq('track', 'PageView');
 
   /* "Comfort, every step" banner between Trending and About Us */
   #comfort-banner{padding:0 32px; margin:8px 0;}
-  .comfort-banner-img{width:100%; display:block; border-radius:20px; box-shadow:0 16px 36px rgba(43,39,51,0.14);}
+  .comfort-banner-img{width:100%; display:block; border-radius:20px; box-shadow:0 16px 36px rgba(43,39,51,0.14); object-fit:cover;}
+  @media(max-width:600px){
+    #comfort-banner{padding:0 20px;}
+    .comfort-banner-img{height:150px; border-radius:14px;}
+  }
 
   /* Why Lord Walker — intro copy above the feature cards */
 
@@ -249,6 +255,19 @@ fbq('track', 'PageView');
   }
   .add-btn:hover{background:var(--accent-plum);}
   .stock-tag{font-size:9.5px; color:rgba(21,22,28,0.4); font-family:'IBM Plex Mono',monospace;}
+
+  /* Trending Now / New Arrivals — horizontal sliding row instead of a wrapping grid.
+     Cuts vertical space dramatically since products sit in one scrollable line. */
+  .grid--scroll{
+    display:flex; flex-wrap:nowrap; overflow-x:auto; scroll-snap-type:x mandatory;
+    -webkit-overflow-scrolling:touch; padding-bottom:10px; scrollbar-width:thin;
+  }
+  .grid--scroll::-webkit-scrollbar{height:6px;}
+  .grid--scroll::-webkit-scrollbar-thumb{background:rgba(43,39,51,0.18); border-radius:999px;}
+  .grid--scroll .card{flex:0 0 200px; scroll-snap-align:start;}
+  @media(max-width:600px){
+    .grid--scroll .card{flex:0 0 150px;}
+  }
 
   /* Compact 2-up grid on mobile — this is the main fix for excessive mobile scrolling */
   @media(max-width:600px){
@@ -341,6 +360,9 @@ fbq('track', 'PageView');
   @media(max-width:900px){
     .about-grid{grid-template-columns:1fr; gap:32px;}
     .about-grid__media{position:static; top:auto;}
+  }
+  @media(max-width:600px){
+    .about-grid__media img{height:220px; border-radius:16px;}
   }
   #gifting .section-eyebrow{font-family:'IBM Plex Mono',monospace; font-size:12px; letter-spacing:2px; text-transform:uppercase; color:var(--accent-plum); margin-bottom:16px;}
   #gifting h2{font-family:'Fraunces',serif; font-size:38px; font-weight:600; letter-spacing:-0.5px; margin-bottom:18px; line-height:1.15;}
@@ -778,7 +800,7 @@ fbq('track', 'PageView');
       <a href="#" onclick="event.preventDefault(); openSizeGuide();" style="text-decoration:underline; color:inherit;">See size guide →</a>
     </p>
   </div>
-  <div class="grid reveal-stagger" id="trending-grid"></div>
+  <div class="grid grid--scroll reveal-stagger" id="trending-grid"></div>
 </section>
 
 <section id="comfort-banner" class="reveal">
@@ -814,7 +836,7 @@ fbq('track', 'PageView');
     <h2 class="section-h2-compact">New Arrivals</h2>
     <p>Fresh off the loom — just added to the collection.</p>
   </div>
-  <div class="grid reveal-stagger" id="new-arrivals-grid"></div>
+  <div class="grid grid--scroll reveal-stagger" id="new-arrivals-grid"></div>
 </section>
 
 <section id="gifting" class="reveal">
