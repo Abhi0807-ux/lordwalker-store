@@ -21,11 +21,11 @@ router.get('/products', requireAdmin, (req, res) => {
   res.json(db.getProducts());
 });
 
-// PUT /api/admin/products/:id — update stock, price, status, image(s), category, wearer, etc.
-// body: { stock?, price?, originalPrice?, status?, image?, images?, category?, wearer?, description?, careInstructions? }
+// PUT /api/admin/products/:id — update stock, price, status, and/or image
+// body: { stock?, price?, status?, image? }
 router.put('/products/:id', requireAdmin, (req, res) => {
   try {
-    const { stock, price, originalPrice, status, image, images, category, wearer, description, careInstructions } = req.body;
+    const { stock, price, status, image } = req.body;
     const updates = {};
     if (stock !== undefined) {
       const n = Number(stock);
@@ -37,30 +37,12 @@ router.put('/products/:id', requireAdmin, (req, res) => {
       if (!Number.isFinite(n) || n <= 0) throw new Error('Price must be a positive number');
       updates.price = n;
     }
-    if (originalPrice !== undefined) {
-      if (originalPrice === null || originalPrice === '') {
-        updates.originalPrice = null; // clears the "was" price / strikethrough
-      } else {
-        const n = Number(originalPrice);
-        if (!Number.isFinite(n) || n <= 0) throw new Error('Original price must be a positive number');
-        updates.originalPrice = n;
-      }
-    }
     if (status !== undefined) {
       if (!['active', 'inactive'].includes(status)) throw new Error('Status must be active or inactive');
       updates.status = status;
     }
-    if (category !== undefined) updates.category = String(category).trim();
-    if (wearer !== undefined) updates.wearer = String(wearer).trim();
-    if (description !== undefined) updates.description = String(description);
-    if (careInstructions !== undefined) updates.careInstructions = String(careInstructions);
     if (image !== undefined) {
-      updates.image = image; // base64 data URL, or '' to clear it (legacy single-image field)
-    }
-    if (images !== undefined) {
-      if (!Array.isArray(images)) throw new Error('images must be an array of data URLs');
-      updates.images = images; // full gallery — replaces the stored array
-      updates.image = images[0] || ''; // keep legacy single-image field in sync for older consumers
+      updates.image = image; // base64 data URL, or '' to clear it
     }
     const updated = db.updateProduct(req.params.id, updates);
     res.json(updated);
@@ -70,10 +52,10 @@ router.put('/products/:id', requireAdmin, (req, res) => {
 });
 
 // POST /api/admin/products — create a new product
-// body: { id, name, price, originalPrice?, stock, status?, image?, images?, category?, wearer?, description?, careInstructions? }
+// body: { id, name, price, stock, status?, image? }
 router.post('/products', requireAdmin, (req, res) => {
   try {
-    const { id, name, price, originalPrice, stock, status, image, images, category, wearer, description, careInstructions } = req.body;
+    const { id, name, price, stock, status, image } = req.body;
     if (!id || !String(id).trim()) throw new Error('Product code is required');
     if (!name || !String(name).trim()) throw new Error('Product name is required');
     const priceNum = Number(price);
@@ -87,21 +69,8 @@ router.post('/products', requireAdmin, (req, res) => {
       price: priceNum,
       stock: stockNum,
       status: status === 'inactive' ? 'inactive' : 'active',
-      category: category ? String(category).trim() : '',
-      wearer: wearer ? String(wearer).trim() : 'unisex',
-      description: description ? String(description) : '',
-      careInstructions: careInstructions ? String(careInstructions) : '',
     };
-    if (originalPrice !== undefined && originalPrice !== null && originalPrice !== '') {
-      const opNum = Number(originalPrice);
-      if (Number.isFinite(opNum) && opNum > 0) product.originalPrice = opNum;
-    }
-    if (Array.isArray(images) && images.length) {
-      product.images = images;
-      product.image = images[0];
-    } else if (image) {
-      product.image = image;
-    }
+    if (image) product.image = image;
 
     const created = db.addProduct(product);
     res.status(201).json(created);
@@ -173,26 +142,6 @@ router.delete('/categories/:id', requireAdmin, (req, res) => {
   try {
     const removed = db.deleteCategory(req.params.id);
     res.json({ success: true, removed });
-  } catch (err) {
-    res.status(400).json({ error: err.message });
-  }
-});
-
-// GET /api/admin/backup — download everything (products, categories, orders) as one JSON file.
-// This is a manual safety net while running on free hosting with no persistent disk —
-// download this periodically so a server restart/redeploy never means losing real data.
-router.get('/backup', requireAdmin, (req, res) => {
-  try {
-    const backup = {
-      exportedAt: new Date().toISOString(),
-      products: db.getProducts(),
-      categories: db.getCategories(),
-      orders: db.getAllOrders(),
-    };
-    const filename = `lordwalker-backup-${new Date().toISOString().slice(0, 10)}.json`;
-    res.setHeader('Content-Disposition', `attachment; filename="${filename}"`);
-    res.setHeader('Content-Type', 'application/json');
-    res.send(JSON.stringify(backup, null, 2));
   } catch (err) {
     res.status(400).json({ error: err.message });
   }
