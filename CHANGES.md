@@ -2,6 +2,21 @@
 
 Three things were asked for: don't make it look AI-generated, improve the images, make it more efficient. Here's what was done for each, concretely.
 
+## Update — homepage rebuilt in a bold editorial direction
+
+A second pass, scoped to `index.html` only (every other page is untouched, still on the calmer system described below). This wasn't a re-skin — it's a different stylesheet (`home.css`, separate from `styles.css`), a different layout, different typography treatment, all built around a "magazine, not app" concept:
+
+- **Masthead nav** instead of a mega-menu — flat text links, a volume/issue line up top, a full-screen "Contents" panel on mobile instead of a bottom app-style tab bar.
+- **Single editorial cover hero** instead of the 4-slide auto-advancing carousel — one real, visible, accessible `<h1>` overlaid on one photo, plus "cover line" teasers for Men/Women/Kids/Gifting. Side benefit: one hero image loads instead of four.
+- **"In This Issue"** — the old shop-by-purpose tile grid, now a numbered editorial index.
+- **A real drop cap and pull quote** in the About section, using your own existing copy — nothing invented.
+- **"Chapters"** for Men/Women/Kids replacing the plain wearer tiles — full-bleed photo, chapter number, small inset detail shot.
+- **Reviews reframed as "Letters to the Editor"**, blog as "Further Reading," contact + newsletter merged into "Correspondence," footer as a magazine colophon.
+- Cart, checkout (Razorpay), the product modal, size guide, and search all work exactly as before — every element ID and class those scripts depend on was kept identical; only their CSS changed. Nothing about the payment flow was touched.
+- Every change went through the same validation as the first pass: HTML tag-balance checked, all 3 script blocks parsed, zero duplicate IDs, zero broken image references, every CSS class cross-checked against its stylesheet.
+
+---
+
 ## 1. Images — 72% smaller, same 24 files down to 21
 
 | | Before | After |
