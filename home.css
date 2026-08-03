@@ -195,11 +195,9 @@ section{position:relative;}
 }
 
 /* ============ PULL-QUOTE BANNER (comfort image break) ============ */
-.mood-break{position:relative; height:56vh; min-height:320px; overflow:hidden;}
-.mood-break img{width:100%; height:100%; object-fit:cover;}
-.mood-break::after{content:""; position:absolute; inset:0; background:linear-gradient(0deg, rgba(20,17,16,0.55), rgba(20,17,16,0) 60%);}
-.mood-break--plain::after{display:none;}
-.mood-break__cap{position:absolute; bottom:28px; left:28px; right:28px; z-index:2; color:#fff; font-family:'Fraunces',serif; font-style:italic; font-size:clamp(19px,2.6vw,28px); max-width:560px; text-shadow:0 2px 16px rgba(0,0,0,0.35);}
+.closing-card{border:1px solid var(--line); overflow:hidden; height:340px;}
+.closing-card img{width:100%; height:100%; object-fit:cover;}
+@media(max-width:640px){.closing-card{height:220px;}}
 
 /* ============ PRODUCT GRID (Trending / New Arrivals) ============ */
 .shop-section{padding:88px 0;}
@@ -229,18 +227,33 @@ section{position:relative;}
   .card-media{height:140px;}
 }
 
-/* ============ CHAPTERS (Men / Women / Kids) ============ */
-.chapters{border-top:3px solid var(--ink);}
-.chapter{position:relative; height:62vh; min-height:380px; display:flex; align-items:flex-end; overflow:hidden; border-bottom:2px solid var(--ink);}
-.chapter img.bg{position:absolute; inset:0; width:100%; height:100%; object-fit:cover; z-index:0;}
-.chapter::after{content:""; position:absolute; inset:0; background:linear-gradient(0deg, rgba(20,17,16,0.7), rgba(20,17,16,0.05) 60%); z-index:1;}
-.chapter-content{position:relative; z-index:2; padding:36px 40px; display:flex; align-items:flex-end; justify-content:space-between; width:100%; color:#fff; gap:20px;}
-.chapter-num{font-family:'IBM Plex Mono',monospace; font-size:12.5px; letter-spacing:2px; color:var(--brass); margin-bottom:10px; display:block;}
-.chapter-title{font-family:'Fraunces',serif; font-size:clamp(28px,4vw,50px); font-weight:600; line-height:1;}
-.chapter-cta{font-family:'IBM Plex Mono',monospace; font-size:11.5px; letter-spacing:1.5px; text-transform:uppercase; border-bottom:1px solid #fff; padding-bottom:3px; white-space:nowrap;}
-.chapter-inset{width:72px; height:72px; border:3px solid #fff; object-fit:cover; box-shadow:0 10px 26px rgba(0,0,0,0.35); flex-shrink:0;}
+/* ============ STATEMENT CARD (replaces a stock-photo banner with original typography) ============ */
+.statement-card{background:var(--ink); color:var(--paper); padding:64px 56px; text-align:center; border:1px solid var(--ink);}
+.statement-card .kicker{color:var(--brass); margin-bottom:22px;}
+.statement-card__line{
+  font-family:'Fraunces',serif; font-style:italic; font-weight:500; font-size:clamp(22px,3.4vw,38px);
+  line-height:1.4; max-width:640px; margin:0 auto; color:var(--ink-soft);
+}
+.statement-card__line em{color:var(--brass); font-style:italic;}
+@media(max-width:640px){.statement-card{padding:44px 26px;}}
+
+/* ============ CHAPTERS (Men / Women / Kids) — contained card grid, not full-bleed bands ============ */
+.chapters-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:20px; padding:88px 0;}
+.chapter{position:relative; height:420px; border:1px solid var(--line); display:flex; align-items:flex-end; overflow:hidden;}
+.chapter img.bg{position:absolute; inset:0; width:100%; height:100%; object-fit:cover; z-index:0; transition:transform .5s ease;}
+.chapter:hover img.bg{transform:scale(1.04);}
+.chapter::after{content:""; position:absolute; inset:0; background:linear-gradient(0deg, rgba(20,17,16,0.75), rgba(20,17,16,0.05) 60%); z-index:1;}
+.chapter-content{position:relative; z-index:2; padding:24px; display:flex; align-items:flex-end; justify-content:space-between; width:100%; color:#fff; gap:14px;}
+.chapter-num{font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:2px; color:var(--brass); margin-bottom:8px; display:block;}
+.chapter-title{font-family:'Fraunces',serif; font-size:clamp(22px,2.4vw,30px); font-weight:600; line-height:1;}
+.chapter-cta{font-family:'IBM Plex Mono',monospace; font-size:10.5px; letter-spacing:1.5px; text-transform:uppercase; border-bottom:1px solid #fff; padding-bottom:3px; white-space:nowrap;}
+.chapter-inset{width:56px; height:56px; border:2px solid #fff; object-fit:cover; box-shadow:0 8px 20px rgba(0,0,0,0.35); flex-shrink:0;}
+@media(max-width:900px){
+  .chapters-grid{grid-template-columns:1fr; gap:16px; padding:64px 0;}
+  .chapter{height:280px;}
+}
 @media(max-width:640px){
-  .chapter-content{flex-direction:column; align-items:flex-start; gap:14px;}
+  .chapter-content{flex-direction:column; align-items:flex-start; gap:12px; padding:20px;}
   .chapter-inset{display:none;}
 }
 
