@@ -23,7 +23,7 @@
 <meta name="twitter:image" content="https://www.lordwalkerbybrham.com/lord-walker-logo.webp">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Libre+Franklin:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 
 <!-- Structured data — helps Google show rich results (brand, logo, contact info) -->
@@ -72,29 +72,29 @@ fbq('track', 'PageView');
   gtag('js', new Date());
   gtag('config', 'G-QWV2JV0V0V');
 </script>
-<link rel="stylesheet" href="home.css">
+<link rel="stylesheet" href="playful.css">
 </head>
 <body>
 
-<div class="masthead-topline">Vol. XXXII — Free Shipping On Orders Over &#8377;499</div>
+<div class="announce">Vol. 4 — Free Shipping On Orders Over &#8377;499 &middot; No Second Thoughts</div>
 
 <header>
-  <div class="wrap masthead-main">
-    <a href="index.html" class="masthead-word">
+  <div class="wrap nav-row">
+    <a href="index.html" class="nav-logo">
       <img src="lord-walker-logo.webp" alt="Lord Walker crest" loading="eager">
-      <span>Lord Walker</span>
     </a>
-    <nav class="masthead-links">
+    <nav class="nav-links">
       <a href="shop.html?wearer=men">Men</a>
       <a href="shop.html?wearer=women">Women</a>
       <a href="shop.html?wearer=kids">Kids</a>
       <a href="gifting.html">Gifting</a>
-      <a href="why-lord-walker.html">Journal</a>
-      <a href="#contact">Contact</a>
+      <a href="why-lord-walker.html">About</a>
     </nav>
-    <div class="masthead-actions">
-      <button onclick="toggleSearchBar()" aria-label="Search">Search</button>
-      <button id="cart-btn" onclick="openCart()" aria-label="Open cart">Cart&nbsp;<span id="cart-count">0</span></button>
+    <div class="nav-actions">
+      <button class="icon-btn" onclick="toggleSearchBar()" aria-label="Search">&#128269;</button>
+      <button class="icon-btn" id="cart-btn" onclick="openCart()" aria-label="Open cart">
+        &#128092;<span class="cart-badge" id="cart-count">0</span>
+      </button>
       <button class="lw-hamburger" onclick="openDrawer()" aria-label="Open menu" aria-expanded="false" aria-controls="lw-drawer">
         <span></span><span></span><span></span>
       </button>
@@ -102,8 +102,8 @@ fbq('track', 'PageView');
   </div>
   <div id="lw-search-bar" class="lw-search-bar">
     <form class="wrap" onsubmit="event.preventDefault(); runSiteSearch(document.getElementById('lw-search-input').value);">
-      <input id="lw-search-input" type="search" placeholder="Search socks, collections…" autocomplete="off">
-      <button type="submit">Search</button>
+      <input id="lw-search-input" type="search" placeholder="Search socks, collections&hellip;" autocomplete="off">
+      <button type="submit" class="btn btn-ink" style="padding:10px 22px;">Go</button>
     </form>
   </div>
 </header>
@@ -111,133 +111,158 @@ fbq('track', 'PageView');
 <div id="lw-overlay" class="lw-overlay" onclick="closeDrawer()"></div>
 <nav id="lw-drawer" class="lw-drawer" aria-label="Mobile navigation">
   <div class="lw-drawer-head">
-    <span>Contents</span>
-    <button onclick="closeDrawer()" aria-label="Close menu">×</button>
+    <img src="lord-walker-logo.webp" alt="Lord Walker" style="height:32px;" loading="lazy" decoding="async">
+    <button onclick="closeDrawer()" aria-label="Close menu">&times;</button>
   </div>
   <nav>
-    <a href="shop.html?wearer=men" onclick="closeDrawer()">Men <span>01</span></a>
-    <a href="shop.html?wearer=women" onclick="closeDrawer()">Women <span>02</span></a>
-    <a href="shop.html?wearer=kids" onclick="closeDrawer()">Kids <span>03</span></a>
-    <a href="gifting.html" onclick="closeDrawer()">Gifting <span>04</span></a>
-    <a href="why-lord-walker.html" onclick="closeDrawer()">Journal <span>05</span></a>
-    <a href="shop.html" onclick="closeDrawer()">Shop All <span>06</span></a>
+    <a href="shop.html?wearer=men" onclick="closeDrawer()">Men</a>
+    <a href="shop.html?wearer=women" onclick="closeDrawer()">Women</a>
+    <a href="shop.html?wearer=kids" onclick="closeDrawer()">Kids</a>
+    <a href="gifting.html" onclick="closeDrawer()">Gifting</a>
+    <a href="why-lord-walker.html" onclick="closeDrawer()">About</a>
+    <a href="shop.html" onclick="closeDrawer()">Shop All</a>
   </nav>
-  <div class="lw-drawer-foot">Lord Walker by Brahm — Crafted Since 1994</div>
+  <div class="lw-drawer-foot">Lord Walker by Brahm &mdash; Crafted Since 1994</div>
 </nav>
 
-<section class="hero-ed section-relative">
-  <div class="hero-ed__copy">
-    <span class="kicker">Issue N&#176;01 &mdash; Since 1994</span>
-    <h1>Walk<br>Like A<br><em>Lord.</em></h1>
-    <p class="hero-ed__deck">Premium socks, without excess. Crafted since 1994, now stepping into India &mdash; comfort engineered for the office, the everyday, and everything in between.</p>
-    <div class="hero-ed__covlines">
-      <a href="shop.html?wearer=men"><span>Lord Walker &mdash; Men</span><span>&rarr;</span></a>
-      <a href="shop.html?wearer=women"><span>Lady Walker &mdash; Women</span><span>&rarr;</span></a>
-      <a href="shop.html?wearer=kids"><span>Li'l Walker &mdash; Kids</span><span>&rarr;</span></a>
-      <a href="gifting.html"><span>The Gifting Edit</span><span>&rarr;</span></a>
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div class="hero-copy">
+      <span class="eyebrow-tag">&#9733; Crafted Since 1994</span>
+      <h1>Socks that mean<br><span>no second thoughts.</span></h1>
+      <p>Premium comfort for the office, the everyday, and everything in between &mdash; now stepping into India.</p>
+      <div class="hero-cta-row">
+        <a href="#shop" class="btn btn-ink">Shop Bestsellers</a>
+        <a href="gifting.html" class="btn btn-outline" style="background:#fff;">Explore Gifting</a>
+      </div>
+    </div>
+    <div class="hero-media">
+      <div class="hero-media__frame">
+        <img src="purpose-everyday.webp" alt="Lord Walker socks in everyday wear" loading="eager" fetchpriority="high">
+      </div>
+      <div class="hero-media__badge"><strong>5&#9733;</strong>Rated Comfort</div>
     </div>
   </div>
-  <div class="hero-ed__media">
-    <img src="purpose-everyday.webp" alt="Lord Walker &mdash; everyday style in motion" loading="eager" fetchpriority="high">
-    <span class="hero-ed__credit">Lord Walker Studio</span>
-  </div>
+  <div class="stripe-cuff" aria-hidden="true"></div>
 </section>
 
-<section class="wrap contents reveal">
+<section class="wrap purpose-grid reveal">
   <div class="section-head">
-    <h2>In This Issue</h2>
+    <span class="eyebrow-tag" style="background:var(--cornflower); color:#fff;">Find Your Fit</span>
+    <h2>Shop By Purpose</h2>
     <p>Five ways to find the right pair for wherever your day takes you.</p>
   </div>
-  <div class="contents-list">
-    <a href="shop.html?purpose=formal">
-      <span class="num">01</span>
-      <img class="thumb" src="purpose-office.webp" alt="" loading="lazy" decoding="async">
-      <span><span class="title">The Office Edit</span><span class="sub">Office &amp; Corporate</span></span>
-      <span class="arrow">&rarr;</span>
+  <div class="purpose-cards reveal-stagger">
+    <a href="shop.html?purpose=formal" class="purpose-card purpose-card--1">
+      <div class="purpose-card__thumb"><img src="purpose-office.webp" alt="" loading="lazy" decoding="async"></div>
+      <h3>Office</h3><p>Corporate &amp; Formal</p>
     </a>
-    <a href="shop.html?purpose=casual">
-      <span class="num">02</span>
-      <img class="thumb" src="purpose-everyday.webp" alt="" loading="lazy" decoding="async">
-      <span><span class="title">Everyday Carry</span><span class="sub">Casual &amp; Everyday</span></span>
-      <span class="arrow">&rarr;</span>
+    <a href="shop.html?purpose=casual" class="purpose-card purpose-card--2">
+      <div class="purpose-card__thumb"><img src="purpose-everyday.webp" alt="" loading="lazy" decoding="async"></div>
+      <h3>Everyday</h3><p>Casual Comfort</p>
     </a>
-    <a href="shop.html?purpose=active">
-      <span class="num">03</span>
-      <img class="thumb" src="purpose-active.webp" alt="" loading="lazy" decoding="async">
-      <span><span class="title">On The Move</span><span class="sub">Sports &amp; Active</span></span>
-      <span class="arrow">&rarr;</span>
+    <a href="shop.html?purpose=active" class="purpose-card purpose-card--3">
+      <div class="purpose-card__thumb"><img src="purpose-active.webp" alt="" loading="lazy" decoding="async"></div>
+      <h3>Active</h3><p>Sports &amp; Movement</p>
     </a>
-    <a href="shop.html?purpose=wellness">
-      <span class="num">04</span>
-      <img class="thumb" src="purpose-wellness.webp" alt="" loading="lazy" decoding="async">
-      <span><span class="title">Wellness Notes</span><span class="sub">Diabetic &amp; Sensitive Feet</span></span>
-      <span class="arrow">&rarr;</span>
+    <a href="shop.html?purpose=wellness" class="purpose-card purpose-card--4">
+      <div class="purpose-card__thumb"><img src="purpose-wellness.webp" alt="" loading="lazy" decoding="async"></div>
+      <h3>Wellness</h3><p>Diabetic-Friendly</p>
     </a>
-    <a href="gifting.html">
-      <span class="num">05</span>
-      <img class="thumb" src="purpose-gifting.webp" alt="" loading="lazy" decoding="async">
-      <span><span class="title">The Gifting Edit</span><span class="sub">Corporate, Festive &amp; Personal</span></span>
-      <span class="arrow">&rarr;</span>
+    <a href="gifting.html" class="purpose-card purpose-card--5">
+      <div class="purpose-card__thumb"><img src="purpose-gifting.webp" alt="" loading="lazy" decoding="async"></div>
+      <h3>Gifting</h3><p>Boxed &amp; Ready</p>
     </a>
   </div>
 </section>
 
-<section id="shop" class="wrap shop-section reveal">
+<section class="wrap wearer-strip reveal">
   <div class="section-head">
-    <h2>Trending Now</h2>
-    <p>What everyone's adding to cart this week.
-      <a href="#" onclick="event.preventDefault(); openSizeGuide();" style="text-decoration:underline; color:inherit;">See size guide &rarr;</a>
-    </p>
+    <span class="eyebrow-tag" style="background:var(--grass); color:#fff;">Shop By Wearer</span>
+    <h2>For Everyone In The Family</h2>
+  </div>
+  <div class="wearer-cards reveal-stagger">
+    <a href="shop.html?wearer=men" class="wearer-card">
+      <img src="wearer-men.webp" alt="Lord Walker men's socks" loading="lazy" decoding="async">
+      <div class="wearer-card__body">
+        <span class="wearer-card__tag">Men</span>
+        <h3>Lord Walker</h3>
+        <span class="wearer-card__cta">Shop Now &rarr;</span>
+      </div>
+    </a>
+    <a href="shop.html?wearer=women" class="wearer-card">
+      <img src="wearer-women.webp" alt="Lady Walker women's socks" loading="lazy" decoding="async">
+      <div class="wearer-card__body">
+        <span class="wearer-card__tag">Women</span>
+        <h3>Lady Walker</h3>
+        <span class="wearer-card__cta">Shop Now &rarr;</span>
+      </div>
+    </a>
+    <a href="shop.html?wearer=kids" class="wearer-card">
+      <img src="wearer-kids.webp" alt="Li'l Walker kids' socks" loading="lazy" decoding="async">
+      <div class="wearer-card__body">
+        <span class="wearer-card__tag">Kids</span>
+        <h3>Li'l Walker</h3>
+        <span class="wearer-card__cta">Shop Now &rarr;</span>
+      </div>
+    </a>
+  </div>
+</section>
+
+<div class="stripe-cuff" aria-hidden="true"></div>
+
+<section id="shop" class="wrap shop-section reveal">
+  <div class="section-head" style="display:flex; justify-content:space-between; align-items:flex-end; max-width:none;">
+    <div>
+      <span class="eyebrow-tag" style="background:var(--coral); color:#fff;">Trending Now</span>
+      <h2 style="margin-top:14px;">What Everyone's Adding To Cart</h2>
+    </div>
+    <a href="#" onclick="event.preventDefault(); openSizeGuide();" style="font-family:'Manrope',sans-serif; font-weight:700; font-size:13.5px; text-decoration:underline;">Size guide &rarr;</a>
   </div>
   <div class="grid grid--scroll reveal-stagger" id="trending-grid"></div>
 </section>
 
-<section class="wrap reveal" style="padding:56px 0;">
-  <div class="statement-card">
-    <span class="kicker">A Note, In Passing</span>
-    <p class="statement-card__line">You walk with clarity.<br>With confidence.<br><em>With intent.</em></p>
-  </div>
-</section>
-
 <section class="wrap feature-story reveal">
   <div class="feature-story__media">
-    <img src="about-us-banner.webp" alt="Lord Walker — Everyday style, built to last" loading="lazy" decoding="async">
+    <img src="about-us-banner.webp" alt="Lord Walker — everyday style, built to last" loading="lazy" decoding="async">
+  </div>
+  <div class="feature-story__copy" id="about-copy">
+    <span class="eyebrow-tag">Our Promise</span>
+    <h2>Premium, Without Excess</h2>
+    <p class="lead">Every seam, rib, and stitch is obsessively considered &mdash; made not for trend, but for the daily act of walking well.</p>
+    <div class="benefit-chips">
+      <span class="benefit-chip">&#127807; Soft Cotton</span>
+      <span class="benefit-chip">&#128168; Breathable</span>
+      <span class="benefit-chip">&#128159; Built To Last</span>
     </div>
-    <div class="feature-story__copy" id="about-copy">
-      <span class="kicker">Fresh Off The Loom</span>
-      <h2>Premium, Without Excess</h2>
-      <p class="lead">Every seam, rib, and stitch is obsessively considered. Our socks are made not for trend — but for the daily act of walking well.</p>
-      <div class="about-more">
-        <p class="pull-quote">"No loud logos. No unnecessary gimmicks. Just well-made socks that do their job, consistently."</p>
-        <p>To us, premium means thoughtful — not complicated. It means choosing the right materials, refining the fit, and ensuring comfort that lasts through the day.</p>
-        <h3>How We Think</h3>
-        <p>We believe that when you feel comfortable and put together, you move differently. You walk with clarity. With confidence. With intent.</p>
-      </div>
-      <button type="button" class="show-more-btn" onclick="toggleAboutMore(this)">Show more</button>
+    <div class="about-more">
+      <p>&ldquo;No loud logos. No unnecessary gimmicks. Just well-made socks that do their job, consistently.&rdquo;</p>
+      <p>To us, premium means thoughtful &mdash; not complicated. We choose the right materials, refine the fit, and make sure comfort lasts through the day. When you feel put together, you move differently &mdash; with clarity, confidence, and intent.</p>
     </div>
+    <button type="button" class="show-more-btn" onclick="toggleAboutMore(this)">Show more</button>
+  </div>
 </section>
 
 <section id="new-arrivals" class="wrap shop-section reveal">
   <div class="section-head">
-    <h2>New Arrivals</h2>
-    <p>Fresh off the loom — just added to the collection.</p>
+    <span class="eyebrow-tag" style="background:var(--sunshine);">New Arrivals</span>
+    <h2 style="margin-top:14px;">Fresh Off The Loom</h2>
   </div>
   <div class="grid grid--scroll reveal-stagger" id="new-arrivals-grid"></div>
 </section>
 
-<section id="diabetic-feature" class="reveal">
+<section class="wrap reveal" style="padding:0 0 80px;">
   <div class="spread">
     <div class="spread__copy">
-      <span class="kicker">Wellness Notes</span>
-      <h2>Designed For Men &amp; Women With Diabetes</h2>
-      <p>These socks are made to support comfort and foot health for people with diabetes and sensitive feet. The non-restrictive design helps improve circulation while reducing pressure and irritation.</p>
+      <span class="eyebrow-tag" style="background:var(--grass); color:#fff;">Wellness Notes</span>
+      <h2>Designed For Diabetic &amp; Sensitive Feet</h2>
+      <p>Non-restrictive design that supports comfort and circulation, without the pressure and irritation of ordinary socks.</p>
       <h3>Benefits</h3>
       <ul>
         <li>Helps relieve neuropathy discomfort</li>
         <li>Supports better circulation</li>
         <li>Reduces swelling in feet and ankles</li>
         <li>Gentle on sensitive skin</li>
-        <li>Helps prevent blisters and infections</li>
       </ul>
       <h3>Comfort Features</h3>
       <ul>
@@ -245,127 +270,88 @@ fbq('track', 'PageView');
         <li>Seamless toe to reduce friction</li>
         <li>Breathable for all-day wear</li>
       </ul>
-      <p>Designed for daily comfort, protection, and peace of mind.</p>
-      <a href="#shop" class="spread__cta">Learn More &rarr;</a>
+      <a href="#shop" class="btn btn-ink" style="margin-top:8px;">Learn More</a>
     </div>
     <div class="spread__media">
-      <img src="diabetic-socks-feature.webp" alt="Lord Walker diabetic-friendly socks — designed for men and women with diabetes" loading="lazy" decoding="async">
+      <img src="diabetic-socks-feature.webp" alt="Lord Walker diabetic-friendly socks" loading="lazy" decoding="async">
     </div>
   </div>
 </section>
 
-<div class="wrap chapters-grid reveal-stagger">
-  <a href="shop.html?wearer=men" class="chapter">
-    <img class="bg" src="hero-slide-men.webp" alt="Lord Walker — Men's socks" loading="lazy" decoding="async">
-    <div class="chapter-content">
-      <div>
-        <span class="chapter-num">Chapter 01</span>
-        <span class="chapter-title">Lord Walker</span>
-        <div class="chapter-cta" style="margin-top:14px;">Shop Now &rarr;</div>
-      </div>
-      <img class="chapter-inset" src="wearer-men.webp" alt="" loading="lazy" decoding="async">
-    </div>
-  </a>
-  <a href="shop.html?wearer=women" class="chapter">
-    <img class="bg" src="hero-slide-women.webp" alt="Lady Walker — Women's socks" loading="lazy" decoding="async">
-    <div class="chapter-content">
-      <div>
-        <span class="chapter-num">Chapter 02</span>
-        <span class="chapter-title">Lady Walker</span>
-        <div class="chapter-cta" style="margin-top:14px;">Shop Now &rarr;</div>
-      </div>
-      <img class="chapter-inset" src="wearer-women.webp" alt="" loading="lazy" decoding="async">
-    </div>
-  </a>
-  <a href="shop.html?wearer=kids" class="chapter">
-    <img class="bg" src="hero-slide-kids.webp" alt="Li'l Walker — Kids' socks" loading="lazy" decoding="async">
-    <div class="chapter-content">
-      <div>
-        <span class="chapter-num">Chapter 03</span>
-        <span class="chapter-title">Li'l Walker</span>
-        <div class="chapter-cta" style="margin-top:14px;">Shop Now &rarr;</div>
-      </div>
-      <img class="chapter-inset" src="wearer-kids.webp" alt="" loading="lazy" decoding="async">
-    </div>
-  </a>
-</div>
+<div class="stripe-cuff" aria-hidden="true"></div>
 
-<section class="letters-wrap reveal" id="reviews">
-  <div class="wrap">
-    <div class="section-head">
-      <h2>Letters To The Editor</h2>
-      <p>What readers are saying — unedited.</p>
-    </div>
-    <span class="kicker" style="margin:26px 0 -6px; display:block;">Trusted By Everyday Walkers</span>
-    <div class="letters-scroll" id="reviews-grid">
-      <div class="letter">
-        <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-        <p>&ldquo;Genuinely the most comfortable socks I've bought online. The heel grip actually works &mdash; no slipping by evening.&rdquo;</p>
-        <div class="sig">Ananya R. &mdash; Bengaluru</div>
-      </div>
-      <div class="letter">
-        <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-        <p>&ldquo;Bought the Pack of 5 as a gift for my dad &mdash; he's asked for more already. Great quality for the price.&rdquo;</p>
-        <div class="sig">Karthik M. &mdash; Chennai</div>
-      </div>
-      <div class="letter">
-        <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9734;</div>
-        <p>&ldquo;Fast delivery and the no-show pair is invisible with loafers, exactly as advertised.&rdquo;</p>
-        <div class="sig">Priya S. &mdash; Pune</div>
-      </div>
-    </div>
-    <p class="letters-note">Placeholder reviews — swap these for real customer feedback (e.g. via a post-purchase WhatsApp/email review request) before launch.</p>
-  </div>
-</section>
-
-<section class="wrap further-reading reveal">
+<section class="wrap reviews-wrap reveal" id="reviews">
   <div class="section-head">
-    <h2>Further Reading</h2>
-    <p>Notes on comfort, craft &amp; everyday style.</p>
+    <span class="eyebrow-tag" style="background:var(--cornflower); color:#fff;">Happy Walkers</span>
+    <h2>Letters From Real Customers</h2>
   </div>
-  <div class="reading-grid">
+  <div class="reviews-scroll" id="reviews-grid">
+    <div class="review-card">
+      <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+      <p>&ldquo;Genuinely the most comfortable socks I've bought online. The heel grip actually works &mdash; no slipping by evening.&rdquo;</p>
+      <div class="sig">Ananya R. &mdash; Bengaluru</div>
+    </div>
+    <div class="review-card">
+      <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+      <p>&ldquo;Bought the Pack of 5 as a gift for my dad &mdash; he's asked for more already. Great quality for the price.&rdquo;</p>
+      <div class="sig">Karthik M. &mdash; Chennai</div>
+    </div>
+    <div class="review-card">
+      <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9734;</div>
+      <p>&ldquo;Fast delivery and the no-show pair is invisible with loafers, exactly as advertised.&rdquo;</p>
+      <div class="sig">Priya S. &mdash; Pune</div>
+    </div>
+  </div>
+  <p class="reviews-note">Placeholder reviews &mdash; swap these for real customer feedback before launch.</p>
+</section>
+
+<section class="wrap reading-grid reveal">
+  <div class="section-head">
+    <span class="eyebrow-tag" style="background:var(--coral); color:#fff;">Journal</span>
+    <h2>Further Reading</h2>
+  </div>
+  <div class="reading-cards reveal-stagger">
     <a href="blog-sock-length-guide.html" class="reading-card">
-      <span class="num">01</span>
+      <span class="tag">Guide</span>
       <h3>How to Choose the Right Sock Length</h3>
-      <p>A quick guide to crew, ankle, and no-show fits — and when to wear each one.</p>
+      <p>A quick guide to crew, ankle, and no-show fits.</p>
     </a>
     <a href="blog-sock-care.html" class="reading-card">
-      <span class="num">02</span>
+      <span class="tag">Care</span>
       <h3>Caring for Your Cotton Socks</h3>
-      <p>Simple washing habits that keep colours sharp and elastic intact for longer.</p>
+      <p>Simple habits that keep colours sharp for longer.</p>
     </a>
     <a href="blog-gifting-guide.html" class="reading-card">
-      <span class="num">03</span>
+      <span class="tag">Gifting</span>
       <h3>A Gifting Guide for Every Occasion</h3>
-      <p>From onboarding kits to festival bundles — how to pick the right pack size.</p>
+      <p>How to pick the right pack size, every time.</p>
     </a>
   </div>
 </section>
 
-<section class="correspondence reveal" id="contact">
+<section class="wrap correspondence reveal" id="contact">
   <div class="correspondence__contact">
-    <span class="kicker">Get In Touch</span>
+    <span class="eyebrow-tag" style="background:var(--sunshine);">Get In Touch</span>
     <h2>Talk To Us</h2>
-    <p>Questions about an order, bulk gifting, or just want to say hello — reach out and we'll get back to you.</p>
+    <p>Questions about an order, bulk gifting, or just want to say hello &mdash; we'll get back to you.</p>
     <div class="contact-detail">shop@lordwalkerbybrham.com</div>
     <div class="contact-detail">+91-7878325805</div>
-    <div class="contact-detail">India</div>
-    <form class="contact-form" onsubmit="event.preventDefault(); showToast('Thanks — we\'ll get back to you soon.'); this.reset();">
+    <form class="contact-form" onsubmit="event.preventDefault(); showToast('Thanks — we will get back to you soon.'); this.reset();">
       <input type="text" placeholder="Your name" required>
       <input type="email" placeholder="Your email" required>
       <textarea rows="3" placeholder="Your message" required></textarea>
-      <button type="submit">Send Message</button>
+      <button type="submit" class="btn btn-coral">Send Message</button>
     </form>
   </div>
   <div class="correspondence__subscribe">
-    <span class="kicker">Subscribe</span>
-    <h2>Never Miss An Issue</h2>
-    <p>New arrivals, gifting edits, and the occasional good story — straight to your inbox.</p>
+    <span class="eyebrow-tag" style="background:var(--sunshine);">Subscribe</span>
+    <h2>Never Miss A Drop</h2>
+    <p>New arrivals, gifting edits, and the occasional good story &mdash; straight to your inbox.</p>
     <form onsubmit="event.preventDefault(); showToast('Thanks for subscribing!'); this.reset();">
       <input type="email" placeholder="Your e-mail address" required>
-      <button type="submit">&rarr;</button>
+      <button type="submit">Join</button>
     </form>
-    <div class="correspondence__social">
+    <div class="social-row">
       <a href="#" aria-label="Facebook">FB</a>
       <a href="#" aria-label="Twitter / X">X</a>
       <a href="https://www.instagram.com/lordwalker_/" target="_blank" rel="noopener" aria-label="Instagram">IG</a>
@@ -373,11 +359,12 @@ fbq('track', 'PageView');
   </div>
 </section>
 
-<section class="wrap reveal" style="padding:0 40px 88px;">
-  <div class="closing-card">
-    <img src="hero-slide-walk.webp" alt="Walk like a Lord — since 1994, now stepping into India" loading="lazy" decoding="async">
+<div class="wrap reveal">
+  <div class="closing-card" style="background:var(--cornflower); display:flex; align-items:center; justify-content:center; text-align:center; flex-direction:column; gap:14px; padding:40px;">
+    <h2 style="color:#fff; font-size:clamp(24px,3.4vw,38px);">Ready To Walk Like A Lord?</h2>
+    <a href="#shop" class="btn" style="background:var(--sunshine); color:var(--ink); box-shadow:0 6px 0 var(--sunshine-deep);">Shop The Collection</a>
   </div>
-</section>
+</div>
 
 <footer class="colophon">
   <div class="wrap">
@@ -404,9 +391,8 @@ fbq('track', 'PageView');
         <a href="pricing-policy.html">Pricing Policy</a>
       </div>
       <div class="colophon-col">
-        <h4>Masthead</h4>
-        <span>Lord Walker by Brahm</span>
-        <span>Crafted since 1994</span>
+        <h4>Lord Walker</h4>
+        <span>By Brahm &mdash; Crafted since 1994</span>
         <span>A-1/2, GIDC Industrial Estate,<br>Kabilpore, Navsari,<br>Gujarat 396424, India</span>
       </div>
     </div>
@@ -417,34 +403,34 @@ fbq('track', 'PageView');
   </div>
 </footer>
 
-<div id="product-overlay" onclick="closeProductModal()" style="position:fixed; inset:0; background:rgba(20,17,16,0.55); display:none; z-index:98;"></div>
+<div id="product-overlay" onclick="closeProductModal()" style="position:fixed; inset:0; background:rgba(27,27,47,0.55); display:none; z-index:98;"></div>
 <div id="product-modal" class="product-modal">
   <button class="product-modal__close" onclick="closeProductModal()" aria-label="Close">×</button>
   <div class="product-modal__inner" id="product-modal-content"></div>
 </div>
 
-<div id="size-overlay" onclick="closeSizeGuide()" style="position:fixed; inset:0; background:rgba(20,17,16,0.5); display:none; z-index:98;"></div>
-<div id="size-modal" style="position:fixed; top:50%; left:50%; transform:translate(-50%,-50%) scale(0.95); opacity:0; pointer-events:none; transition:opacity .25s ease, transform .25s ease; background:var(--paper); color:var(--ink); z-index:99; width:420px; max-width:90vw; border-radius:18px; padding:28px;">
+<div id="size-overlay" onclick="closeSizeGuide()" style="position:fixed; inset:0; background:rgba(27,27,47,0.5); display:none; z-index:98;"></div>
+<div id="size-modal" style="position:fixed; top:50%; left:50%; transform:translate(-50%,-50%) scale(0.95); opacity:0; pointer-events:none; transition:opacity .25s ease, transform .25s ease; background:var(--cream); color:var(--ink); z-index:99; width:420px; max-width:90vw; border-radius:24px; padding:28px; box-shadow:0 30px 70px rgba(27,27,47,0.3);">
   <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:18px;">
-    <h3 style="font-family:'Fraunces',serif; font-size:20px;">Size Guide</h3>
+    <h3 style="font-family:'Fredoka',sans-serif; font-size:20px; font-weight:600;">Size Guide</h3>
     <button onclick="closeSizeGuide()" style="background:none; border:none; font-size:22px; cursor:pointer; color:var(--ink);">×</button>
   </div>
-  <p style="font-size:13px; color:rgba(20,17,16,0.6); margin-bottom:16px;">Most Lord Walker socks are One Size and stretch comfortably across the range below. Formal crew styles run true to size.</p>
+  <p style="font-size:13px; color:rgba(27,27,47,0.6); margin-bottom:16px;">Most Lord Walker socks are One Size and stretch comfortably across the range below. Formal crew styles run true to size.</p>
   <table style="width:100%; border-collapse:collapse; font-size:13px;">
     <thead>
-      <tr style="border-bottom:1px solid rgba(20,17,16,0.15); text-align:left;">
+      <tr style="border-bottom:1px solid rgba(27,27,47,0.15); text-align:left;">
         <th style="padding:8px 4px;">Foot Length (cm)</th>
         <th style="padding:8px 4px;">UK Size</th>
         <th style="padding:8px 4px;">EU Size</th>
       </tr>
     </thead>
     <tbody>
-      <tr style="border-bottom:1px solid rgba(20,17,16,0.08);"><td style="padding:8px 4px;">24–26</td><td style="padding:8px 4px;">6–8</td><td style="padding:8px 4px;">39–42</td></tr>
-      <tr style="border-bottom:1px solid rgba(20,17,16,0.08);"><td style="padding:8px 4px;">26–28</td><td style="padding:8px 4px;">8–10</td><td style="padding:8px 4px;">42–44</td></tr>
+      <tr style="border-bottom:1px solid rgba(27,27,47,0.08);"><td style="padding:8px 4px;">24–26</td><td style="padding:8px 4px;">6–8</td><td style="padding:8px 4px;">39–42</td></tr>
+      <tr style="border-bottom:1px solid rgba(27,27,47,0.08);"><td style="padding:8px 4px;">26–28</td><td style="padding:8px 4px;">8–10</td><td style="padding:8px 4px;">42–44</td></tr>
       <tr><td style="padding:8px 4px;">28–30</td><td style="padding:8px 4px;">10–11</td><td style="padding:8px 4px;">44–46</td></tr>
     </tbody>
   </table>
-  <p style="font-size:11.5px; color:rgba(20,17,16,0.45); margin-top:14px;">Note: replace this chart with your own measured sizing before launch — these are placeholder ranges.</p>
+  <p style="font-size:11.5px; color:rgba(27,27,47,0.45); margin-top:14px;">Note: replace this chart with your own measured sizing before launch — these are placeholder ranges.</p>
 </div>
 
 <div id="overlay" onclick="closeCart()"></div>
@@ -456,9 +442,9 @@ fbq('track', 'PageView');
   <div id="cart-items"></div>
   <div class="drawer-foot">
     <div id="checkout-form" style="display:none; margin-bottom:16px;">
-      <input id="cf-name" placeholder="Full name" style="width:100%;padding:10px;margin-bottom:8px;border:none;border-bottom:1px solid rgba(20,17,16,0.25);font-family:'Libre Franklin',sans-serif;padding:10px 2px;">
-      <input id="cf-phone" placeholder="Phone number" style="width:100%;padding:10px;margin-bottom:8px;border:none;border-bottom:1px solid rgba(20,17,16,0.25);font-family:'Libre Franklin',sans-serif;padding:10px 2px;">
-      <textarea id="cf-address" placeholder="Delivery address" rows="2" style="width:100%;padding:10px;border:none;border-bottom:1px solid rgba(20,17,16,0.25);font-family:'Libre Franklin',sans-serif;padding:10px 2px;resize:vertical;"></textarea>
+      <input id="cf-name" placeholder="Full name" style="width:100%;padding:10px;margin-bottom:8px;border:none;border-bottom:1px solid rgba(27,27,47,0.25);font-family:'Manrope',sans-serif;padding:10px 2px;">
+      <input id="cf-phone" placeholder="Phone number" style="width:100%;padding:10px;margin-bottom:8px;border:none;border-bottom:1px solid rgba(27,27,47,0.25);font-family:'Manrope',sans-serif;padding:10px 2px;">
+      <textarea id="cf-address" placeholder="Delivery address" rows="2" style="width:100%;padding:10px;border:none;border-bottom:1px solid rgba(27,27,47,0.25);font-family:'Manrope',sans-serif;padding:10px 2px;resize:vertical;"></textarea>
     </div>
     <div id="cart-summary"></div>
     <div class="subtotal-row"><span>Total</span><strong id="subtotal">₹0</strong></div>
@@ -476,9 +462,9 @@ let cart = {};
 let lastQuote = null;
 const FREE_SHIPPING_THRESHOLD = 499; // display-only mirror of pricing.js — server is authoritative
 
-const swatchOrder = ["paperDim","inkSoft","brassLight"];
+const swatchOrder = ["cornflower","sunshine","grass"];
 function swatchFor(i){ return swatchOrder[i % swatchOrder.length]; }
-const swatchColor = {paperDim:"var(--paper-dim)", inkSoft:"var(--ink-soft)", brassLight:"#EBD9B8"};
+const swatchColor = {cornflower:"var(--cornflower-tint)", sunshine:"var(--sunshine-tint)", grass:"var(--grass-tint)"};
 
 async function loadProducts(){
   try{
@@ -486,7 +472,7 @@ async function loadProducts(){
     PRODUCTS = await res.json();
   }catch(e){
     document.getElementById('trending-grid').innerHTML =
-      '<p style="grid-column:1/-1;text-align:center;color:rgba(20,17,16,0.5);">Could not load products — is the backend running at ' + API_BASE + '?</p>';
+      '<p style="grid-column:1/-1;text-align:center;color:rgba(27,27,47,0.5);">Could not load products — is the backend running at ' + API_BASE + '?</p>';
     return;
   }
   renderProducts();
@@ -513,9 +499,9 @@ async function loadProducts(){
 function sockSVG(hex){
   return `<svg width="52" height="52" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
     <path d="M24 6 L24 30 C24 36 20 40 16 44 C10 50 10 56 16 58 L44 58 C50 58 52 52 50 46 L42 30 L42 6 Z"
-      fill="${hex}" stroke="rgba(20,17,16,0.25)" stroke-width="1.5"/>
-    <path d="M24 6 L42 6" stroke="rgba(20,17,16,0.3)" stroke-width="3" stroke-linecap="round"/>
-    <path d="M17 45 C24 42 34 42 41 46" stroke="rgba(20,17,16,0.25)" stroke-width="1.2" fill="none"/>
+      fill="${hex}" stroke="rgba(27,27,47,0.25)" stroke-width="1.5"/>
+    <path d="M24 6 L42 6" stroke="rgba(27,27,47,0.3)" stroke-width="3" stroke-linecap="round"/>
+    <path d="M17 45 C24 42 34 42 41 46" stroke="rgba(27,27,47,0.25)" stroke-width="1.2" fill="none"/>
   </svg>`;
 }
 
@@ -585,7 +571,7 @@ function renderGrid(elementId, list){
   const grid = document.getElementById(elementId);
   if (!grid) return;
   if (!list.length){
-    grid.innerHTML = '<p style="grid-column:1/-1;text-align:center;color:rgba(20,17,16,0.4);">Nothing to show here yet.</p>';
+    grid.innerHTML = '<p style="grid-column:1/-1;text-align:center;color:rgba(27,27,47,0.4);">Nothing to show here yet.</p>';
     return;
   }
   grid.innerHTML = list.map((p) => {
@@ -593,7 +579,7 @@ function renderGrid(elementId, list){
     const thumb = (p.images && p.images.length) ? p.images[0] : p.image;
     const media = thumb
       ? `<img src="${thumb}" alt="${p.name}" style="width:100%; height:100%; object-fit:cover;" loading="lazy" decoding="async">`
-      : sockSVG('rgba(20,17,16,0.32)');
+      : sockSVG('rgba(27,27,47,0.32)');
     const priceHtml = (p.originalPrice && p.originalPrice > p.price)
       ? `<div class="price">₹${p.price} <span class="price-original">₹${p.originalPrice}</span></div>`
       : `<div class="price">₹${p.price}</div>`;
@@ -730,7 +716,7 @@ async function loadCategories(){
   }
 }
 
-const CATEGORY_PILL_TINTS = ['var(--paper-dim)','var(--wash-a)','var(--wash-b)','var(--ink-soft)'];
+const CATEGORY_PILL_TINTS = ['var(--cornflower-tint)','var(--sunshine-tint)','var(--grass-tint)','var(--coral-tint)'];
 
 function renderCategories(categories){
   const grid = document.getElementById('category-grid');
@@ -790,7 +776,7 @@ function openProductModal(id){
   const images = (p.images && p.images.length) ? p.images : (p.image ? [p.image] : []);
   const mainImage = images.length
     ? `<img src="${images[0]}" alt="${p.name}" id="pm-main-img" loading="lazy" decoding="async">`
-    : sockSVG('rgba(20,17,16,0.3)');
+    : sockSVG('rgba(27,27,47,0.3)');
   const thumbsHtml = images.length > 1
     ? `<div class="pm-thumbs">${images.map((src, i) =>
         `<img src="${src}" class="${i === 0 ? 'active' : ''}" loading="lazy" decoding="async" onclick="switchModalImage(this, '${src}')">`
