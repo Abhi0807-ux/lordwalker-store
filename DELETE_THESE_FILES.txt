@@ -1,0 +1,10 @@
+After uploading the 4 files in this folder (which will overwrite the broken
+versions currently in your repo root), also DELETE these files from your repo —
+they belong to the React project only and have no reason to be at the root of
+the vanilla site:
+
+  vite.config.js
+  .oxlintrc.json
+
+Delete them the same way you'd delete any file on GitHub: open the file on
+github.com, click the trash-can icon, commit.
